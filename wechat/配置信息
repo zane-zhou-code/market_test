@@ -1,0 +1,4 @@
+wechat  class AccessToken 获取access_token信息
+        class WechatHandler 对接微信服务器 并 回复 文字、图片、声音 以及 识别扫描二维码
+        class QrcodeHandler 请求微信服务器生成带参数二维码返回
+        class ProfileHandler 对接网页跳转信息

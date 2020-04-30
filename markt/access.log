@@ -1,0 +1,4 @@
+2019-12-11 12:13:45 autoreload.run_with_reloader: Watching for file changes with StatReloader
+2019-12-11 12:14:46 autoreload.trigger_reload: E:\Developing\markt\oa\urls.py changed, reloading.
+2019-12-11 12:14:47 autoreload.run_with_reloader: Watching for file changes with StatReloader
+2019-12-11 12:16:42 autoreload.trigger_reload: E:\Developing\markt\oa\settings.py changed, reloading.

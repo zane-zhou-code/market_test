@@ -1,0 +1,9 @@
+json pickle shelve
+
+加密
+hmac/hashlib
+
+property 属性方法  直接调用def 把方法变成静态属性
+         传参数 属性+setter
+classmethod 类方法 只能访问类变量 不能访问实例变量
+staticmethod 静态方法 名义归类管理
