@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!-- 引入 echarts.js -->
+    <script src="{% static 'echarts/echarts.min.js' %}"></script>
+</head>
+<body>
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="main" style="width: 900px;height:600px;"></div>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+    var colors = ['#95a2ff', '#fa8080', '#ffc076', '#fae768', '#87e885', '#3cb9fc', '#73abf5',
+        '#cb9bff', '#434348', '#90ed7d', '#f7a35c', '#8085e9'];
+    // 指定图表的配置项和数据
+    var option = {
+        legend: {},
+        tooltip: {
+            trigger: 'axis',
+            showContent: true,
+        },
+        {#legend: [{data:['Matcha Latte','Milk Tea']}],#}
+        dataset: {
+            source: [
+                ['product', '2012', '2013', '2014', '2015', '2016', '2017'],
+                ['Matcha Latte', 41.1, 30.4, 65.1, 53.3, 83.8, 98.7],
+                ['Milk Tea', 86.5, 92.1, 85.7, 83.1, 73.4, 55.1],
+                ['Cheese Cocoa', 24.1, 67.2, 79.5, 86.4, 65.2, 82.5],
+                ['Walnut Brownie', 55.2, 67.1, 69.2, 72.4, 53.9, 39.1]
+            ]
+        },
+        xAxis: {
+            type: 'category',
+            triggerEvent: true,
+            //axisPointer: {show:true}
+        },
+        yAxis: {type: 'value', gridIndex: 0,},
+        grid: {top: '55%'},
+        series: [
+            {
+                type: 'line', smooth: true, seriesLayoutBy: 'row', symbolSize: 10, itemStyle: {
+                    normal: {
+                        color: colors[0]
+                    }
+                },
+            },
+            {
+                type: 'line', smooth: true, seriesLayoutBy: 'row', symbolSize: 10, itemStyle: {
+                    normal: {
+                        color: colors[1]
+                    }
+                },
+            },
+            {
+                type: 'line', smooth: true, seriesLayoutBy: 'row', symbolSize: 10, itemStyle: {
+                    normal: {
+                        color: colors[2]
+                    }
+                },
+            },
+            {
+                type: 'line', smooth: true, seriesLayoutBy: 'row', symbolSize: 10, itemStyle: {
+                    normal: {
+                        color: colors[3]
+                    }
+                },
+            },
+            {
+                type: 'pie',
+                id: 'pie',
+                radius: '30%',
+                center: ['50%', '25%'],
+                color: colors,
+                {#itemStyle: {#}
+                {#                normal: {#}
+                {#                    color: colors[4]#}
+                {#                }#}
+                {#            },#}
+                {#label: {#}
+                {#    formatter: '{b}: {@[2012]} ({d}%)'#}
+                //},
+                encode: {
+                    itemName: 'product',
+                    value: '2012',
+                    {#tooltip: '2012'#}
+                }
+            }
+        ]
+    };
+
+    setTimeout(function () {
+        myChart.on('mouseover', function (params) {
+            console.log(params);
+
+            if (params.componentType == "xAxis") {
+                var xAxisInfo = params.value;
+                myChart.setOption({
+                    series: {
+                        id: 'pie',
+                        label: {
+                            formatter: '{b}: {@[' + xAxisInfo + ']} ({d}%)'
+                        },
+                        encode: {
+                            value: xAxisInfo,
+                            tooltip: xAxisInfo
+                        }
+                    }
+                });
+            }
+            if (params.componentType == "series" && params.seriesType == 'line') {
+                var xAxisInfo = params.value[0];
+                myChart.setOption({
+                    series: {
+                        id: 'pie',
+                        label: {
+                            formatter: '{b}: {@[' + xAxisInfo + ']} ({d}%)'
+                        },
+                        encode: {
+                            value: xAxisInfo,
+                            tooltip: xAxisInfo
+                        }
+                    }
+                });
+            }
+            setTimeout(function () {
+                myChart.dispatchAction({
+                    type: 'highlight',
+                    seriesIndex: 4,
+                    dataIndex: params.seriesIndex
+                });
+            }, 300);
+        });
+
+        myChart.on('mouseout', function (params) {
+            myChart.dispatchAction({
+                type: 'downplay',
+                seriesIndex: 4,
+                dataIndex: params.seriesIndex
+            });
+        });
+    }, 0);
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+
+
+<div id="main2" style="width: 900px;height:600px;"></div>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart2 = echarts.init(document.getElementById('main2'));
+    var colors = ['#95a2ff', '#fa8080', '#ffc076', '#fae768', '#87e885', '#3cb9fc', '#73abf5',
+        '#cb9bff', '#434348', '#90ed7d', '#f7a35c', '#8085e9'];
+    // 指定图表的配置项和数据
+    var option2 = {
+        {#legend: {},#}
+        tooltip: {
+            trigger: 'axis',
+            showContent: true,
+        },
+        legend: [{data: ['Matcha Latte', 'Milk Tea', 'Cheese Cocoa', 'Walnut Brownie']}],
+        dataset: {
+            source: [
+                ['product', '2012', '2013', '2014', '2015', '2016', '2017'],
+                ['Matcha Latte', 41.1, 30.4, 65.1, 53.3, 83.8, 98.7],
+                ['Milk Tea', 86.5, 92.1, 85.7, 83.1, 73.4, 55.1],
+                ['Cheese Cocoa', 24.1, 67.2, 79.5, 86.4, 65.2, 82.5],
+                ['Walnut Brownie', 55.2, 67.1, 69.2, 72.4, 53.9, 39.1]
+            ]
+        },
+        xAxis: [{
+            type: 'category',
+            triggerEvent: true, gridIndex: 0
+            //axisPointer: {show:true}
+        }, {type: 'category', gridIndex: 1}],
+        yAxis: [{type: 'value', gridIndex: 0,}, {type: 'value', gridIndex: 1, yAxisIndex: 1,}],
+        grid: [{x: '7%', y: '7%', width: '38%', height: '87%'},
+            {x2: '7%', y: '7%', width: '38%', height: '87%'},
+            // {x: '7%', y2: '7%', width: '38%', height: '38%'},
+            // {x2: '7%', y2: '7%', width: '38%', height: '38%'}
+        ],
+        series: [
+            {
+                type: 'line', smooth: true, seriesLayoutBy: 'row', symbolSize: 10, itemStyle: {
+                    normal: {
+                        color: colors[0]
+                    }
+                },
+            },
+            {
+                type: 'line', smooth: true, seriesLayoutBy: 'row', symbolSize: 10, itemStyle: {
+                    normal: {
+                        color: colors[1]
+                    }
+                },
+            },
+            {
+                type: 'line', smooth: true, seriesLayoutBy: 'row', symbolSize: 10, itemStyle: {
+                    normal: {
+                        color: colors[2]
+                    }
+                },
+            },
+            {
+                type: 'line', smooth: true, seriesLayoutBy: 'row', symbolSize: 10, itemStyle: {
+                    normal: {
+                        color: colors[3]
+                    }
+                },
+            },
+            {
+                type: 'bar',
+                xAxisIndex: 1,
+                yAxisIndex: 1,
+                id: 'line',
+                {#radius: '30%',#}
+                {#center: ['50%', '25%'],#}
+                itemStyle: {
+                    normal: {
+                        //这里是重点
+                        color: function (params) {
+                            //注意，如果颜色太少的话，后面颜色不会自动循环，最好多定义几个颜色
+
+                            return colors[params.dataIndex]
+                        }
+                    }
+                },
+                {#itemStyle: {#}
+                {#                normal: {#}
+                {#                    color: colors[4]#}
+                {#                }#}
+                {#            },#}
+                {#label: {#}
+                {#    formatter: '{b}: {@[2012]} ({d}%)'#}
+                //},
+                encode: {
+                    x: 'product',
+                    y: '2012',
+                    {#tooltip: '2012'#}
+                }
+            }
+        ]
+    };
+
+    setTimeout(function () {
+        myChart2.on('mouseover', function (params) {
+            console.log(params);
+
+            if (params.componentType == "xAxis") {
+                var xAxisInfo = params.value;
+                myChart2.setOption({
+                    series: {
+                        id: 'line',
+                        itemStyle: {
+                            normal: {
+                                //这里是重点
+                                color: function (params) {
+                                    //注意，如果颜色太少的话，后面颜色不会自动循环，最好多定义几个颜色
+
+                                    return colors[params.dataIndex]
+                                }
+                            }
+                        },
+                        label: {
+                            formatter: '{b}: {@[' + xAxisInfo + ']} ({d}%)'
+                        },
+                        encode: {
+                            x: 'product',
+                            y: xAxisInfo
+                        }
+                    }
+                });
+            }
+            if (params.componentType == "series" && params.seriesType == 'line') {
+                var xAxisInfo = params.value[0];
+                myChart2.setOption({
+                    series: {
+                        id: 'line',
+                        itemStyle: {
+                            normal: {
+                                //这里是重点
+                                color: function (params) {
+                                    //注意，如果颜色太少的话，后面颜色不会自动循环，最好多定义几个颜色
+
+                                    return colors[params.dataIndex]
+                                }
+                            }
+                        },
+
+                        label: {
+                            formatter: '{b}: {@[' + xAxisInfo + ']} ({d}%)'
+                        },
+                        encode: {
+                            x: 'product',
+                            y: xAxisInfo
+                        }
+                    }
+                });
+            }
+            setTimeout(function () {
+                myChart2.dispatchAction({
+                    type: 'highlight',
+                    seriesIndex: 4,
+                    dataIndex: params.seriesIndex
+                });
+            }, 300);
+        });
+
+        myChart2.on('mouseout', function (params) {
+            myChart2.dispatchAction({
+                type: 'downplay',
+                seriesIndex: 4,
+                dataIndex: params.seriesIndex
+            });
+        });
+    }, 0);
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart2.setOption(option2);
+</script>
+</body>
+</html>

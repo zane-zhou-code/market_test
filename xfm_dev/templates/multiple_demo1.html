@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+{% block item %}
+<div style="padding-top: 150px;overflow:hidden;background-color: #e6eee1"> {# background-color: #d1b8ff; #}
+	<div class='ds1' style="border: 1px dashed #000000;left: 20px;width: 20%;float: left;height:360px;">
+		<div class="ui container">
+    	<div class="ui form">
+        <form action="" method="post">
+            {% block form1 %}
+
+            {% endblock form1 %}
+        </form>
+        </div>
+    </div>
+
+
+	</div>
+    <!-- 下面进行echarts画图 -->
+	<div class='ds2' style="border: 1px dashed #000000;left: 20px;width: 80%;float: left">
+		<div id="main" style="width: 100%;height:360px;"></div>
+        <!-- 定义变量 -->
+		<script type="text/javascript">
+        var server_info;
+        var colors = ['#0780cf','#765005', '#fa6d1d', '#0e2c82', '#b6b51f', '#da1f18',
+             '#701866', '#f47a75', '#009db2', '#024b51', '#0780cf', '#765005'];
+        var colors2 = ['#63b2ee', '#76da91', '#f8cb7f', '#f89588', '#7cd6cf', '#9192ab', '#7898e1',
+             '#efa666', '#eddd86', '#9987ce', '#63b2ee', '#76da91'];
+        var colors3 = ['#95a2ff', '#fa8080', '#ffc076', '#fae768', '#87e885', '#3cb9fc', '#73abf5',
+             '#cb9bff', '#434348', '#90ed7d', '#f7a35c', '#8085e9'];
+        </script>
+        {% block fun1 %}
+        {% endblock fun1 %}
+	</div>
+</div>
+{% endblock item %}
+{% endblock body %}

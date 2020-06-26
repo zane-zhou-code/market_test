@@ -1,0 +1,223 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+    <script></script>
+
+    <div style="padding-top: 150px;overflow:hidden;background-color: #e6eee1"> {# background-color: #d1b8ff; #}
+
+        <div class='ds1' style="border: 1px dashed #000000;left: 20px;width: 20%;float: left;height:360px;">
+            <div class="ui container">
+                <div class="ui form">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <h3>分析维度</h3>
+                        <div class="field">
+                            <div class="fields">
+                                <div class="sixteen wide field">
+                                    <select name="DIMENSION_select" id="DIMENSION_select"
+                                            class="ui fluid search dropdown" multiple="multiple">
+                                        <option value="S5431567" selected>{{ id }}</option>
+                                        <script>
+                                            $.ajax({
+                                                url: '{% url 'query5' %}',
+                                                async: false,
+                                                // 请求的type
+                                                type: 'GET',
+                                                success: function (ret) {     //成功执行
+                                                    console.log('执行ajax');
+                                                    server_info_f = eval(ret);
+
+                                                    {% for key, value in server_info_f.items %}
+                                                <option value="{{ value }}">{{ key }}</option>
+                                                    {% endfor %}
+                                                },
+                                                error: function () {            //失败
+                                                    console.log('失败')
+                                                }
+                                            });
+                                        </script>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="fields">
+                                <div class="ui calendar {{ start_time }}" style="width: 50%">
+                                    <div class="ui input right icon">
+                                        <i class="calendar icon"></i>
+                                        <input type="text" placeholder="开始时间" value="" name="START_time"
+                                               id="START_time">
+                                    </div>
+
+                                </div>
+                                <div class="ui calendar {{ end_time }}" style="width: 50%">
+                                    <div class="ui input right icon">
+                                        <i class="calendar icon"></i>
+                                        <input type="text" placeholder="结束时间" value="" name="END_time" id="END_time">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="ui buttons" style="left:30%">
+                            <input class="ui blue button" type='button' id='AJAX_get' value="查询"/>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+        <!-- 下面进行echarts画图 -->
+        <div class='ds2' style="border: 1px dashed #000000;left: 20px;width: 80%;float: left">
+            <div id="{{ main }}" style="width: 100%;height:360px;"></div>
+            <!-- 定义变量 -->
+            <script type="text/javascript">
+                var colors = ['#0780cf', '#765005', '#fa6d1d', '#0e2c82', '#b6b51f', '#da1f18',
+                    '#701866', '#f47a75', '#009db2', '#024b51', '#0780cf', '#765005'];
+                var colors2 = ['#63b2ee', '#76da91', '#f8cb7f', '#f89588', '#7cd6cf', '#9192ab', '#7898e1',
+                    '#efa666', '#eddd86', '#9987ce', '#63b2ee', '#76da91'];
+                var colors3 = ['#95a2ff', '#fa8080', '#ffc076', '#fae768', '#87e885', '#3cb9fc', '#73abf5',
+                    '#cb9bff', '#434348', '#90ed7d', '#f7a35c', '#8085e9'];
+            </script>
+            <script type="text/javascript">
+                $(function () {
+                    var myChart = echarts.init(document.getElementById('{{main}}'));
+                    var option;
+                    option = {
+                        title: [
+                            {text: '价格分布'}
+                        ],
+                        backgroundColor: '',
+                        dataZoom: [
+                            {   // 这个dataZoom组件，默认控制x轴。
+                                type: 'slider', // 这个 dataZoom 组件是 slider 型 dataZoom 组件
+                                xAxisIndex: 0,
+                                start: 50,      // 左边在 10% 的位置。
+                                end: 100         // 右边在 60% 的位置。
+                            },
+                            {   // 这个dataZoom组件，也控制x轴。
+                                type: 'inside', // 这个 dataZoom 组件是 inside 型 dataZoom 组件
+                                xAxisIndex: 0,
+                                start: 0,      // 左边在 10% 的位置。
+                                end: 100         // 右边在 60% 的位置。
+                            },
+                        ],
+                        tooltip: [{}],
+                        legend: [
+                            {
+                                data: [],
+                            }
+                        ],
+                        xAxis: [
+                            {
+                                data: [],
+                                splitLine: {show: false}
+                            }
+                        ],
+                        yAxis: [{scale: true, splitLine: {show: false}}],
+                        series: [
+                            {
+                                name: [],
+                                type: 'line',//pip 饼 line 折线 bar 柱状图
+                                markPoint: {
+                                    data: [
+                                        {type: 'max', name: '最大值'},
+                                        {type: 'min', name: '最小值'}]
+                                },
+                                data: [],
+                                {#data:[1,2,3,45,6],#}
+                                itemStyle: {
+                                    normal: {
+                                        color: colors[0]
+                                    }
+                                },
+                            }
+
+                        ]
+                    };
+                    myChart.showLoading();
+                    myChart.setOption(option, true);
+                    $.ajax({
+                        url: '{% url 'query2' %}',
+                        async: true,
+                        type: 'GET',
+                        success: function (ret2) {     //成功执行
+                            console.log('执行ajax');
+                            server_info = eval(ret2);
+                            option.xAxis[0].data = server_info.a;
+                            option.legend[0].data = server_info.id;
+                            option.series[0].name = server_info.id;
+                            option.series[0].data = server_info.b;
+                            myChart.hideLoading();
+                            myChart.setOption(option, true);
+                        },
+                        error: function () {            //失败
+                            console.log('失败')
+                        }
+                    });
+                    $("#AJAX_get").click(function () {
+                        // 获取单选下拉框的值
+                        var form_data = {
+                            "DIMENSION_select": $("#DIMENSION_select").val(),
+                            "START_time": $("#START_time").val(),
+                            "END_time": $("#END_time").val(),
+                        };
+
+                        $.ajax({
+                            // 请求的url
+                            url: '{% url 'query' %}',
+                            async: true,
+                            // 请求的type
+                            type: 'GET',
+                            // 发送的数据
+                            data: form_data,
+                            // 回调函数，其中ret是返回的JSON，可以以字典的方式调用
+                            success: function (ret) {     //成功执行
+                                var series = [];
+                                server_info = eval(ret);
+                                // console.log(server_info)
+                                option.xAxis[0].data = server_info.a;
+                                option.legend[0].data = server_info.id;
+                                {#option.title[0].text = server_info.id#}
+                                for (var i = 0; i < server_info['id'].length; i++) {
+                                    series.push({
+                                        name: server_info['id'][i],
+                                        type: 'line',
+                                        data: server_info['b'][i],
+                                        markPoint: {
+                                            data: [
+                                                {type: 'max', name: '最大值'},
+                                                {type: 'min', name: '最小值'}],
+                                            {#symbolSize: 15,#}
+                                        },
+
+                                        itemStyle: {
+                                            normal: {
+                                                color: colors[i]
+                                            }
+                                        }
+                                    })
+                                }
+                                option.series = series;
+                                {#option.title[0].text = server_info.id+'  价格分布';#}
+                                myChart.hideLoading();
+                                myChart.setOption(option, true)
+                            },
+                            error: function () {            //失败
+                                console.log('失败')
+                            }
+                        });
+
+                    });
+                    window.onresize = function () {
+                        myChart.resize();
+                    };
+
+
+                });
+            </script>
+        </div>
+    </div>
+    <script src="{% static 'js/zmonthdemo.js' %}"></script>
+{% endblock body %}

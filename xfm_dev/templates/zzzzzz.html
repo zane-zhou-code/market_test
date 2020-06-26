@@ -1,0 +1,2012 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'Semantic-UI-CSS-master/semantic.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'datatables/dataTables.semanticui.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'demo/demo1.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'Semantic-UI-Calendar-master/calendar.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'Semantic-UI-Calendar-master/calendar.css' %}">
+    <script src="{% static 'jquery/jquery-3.4.1.js' %}"></script>
+    <script type="text/javascript" src="{% static 'Semantic-UI-CSS-master/semantic.js' %}"></script>
+    <script type="text/javascript" src="{% static 'Semantic-UI-Calendar-master/calendar.js' %}"></script>
+    <script type="text/javascript" src="{% static 'Semantic-UI-Calendar-master/calendar.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'datatables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'datatables/dataTables.semanticui.min.js' %}"></script>
+    <script src="{% static 'echarts/echarts.min.js' %}"></script>
+    <title>Semantic UI Project</title>
+
+</head>
+
+<body>
+<div class="ui vertical inverted sidebar menu">
+    <a class="item" href="#main">Home</a>
+    <a class="item" href="#services">Services</a>
+    <a class="item" href="#portfolio">Portfolio</a>
+    <a class="item" href="#about">About</a>
+    <a class="item" href="#team">Team</a>
+    <a class="item" href="#contact">Contact</a>
+
+</div>
+
+
+<div class="pusher">
+    <div class="ui vertical sc-main center aligned segment" style="border-color: rgba(248,248,255,0.7);">
+        <div class="ui container"><!--创建ui容器-->
+            <div class="ui container">
+                <nav class="ui large secondary inverted pointing fixed menu main_nav align-items-center"
+                     style="border: white;display: flex !important;" id="header-fixed">
+                    <!--创建一个抬头标签-->
+                    <a class="toc item">
+                        <i class="sidebar icon"></i>
+                    </a>
+                    <div class="logo"><a href="index">Data</a></div>
+                    <ul class="right item d-flex">
+                        <li class="active"><a class="item" href="#dashboard">总览</a></li>
+                        <li><a class="item" href="#product">生产</a></li>
+                        <li><a class="item" href="#sales">销售</a></li>
+                        <li><a class="item" href="#financial">财务</a></li>
+                        <li><a class="item" href="#market">市场</a></li>
+                        <li><a class="item" href="#hresource">人力</a></li>
+                        <li><a class="item" href="#quality">质量</a></li>
+                        <li><a class="item" href="#supplies">物资</a></li>
+                        <div class="ui dropdown item">更多
+                            <i class="dropdown icon"></i>
+                            <div class="menu">
+                                <a class="item" href="#project">项目</a>
+                                <a class="item" href="#system">系统</a>
+                            </div>
+                        </div>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <section id="echarts" class="sc-section">
+        {#        <div class="home">#}
+        {#            <div class="home_page_nav">#}
+        {#                <ul class="d-flex flex-column align-items-end justify-content-end">#}
+        {#                    <li><a href="#" data-scroll-to="#all"><span>01</span>总览</a></li>#}
+        {#                    <li><a href="#" data-scroll-to="#portfolio"><span>02</span>portfolio</a></li>#}
+        {#                    <li><a href="#" data-scroll-to="#about"><span>03</span>about</a></li>#}
+        {#                </ul>#}
+        {#            </div>#}
+        {#        </div>#}
+        <div class="ui center aligned stackable two column grid container">
+            <div class="column" style="width: 23%">
+                <form class="ui form" action="" method="post">
+                    {% csrf_token %}
+                    <h3>分析维度</h3>
+                    <div class="field">
+                        <select name="DIMENSION_select" id="DIMENSION_select" class="ui fluid search dropdown"
+                                multiple="multiple">
+                        </select>
+                    </div>
+                    <div class="two fields">
+                        <div class="ui calendar start_time field">
+                            <div class="ui input right icon">
+                                <i class="calendar icon"></i>
+                                <input type="text" placeholder="{{ month }}" value="{{ month }}" name="START_time"
+                                       id="START_time">
+                            </div>
+                        </div>
+                        <div class="ui calendar end_time field">
+                            <div class="ui input right icon">
+                                <i class="calendar icon"></i>
+                                <input type="text" placeholder="{{ month }}" value="{{ month }}" name="END_time"
+                                       id="END_time">
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <input class="ui blue button" type='button' id='AJAX_get' value="查询"/>
+                </form>
+            </div>
+            <div class="column" style="width: 77%">
+                <div id="main" style="width: 100%;height:360px;"></div>
+            </div>
+        </div>
+    </section>
+    <section id="echarts2" class="sc-section">
+        <div class="ui center aligned stackable two column grid container">
+            <div class="column" style="width: 23%">
+                <form class="ui form" action="" method="post">
+                    {% csrf_token %}
+                    <h3>分析维度</h3>
+                    <div class="field">
+                        <select name="DIMENSION_select2" id="DIMENSION_select2" class="ui fluid search dropdown"
+                                multiple="multiple">
+                        </select>
+                    </div>
+                    <div class="two fields">
+                        <div class="ui calendar start_time field">
+                            <div class="ui input right icon">
+                                <i class="calendar icon"></i>
+                                <input type="text" placeholder="{{ month }}" value="{{ month }}" name="START_time2"
+                                       id="START_time2">
+                            </div>
+                        </div>
+                        <div class="ui calendar end_time field">
+                            <div class="ui input right icon">
+                                <i class="calendar icon"></i>
+                                <input type="text" placeholder="{{ month }}" value="{{ month }}" name="END_time2"
+                                       id="END_time2">
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <input class="ui blue button" type='button' id='AJAX_get2' value="查询"/>
+                </form>
+            </div>
+            <div class="column" style="width: 77%">
+                <div id="main2" style="width: 100%;height:360px;"></div>
+            </div>
+        </div>
+    </section>
+    <section id="echarts3" class="sc-section">
+        <div class="ui center aligned stackable two column grid container">
+            <div class="column" style="width: 23%">
+                <form class="ui form" action="" method="post">
+                    {% csrf_token %}
+                    <h3>分析维度</h3>
+                    <div class="field">
+                        <select name="DIMENSION_select3" id="DIMENSION_select3" class="ui fluid search dropdown"
+                                multiple="multiple">
+                        </select>
+                    </div>
+                    <div class="two fields">
+                        <div class="ui calendar start_time field">
+                            <div class="ui input right icon">
+                                <i class="calendar icon"></i>
+                                <input type="text" placeholder="{{ month }}" value="{{ month }}" name="START_time3"
+                                       id="START_time3">
+                            </div>
+                        </div>
+                        <div class="ui calendar end_time field">
+                            <div class="ui input right icon">
+                                <i class="calendar icon"></i>
+                                <input type="text" placeholder="{{ month }}" value="{{ month }}" name="END_time3"
+                                       id="END_time3">
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <input class="ui blue button" type='button' id='AJAX_get3' value="查询"/>
+                </form>
+            </div>
+            <div class="column" style="width: 77%">
+                <div id="main3" style="width: 100%;height:360px;"></div>
+            </div>
+        </div>
+    </section>
+    <section id="echarts4" class="sc-section">
+        <div class="ui center aligned stackable four column grid container">
+            <div class="row">
+                <div class="column">
+                    <form class="ui form" action="" method="post">
+                        {% csrf_token %}
+                        <h3>分析维度</h3>
+                        <div class="two fields">
+                            <div class="ui calendar start_time field">
+                                <div class="ui input right icon">
+                                    <i class="calendar icon"></i>
+                                    <input type="text" placeholder="{{ month }}" value="{{ month }}" name="START_time4"
+                                           id="START_time4">
+                                </div>
+                            </div>
+                            <div class="ui calendar end_time field">
+                                <div class="ui input right icon">
+                                    <i class="calendar icon"></i>
+                                    <input type="text" placeholder="{{ month }}" value="{{ month }}" name="END_time4"
+                                           id="END_time4">
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <input class="ui blue button" type='button' id='AJAX_get3' value="查询"/>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="xfm_sd column">
+                    <div class="ui two column middle aligned grid">
+                        <div class="row">
+                            <div class="column">
+                                <h4 class="ui header">销售情况</h4></div>
+                        </div>
+                        <div class="row">
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui tiny labeled button" tabindex="0">
+                                        <button class="ui tiny compact button">销量</button>
+                                        <div class="floating tiny circular ui red label">吨</div>
+                                        <a class="ui basic label">2,048</a>
+                                    </div>
+
+                                </a>
+                            </div>
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui tiny labeled button" tabindex="0">
+                                        <button class="ui tiny compact button">同比</button>
+                                        <div class="floating tiny circular ui teal label"><i class="arrow down icon"
+                                                                                             style="margin: 0.25em 0 0"></i>
+                                        </div>
+                                        <a class="ui basic label">2.85%</a>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui tiny labeled button" tabindex="0">
+                                        <button class="ui tiny compact button">金额</button>
+                                        <div class="floating tiny circular ui red label">万</div>
+                                        <a class="ui basic label">3,052</a>
+                                    </div>
+
+                                </a>
+                            </div>
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui tiny labeled button" tabindex="0">
+                                        <button class="ui tiny compact button">同比</button>
+                                        <div class="floating tiny circular ui red label"><i class="arrow up icon"
+                                                                                            style="margin: 0.25em 0 0"></i>
+                                        </div>
+                                        <a class="ui basic label">3.85%</a>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui tiny labeled button" tabindex="0">
+                                        <button class="ui tiny compact button">均价</button>
+                                        <div class="floating tiny circular ui red label">¥/T</div>
+                                        <a class="ui basic label">580</a>
+                                    </div>
+
+                                </a>
+                            </div>
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui tiny labeled button" tabindex="0">
+                                        <button class="ui tiny compact button">同比</button>
+                                        <div class="floating tiny circular ui red label"><i class="arrow up icon"
+                                                                                            style="margin: 0.25em 0 0"></i>
+                                        </div>
+                                        <a class="ui basic label">1.85%</a>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="xfm_hr column">
+                    <div class="ui grid middle aligned container">
+                        <div class="two column row">
+                            <h4 class="ui header">人力资源</h4></div>
+                        <div class="row">
+                            <div class="column">
+                                <a class="item">
+                                    <div class="ui labeled button" tabindex="0">
+                                        <div class="ui compact button">人数</div>
+                                        <a class="ui basic label">12,048</a>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div id="main4" style="width: 100%;height:130%;"></div>
+                            <script type="text/javascript">
+                                var server_info;
+                                var colors = ['#63b2ee', '#76da91', '#f8cb7f', '#f89588', '#7cd6cf', '#9192ab', '#7898e1',
+                                    '#efa666', '#eddd86', '#9987ce', '#63b2ee', '#76da91'];
+                                var myChart4 = echarts.init(document.getElementById('main4'));
+                                var option4;
+                                option4 = {
+                                    title: [
+                                        {
+                                            text: '人员公司分布',
+                                            textStyle: {
+                                                fontSize: 15,
+                                            }
+                                        }
+                                    ],
+                                    backgroundColor: '',
+                                    tooltip: [{}],
+                                    legend: [],
+                                    xAxis: [],
+                                    yAxis: [],
+                                    series: [
+                                        {
+                                            type: 'pie',
+                                            data: [
+                                                {value: 335, name: '中辰'},
+                                                {value: 310, name: '中盈'},
+                                                {value: 234, name: '中维'},
+                                                {value: 135, name: '中辰'},
+                                                {value: 1548, name: '中石'}
+                                            ],
+                                            itemStyle: {
+                                                normal: {
+                                                    color: function (params) {
+                                                        return colors[params.dataIndex]
+                                                    }
+                                                }
+                                            },
+                                        }
+
+                                    ]
+                                };
+                                myChart4.setOption(option4, true);
+                            </script>
+                        </div>
+                    </div>
+                </div>
+                <div class="xfm_pr column">
+                    <div class="ui grid middle aligned container">
+                        <div class="two column row">
+                            <h4 class="ui header">生产情况</h4></div>
+                        <div class="row">
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui labeled button" tabindex="0">
+                                        <div class="ui compact button">产量</div>
+                                        <div class="floating circular ui red label">吨</div>
+                                        <a class="ui basic label">150,048</a>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div id="main5" style="width: 100%;height:130%;"></div>
+                            <script type="text/javascript">
+                                var server_info;
+                                var colors = ['#63b2ee', '#76da91', '#f8cb7f', '#f89588', '#7cd6cf', '#9192ab', '#7898e1',
+                                    '#efa666', '#eddd86', '#9987ce', '#63b2ee', '#76da91'];
+                                var myChart5 = echarts.init(document.getElementById('main5'));
+                                var option5 = {
+                                    //标题
+                                    title: [
+                                        {
+                                            text: '产量装置分布',
+                                            textStyle: {
+                                                fontSize: 15,
+                                            }
+                                        }
+                                    ],
+                                    grid: [
+                                        {x: '10%', y: '25%', width: '90%', height: '70%'},
+                                    ],
+                                    tooltip: {
+                                        trigger: 'axis',
+                                        formatter: '{b} : {c}'
+                                    },
+                                    xAxis: {
+                                        type: 'category',
+                                        data: ["ZCP01", "ZCP02", "ZCP03", "ZCP04", "ZCP05", "ZCP06", 'ZCP07', 'ZCP08', 'HCP01',
+                                            'HCP02', 'HCP03', 'HCP04', 'HCP05', 'HCP06'],
+                                        show: false,
+                                        axisTick: {
+                                            show: false//不显示坐标轴刻度线
+                                        }, axisLine: {
+                                            show: false,//不显示坐标轴线
+                                        },
+                                    },
+                                    yAxis: [{scale: true, splitLine: {show: false}, show: false}],
+                                    series: [{
+                                        name: '销量',
+                                        type: 'line',
+                                        smooth: true,
+                                        data: [40, 20, 35, 60, 55, 10, 11, 21, 5, 19, 28, 4, 9, 111],
+                                        itemStyle: {normal: {label: {show: true}}},
+                                        color: colors
+                                    }]
+                                };
+                                myChart5.setOption(option5, true);
+                            </script>
+                        </div>
+                    </div>
+                </div>
+                <div class="xfm_mm column">
+                    <div class="ui two column middle aligned grid">
+                        <div class="row">
+                            <div class="two column row">
+                                <h4 class="ui header">库存分布</h4></div>
+                        </div>
+                        <div class="row">
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui labeled tiny button" tabindex="0">
+                                        <button class="ui tiny compact button">内贸成品</button>
+                                        <div class="floating circular ui red label">吨</div>
+                                        <a class="ui basic label">2,048</a>
+                                    </div>
+
+                                </a>
+                            </div>
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui labeled tiny button" tabindex="0">
+                                        <button class="ui tiny compact button">外贸成品</button>
+                                        <div class="floating circular ui red label">吨</div>
+                                        <a class="ui basic label">1,500</a>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div id="main6" style="width: 100%;height:130%;"></div>
+                            <script type="text/javascript">
+                                var server_info;
+                                var colors = ['#63b2ee', '#76da91', '#f8cb7f', '#f89588', '#7cd6cf', '#9192ab', '#7898e1',
+                                    '#efa666', '#eddd86', '#9987ce', '#63b2ee', '#76da91'];
+                                var myChart6 = echarts.init(document.getElementById('main6'));
+                                var option6 = {
+                                    //标题
+                                    title: [
+                                        {
+                                            text: '库存公司分布',
+                                            textStyle: {
+                                                fontSize: 15,
+                                            }
+                                        }
+                                    ],
+                                    grid: [
+                                        {x: '10%', y: '25%', width: '90%', height: '70%'},
+                                    ],
+                                    tooltip: {
+                                        trigger: 'axis',
+                                        formatter: '{b} : {c}'
+                                    },
+                                    xAxis: {
+                                        type: 'category',
+                                        data: ["中欣", "中辰", "中盈", "中石", "中维"],
+                                        show: false,
+                                        axisTick: {
+                                            show: false//不显示坐标轴刻度线
+                                        }, axisLine: {
+                                            show: false,//不显示坐标轴线
+                                        },
+                                    },
+                                    yAxis: [{scale: true, splitLine: {show: false}, show: false}],
+                                    series: [{
+                                        name: '销量',
+                                        type: 'bar',
+                                        data: [561, 785, 412, 566, 986],
+                                        itemStyle: {normal: {label: {show: true}}},
+                                        color: colors
+                                    }]
+                                };
+                                myChart6.setOption(option6, true);
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="xfm_sd_more column">
+                    <div class="ui two column middle aligned grid">
+                        <div class="row">
+                            <h4 class="ui header"><i class="shipping fast icon"></i>销售详细分布</h4></div>
+                        <div class="row">
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui labeled tiny button" tabindex="0">
+                                        <button class="ui tiny compact button">内销</button>
+                                        <div class="floating circular ui red tiny label">吨</div>
+                                        <a class="ui basic label">1,548</a>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui labeled tiny button" tabindex="0">
+                                        <button class="ui tiny compact button">外销</button>
+                                        <div class="floating circular ui red tiny label">吨</div>
+                                        <a class="ui basic label">584</a>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui labeled tiny button" tabindex="0">
+                                        <button class="ui tiny compact button">POY</button>
+                                        <div class="floating circular ui red tiny label">吨</div>
+                                        <a class="ui basic label">1105</a>
+                                    </div>
+
+                                </a>
+                            </div>
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui labeled tiny button" tabindex="0">
+                                        <button class="ui tiny compact button">同比</button>
+                                        <div class="floating circular ui red tiny label"><i class="arrow up tiny icon"
+                                                                                            style="margin: 0.25em 0 0"></i>
+                                        </div>
+                                        <a class="ui basic label">2.85%</a>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui labeled tiny button" tabindex="0">
+                                        <button class="ui tiny compact button">FDY</button>
+                                        <div class="floating circular ui red tiny label">吨</div>
+                                        <a class="ui basic label">505</a>
+                                    </div>
+
+                                </a>
+                            </div>
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui labeled tiny button" tabindex="0">
+                                        <button class="ui tiny compact button">同比</button>
+                                        <div class="floating circular ui teal tiny label"><i
+                                                class="arrow down tiny icon"
+                                                style="margin: 0.25em 0 0"></i></div>
+                                        <a class="ui basic label">1.85%</a>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui labeled tiny button" tabindex="0">
+                                        <button class="ui tiny compact button">DTY</button>
+                                        <div class="floating circular ui red tiny label">吨</div>
+                                        <a class="ui basic label">96</a>
+                                    </div>
+
+                                </a>
+                            </div>
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui labeled tiny button" tabindex="0">
+                                        <button class="ui compact tiny button">同比</button>
+                                        <div class="floating circular ui teal tiny label"><i
+                                                class="arrow down tiny icon"
+                                                style="margin: 0.25em 0 0"></i></div>
+                                        <a class="ui basic label">0.85%</a>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div id="main7" style="width: 100%;height:130%;"></div>
+                            <script type="text/javascript">
+                                var server_info;
+                                var colors = ['#63b2ee', '#76da91', '#f8cb7f', '#f89588', '#7cd6cf', '#9192ab', '#7898e1',
+                                    '#efa666', '#eddd86', '#9987ce', '#63b2ee', '#76da91'];
+                                var myChart7 = echarts.init(document.getElementById('main7'));
+                                var option7 = {
+                                    //标题
+                                    title: [
+                                        {
+                                            text: '销售均价月趋势',
+                                            textStyle: {
+                                                fontSize: 15,
+                                            }
+                                        }
+                                    ],
+                                    grid: [
+                                        {x: '10%', y: '35%', width: '90%', height: '65%'},
+                                    ],
+                                    tooltip: {
+                                        trigger: 'axis',
+                                    },
+                                    xAxis: {
+                                        type: 'category',
+                                        data: ["202001", "202002", "202003", "202004", "202005", "202006",],
+                                        show: false,
+                                        axisTick: {show: false},
+                                        axisLine: {show: false,},
+                                    },
+                                    yAxis: [{scale: true, splitLine: {show: false}, show: false}],
+                                    series: [{
+                                        type: 'line',
+                                        smooth: true,
+                                        seriesLayoutBy: 'row',
+                                        symbolSize: 10,
+                                        itemStyle: {
+                                            normal: {
+                                                color: colors[0]
+                                            }
+                                        },
+                                        data: [['202001', 10], ['202002', 15], ['202003', 20], ['202004', 16], ['202005', 9], ['202006', 12],],
+                                        markPoint: {
+                                        data: [
+                                            {type: 'max', name: '最大值'},
+                                            {type: 'min', name: '最小值'}],
+                                    },
+                                    }]
+                                };
+                                myChart7.setOption(option7, true);
+                            </script>
+                        </div>
+                    </div>
+                </div>
+                <div class="xfm_sc_more column">
+                    <div class="ui two column middle aligned grid">
+                        <div class="row">
+                            <h4 class="ui header"><i class="pallet icon"></i>生产详细分布</h4></div>
+                        <div class="row">
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui labeled tiny button" tabindex="0">
+                                        <button class="ui tiny compact button">POY</button>
+                                        <div class="floating circular ui red tiny label">吨</div>
+                                        <a class="ui basic label">2105</a>
+                                    </div>
+
+                                </a>
+                            </div>
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui labeled tiny button" tabindex="0">
+                                        <button class="ui tiny compact button">同比</button>
+                                        <div class="floating circular ui red tiny label"><i class="arrow up tiny icon"
+                                                                                            style="margin: 0.25em 0 0"></i>
+                                        </div>
+                                        <a class="ui basic label">2.85%</a>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui labeled tiny button" tabindex="0">
+                                        <button class="ui tiny compact button">FDY</button>
+                                        <div class="floating circular ui red tiny label">吨</div>
+                                        <a class="ui basic label">805</a>
+                                    </div>
+
+                                </a>
+                            </div>
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui labeled tiny button" tabindex="0">
+                                        <button class="ui tiny compact button">同比</button>
+                                        <div class="floating circular ui teal tiny label"><i
+                                                class="arrow down tiny icon"
+                                                style="margin: 0.25em 0 0"></i></div>
+                                        <a class="ui basic label">1.85%</a>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui labeled tiny button" tabindex="0">
+                                        <button class="ui tiny compact button">DTY</button>
+                                        <div class="floating circular ui red tiny label">吨</div>
+                                        <a class="ui basic label">596</a>
+                                    </div>
+
+                                </a>
+                            </div>
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui labeled tiny button" tabindex="0">
+                                        <button class="ui compact tiny button">同比</button>
+                                        <div class="floating circular ui teal tiny label"><i
+                                                class="arrow down tiny icon"
+                                                style="margin: 0.25em 0 0"></i></div>
+                                        <a class="ui basic label">0.85%</a>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div id="main7" style="width: 100%;height:130%;"></div>
+                            <script type="text/javascript">
+                                var server_info;
+                                var colors = ['#63b2ee', '#76da91', '#f8cb7f', '#f89588', '#7cd6cf', '#9192ab', '#7898e1',
+                                    '#efa666', '#eddd86', '#9987ce', '#63b2ee', '#76da91'];
+                                var myChart7 = echarts.init(document.getElementById('main7'));
+                                var option7 = {
+                                    //标题
+                                    title: [
+                                        {
+                                            text: '销售均价月趋势',
+                                            textStyle: {
+                                                fontSize: 15,
+                                            }
+                                        }
+                                    ],
+                                    grid: [
+                                        {x: '10%', y: '35%', width: '90%', height: '65%'},
+                                    ],
+                                    tooltip: {
+                                        trigger: 'axis',
+                                    },
+                                    xAxis: {
+                                        type: 'category',
+                                        data: ["202001", "202002", "202003", "202004", "202005", "202006",],
+                                        show: false,
+                                        axisTick: {show: false},
+                                        axisLine: {show: false,},
+                                    },
+                                    yAxis: [{scale: true, splitLine: {show: false}, show: false}],
+                                    series: [{
+                                        type: 'line',
+                                        smooth: true,
+                                        seriesLayoutBy: 'row',
+                                        symbolSize: 10,
+                                        itemStyle: {
+                                            normal: {
+                                                color: colors[0]
+                                            }
+                                        },
+                                        data: [['202001', 10], ['202002', 15], ['202003', 20], ['202004', 16], ['202005', 9], ['202006', 12],],
+                                        markPoint: {
+                                        data: [
+                                            {type: 'max', name: '最大值'},
+                                            {type: 'min', name: '最小值'}],
+                                    },
+                                    }]
+                                };
+                                myChart7.setOption(option7, true);
+                            </script>
+                        </div>
+                    </div>
+                </div>
+                <div class="xfm_mm_more column">
+                    <div class="ui two column middle aligned grid">
+                        <div class="row">
+                            <h4 class="ui header"><i class="warehouse icon"></i>库存详细分布</h4></div>
+                        <div class="row">
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui labeled tiny button" tabindex="0">
+                                        <button class="ui tiny compact button">内销</button>
+                                        <div class="floating circular ui red tiny label">吨</div>
+                                        <a class="ui basic label">1,548</a>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui labeled tiny button" tabindex="0">
+                                        <button class="ui tiny compact button">外销</button>
+                                        <div class="floating circular ui red tiny label">吨</div>
+                                        <a class="ui basic label">584</a>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui labeled tiny button" tabindex="0">
+                                        <button class="ui tiny compact button">POY</button>
+                                        <div class="floating circular ui red tiny label">吨</div>
+                                        <a class="ui basic label">1105</a>
+                                    </div>
+
+                                </a>
+                            </div>
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui labeled tiny button" tabindex="0">
+                                        <button class="ui tiny compact button">同比</button>
+                                        <div class="floating circular ui red tiny label"><i class="arrow up tiny icon"
+                                                                                            style="margin: 0.25em 0 0"></i>
+                                        </div>
+                                        <a class="ui basic label">2.85%</a>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui labeled tiny button" tabindex="0">
+                                        <button class="ui tiny compact button">FDY</button>
+                                        <div class="floating circular ui red tiny label">吨</div>
+                                        <a class="ui basic label">505</a>
+                                    </div>
+
+                                </a>
+                            </div>
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui labeled tiny button" tabindex="0">
+                                        <button class="ui tiny compact button">同比</button>
+                                        <div class="floating circular ui teal tiny label"><i
+                                                class="arrow down tiny icon"
+                                                style="margin: 0.25em 0 0"></i></div>
+                                        <a class="ui basic label">1.85%</a>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui labeled tiny button" tabindex="0">
+                                        <button class="ui tiny compact button">DTY</button>
+                                        <div class="floating circular ui red tiny label">吨</div>
+                                        <a class="ui basic label">96</a>
+                                    </div>
+
+                                </a>
+                            </div>
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui labeled tiny button" tabindex="0">
+                                        <button class="ui compact tiny button">同比</button>
+                                        <div class="floating circular ui teal tiny label"><i
+                                                class="arrow down tiny icon"
+                                                style="margin: 0.25em 0 0"></i></div>
+                                        <a class="ui basic label">0.85%</a>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div id="main7" style="width: 100%;height:130%;"></div>
+                            <script type="text/javascript">
+                                var server_info;
+                                var colors = ['#63b2ee', '#76da91', '#f8cb7f', '#f89588', '#7cd6cf', '#9192ab', '#7898e1',
+                                    '#efa666', '#eddd86', '#9987ce', '#63b2ee', '#76da91'];
+                                var myChart7 = echarts.init(document.getElementById('main7'));
+                                var option7 = {
+                                    //标题
+                                    title: [
+                                        {
+                                            text: '销售均价月趋势',
+                                            textStyle: {
+                                                fontSize: 15,
+                                            }
+                                        }
+                                    ],
+                                    grid: [
+                                        {x: '10%', y: '35%', width: '90%', height: '65%'},
+                                    ],
+                                    tooltip: {
+                                        trigger: 'axis',
+                                    },
+                                    xAxis: {
+                                        type: 'category',
+                                        data: ["202001", "202002", "202003", "202004", "202005", "202006",],
+                                        show: false,
+                                        axisTick: {show: false},
+                                        axisLine: {show: false,},
+                                    },
+                                    yAxis: [{scale: true, splitLine: {show: false}, show: false}],
+                                    series: [{
+                                        type: 'line',
+                                        smooth: true,
+                                        seriesLayoutBy: 'row',
+                                        symbolSize: 10,
+                                        itemStyle: {
+                                            normal: {
+                                                color: colors[0]
+                                            }
+                                        },
+                                        data: [['202001', 10], ['202002', 15], ['202003', 20], ['202004', 16], ['202005', 9], ['202006', 12],],
+                                        markPoint: {
+                                        data: [
+                                            {type: 'max', name: '最大值'},
+                                            {type: 'min', name: '最小值'}],
+                                    },
+                                    }]
+                                };
+                                myChart7.setOption(option7, true);
+                            </script>
+                        </div>
+                    </div>
+                </div>
+                <div class="xfm_qm_more column">
+                    <div class="ui two column middle aligned grid">
+                        <div class="row">
+                            <h4 class="ui header"><i class="dolly flatbed icon"></i>销售详细分布</h4></div>
+                        <div class="row">
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui labeled tiny button" tabindex="0">
+                                        <button class="ui tiny compact button">内销</button>
+                                        <div class="floating circular ui red tiny label">吨</div>
+                                        <a class="ui basic label">1,548</a>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui labeled tiny button" tabindex="0">
+                                        <button class="ui tiny compact button">外销</button>
+                                        <div class="floating circular ui red tiny label">吨</div>
+                                        <a class="ui basic label">584</a>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui labeled tiny button" tabindex="0">
+                                        <button class="ui tiny compact button">POY</button>
+                                        <div class="floating circular ui red tiny label">吨</div>
+                                        <a class="ui basic label">1105</a>
+                                    </div>
+
+                                </a>
+                            </div>
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui labeled tiny button" tabindex="0">
+                                        <button class="ui tiny compact button">同比</button>
+                                        <div class="floating circular ui red tiny label"><i class="arrow up tiny icon"
+                                                                                            style="margin: 0.25em 0 0"></i>
+                                        </div>
+                                        <a class="ui basic label">2.85%</a>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui labeled tiny button" tabindex="0">
+                                        <button class="ui tiny compact button">FDY</button>
+                                        <div class="floating circular ui red tiny label">吨</div>
+                                        <a class="ui basic label">505</a>
+                                    </div>
+
+                                </a>
+                            </div>
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui labeled tiny button" tabindex="0">
+                                        <button class="ui tiny compact button">同比</button>
+                                        <div class="floating circular ui teal tiny label"><i
+                                                class="arrow down tiny icon"
+                                                style="margin: 0.25em 0 0"></i></div>
+                                        <a class="ui basic label">1.85%</a>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui labeled tiny button" tabindex="0">
+                                        <button class="ui tiny compact button">DTY</button>
+                                        <div class="floating circular ui red tiny label">吨</div>
+                                        <a class="ui basic label">96</a>
+                                    </div>
+
+                                </a>
+                            </div>
+                            <div class="column">
+                                <a class="item" style="position: relative">
+                                    <div class="ui labeled tiny button" tabindex="0">
+                                        <button class="ui compact tiny button">同比</button>
+                                        <div class="floating circular ui teal tiny label"><i
+                                                class="arrow down tiny icon"
+                                                style="margin: 0.25em 0 0"></i></div>
+                                        <a class="ui basic label">0.85%</a>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div id="main7" style="width: 100%;height:130%;"></div>
+                            <script type="text/javascript">
+                                var server_info;
+                                var colors = ['#63b2ee', '#76da91', '#f8cb7f', '#f89588', '#7cd6cf', '#9192ab', '#7898e1',
+                                    '#efa666', '#eddd86', '#9987ce', '#63b2ee', '#76da91'];
+                                var myChart7 = echarts.init(document.getElementById('main7'));
+                                var option7 = {
+                                    //标题
+                                    title: [
+                                        {
+                                            text: '销售均价月趋势',
+                                            textStyle: {
+                                                fontSize: 15,
+                                            }
+                                        }
+                                    ],
+                                    grid: [
+                                        {x: '10%', y: '35%', width: '90%', height: '65%'},
+                                    ],
+                                    tooltip: {
+                                        trigger: 'axis',
+                                    },
+                                    xAxis: {
+                                        type: 'category',
+                                        data: ["202001", "202002", "202003", "202004", "202005", "202006",],
+                                        show: false,
+                                        axisTick: {show: false},
+                                        axisLine: {show: false,},
+                                    },
+                                    yAxis: [{scale: true, splitLine: {show: false}, show: false}],
+                                    series: [{
+                                        type: 'line',
+                                        smooth: true,
+                                        seriesLayoutBy: 'row',
+                                        symbolSize: 10,
+                                        itemStyle: {
+                                            normal: {
+                                                color: colors[0]
+                                            }
+                                        },
+                                        data: [['202001', 10], ['202002', 15], ['202003', 20], ['202004', 16], ['202005', 9], ['202006', 12],],
+                                        markPoint: {
+                                        data: [
+                                            {type: 'max', name: '最大值'},
+                                            {type: 'min', name: '最小值'}],
+                                    },
+                                    }]
+                                };
+                                myChart7.setOption(option7, true);
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="portfolio" class="sc-section">
+        <div class="ui center aligned stackable three column grid container">
+            <div class="row">
+                <div class="sixteen wide mobile twelve wide tablet eight wide computer column">
+                    <h2 class="ui header sc-h2">PORTFOLIO</h2>
+                    <p>这是服务名称</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <div class="ui special cards">
+                        <div id="card1" class="ui link center fluid card">
+                            <div class="blurring dimmable image">
+                                <div class="ui dimmer">
+                                    <div class="center">
+                                        <i class="huge plus circle icon"></i>
+                                    </div>
+                                </div>
+                                <img class="ui image" src="../static/images/destination_1.jpg">
+                            </div>
+                            <div class="content">
+                                <div class="header">Project Name</div>
+                                <div class="meta">Project Category</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="ui special cards">
+                        <div id="card2" class="ui link center fluid card">
+                            <div class="blurring dimmable image">
+                                <div class="ui dimmer">
+                                    <div class="center">
+                                        <i class="huge plus circle icon"></i>
+                                    </div>
+                                </div>
+                                <img class="ui image" src="../static/images/destination_2.jpg">
+                            </div>
+                            <div class="content">
+                                <div class="header">Project Name</div>
+                                <div class="meta">Project Category</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="ui special cards">
+                        <div id="card3" class="ui link center fluid card">
+                            <div class="blurring dimmable image">
+                                <div class="ui dimmer">
+                                    <div class="center">
+                                        <i class="huge plus circle icon"></i>
+                                    </div>
+                                </div>
+                                <img class="ui image" src="../static/images/destination_3.jpg">
+                            </div>
+                            <div class="content">
+                                <div class="header">Project Name</div>
+                                <div class="meta">Project Category</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="ui special cards">
+                        <div id="card4" class="ui link center fluid card">
+                            <div class="blurring dimmable image">
+                                <div class="ui dimmer">
+                                    <div class="center">
+                                        <i class="huge plus circle icon"></i>
+                                    </div>
+                                </div>
+                                <img class="ui image" src="../static/images/destination_4.jpg">
+                            </div>
+                            <div class="content">
+                                <div class="header">Project Name</div>
+                                <div class="meta">Project Category</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="about" class="sc-section sc-vertical">
+        <div class="ui grid middle aligned container">
+            <div class="centered row">
+                <div class="center aligned sixteen wide mobile twelve wide table eight wide computer column">
+                    <h2 class="ui header sc-h2">ABOUT US</h2>
+                    <p>这个是介绍</p>
+                </div>
+            </div>
+            <div class="two column row">
+                <div class="right aligned six wide column">
+                    <div class="item">
+                        <div class="content">
+                            <h3 class="header">2009</h3>
+                            <p>这是2009年</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="four wide column">
+                    <div class="ui circular medium image">
+                        <div class="ui hidden divider"></div>
+                        <div class="ui hidden divider"></div>
+                        <img src="../static/images/about.jpg">
+                        <div class="ui hidden divider"></div>
+                        <div class="ui hidden divider"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="two column row">
+                <div class="right floated aligned four wide column">
+                    <div class="ui circular medium image">
+                        <div class="ui hidden divider"></div>
+                        <div class="ui hidden divider"></div>
+                        <img src="../static/images/about.jpg">
+                        <div class="ui hidden divider"></div>
+                        <div class="ui hidden divider"></div>
+                    </div>
+                </div>
+                <div class="left aligned six wide column">
+                    <div class="item">
+                        <div class="content">
+                            <h3 class="header">2019</h3>
+                            <p>这是2019年</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="two column row">
+                <div class="right aligned six wide column">
+                    <div class="item">
+                        <div class="content">
+                            <h3 class="header">2018</h3>
+                            <p>这是2018年</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="four wide column">
+                    <div class="ui circular medium image">
+                        <div class="ui hidden divider"></div>
+                        <div class="ui hidden divider"></div>
+                        <img src="../static/images/about.jpg">
+                        <div class="ui hidden divider"></div>
+                        <div class="ui hidden divider"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="two column row">
+                <div class="right floated aligned four wide column">
+                    <div class="ui circular medium image">
+                        <div class="ui hidden divider"></div>
+                        <div class="ui hidden divider"></div>
+                        <img src="../static/images/about.jpg">
+                        <div class="ui hidden divider"></div>
+                        <div class="ui hidden divider"></div>
+                    </div>
+                </div>
+                <div class="left aligned six wide column">
+                    <div class="item">
+                        <div class="content">
+                            <h3 class="header">2020</h3>
+                            <p>这是2020年</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="centered one column row">
+                <div class="centered aligned four wide column">
+                    <div class="ui circular medium image">
+                        <div class="ui hidden divider"></div>
+                        <div class="ui hidden divider"></div>
+                        <img src="../static/images/about_1.jpg">
+                        <h3 class="header">WE ARE HERE</h3>
+                        <div class="ui hidden divider"></div>
+                        <div class="ui hidden divider"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="item" class="sc-section">
+        <div class="ui center aligned stackable three column grid container">
+            <div class="row">
+                <div class="sixteen wide mobile twelve wide tablet eight wide computer column">
+                    <h2 class="ui header sc-h2">TEAM</h2>
+                    <p>这是团队名称</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <div class="ui two column middle aligned grid">
+                        <div class="sixteen wide tablet eight wide computer column">
+                            <img class="ui fluid image" src="../static/images/travello.jpg">
+                        </div>
+                        <div class="sixteen wide tablet eight wide computer column">
+                            <h3 class="header">AA</h3>
+                            <div class="meta">CEO</div>
+                            <div class="ui hidden divider"></div>
+                            <i class="circular inverted twitter link icon"></i>
+                            <i class="circular inverted facebook link icon"></i>
+                            <i class="circular inverted linkedin link icon"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="ui two column middle aligned grid">
+                        <div class="sixteen wide tablet eight wide computer column">
+                            <img class="ui fluid image" src="../static/images/travello.jpg">
+                        </div>
+                        <div class="sixteen wide tablet eight wide computer column">
+                            <h3 class="header">AA</h3>
+                            <div class="meta">CEO</div>
+                            <div class="ui hidden divider"></div>
+                            <i class="circular inverted twitter link icon"></i>
+                            <i class="circular inverted facebook link icon"></i>
+                            <i class="circular inverted linkedin link icon"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="ui two column middle aligned grid">
+                        <div class="sixteen wide tablet eight wide computer column">
+                            <img class="ui fluid image" src="../static/images/travello.jpg">
+                        </div>
+                        <div class="sixteen wide tablet eight wide computer column">
+                            <h3 class="header">AA</h3>
+                            <div class="meta">CEO</div>
+                            <div class="ui hidden divider"></div>
+                            <i class="circular inverted twitter link icon"></i>
+                            <i class="circular inverted facebook link icon"></i>
+                            <i class="circular inverted linkedin link icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="contact" class="sc-section">
+        <div class="ui center aligned two column stackable grid container">
+            <div class="row">
+                <div class="center aligned eight wide column">
+                    <h2 class="ui header sc-h2">CONTACT US</h2>
+                    <p>这是联系方式</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <form class="ui form">
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <input type="text" placeholder="Name">
+                                <i class="user icon"></i>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <input type="email" placeholder="email">
+                                <i class="envelope icon"></i>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <textarea rows="5" placeholder="Message"></textarea>
+                        </div>
+                        <div class="ui primary button sc-button">SEND</div>
+                    </form>
+                </div>
+                <div class="left aligned column">
+                    <div class="ui list">
+                        <div class="item">
+                            <i class="large home middle aligned icon"></i>
+                            <div class="content">
+                                <h3 class="header">Office ADddress</h3>
+                                <div class="description">aaaaaaaaaaa</div>
+                            </div>
+                        </div>
+                        <div class="ui hidder divider"></div>
+
+                        <div class="item">
+                            <i class="large home middle aligned icon"></i>
+                            <div class="content">
+                                <h3 class="header">Office ADddress</h3>
+                                <div class="description">aaaaaaaaaaa</div>
+                            </div>
+                        </div>
+                        <div class="ui hidder divider"></div>
+
+                        <div class="item">
+                            <i class="large home middle aligned icon"></i>
+                            <div class="content">
+                                <h3 class="header">Office ADddress</h3>
+                                <div class="description">aaaaaaaaaaa</div>
+                            </div>
+                        </div>
+                        <div class="ui hidder divider"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!--MODELS-->
+    <div class="ui modal modal1">
+        <div class="image content">
+            <div class="ui image">
+                <img class="fluid" src="../static/images/destination_1.jpg">
+            </div>
+        </div>
+    </div>
+    <div class="ui modal modal2">
+        <div class="image content">
+            <div class="ui image">
+                <img class="fluid" src="../static/images/destination_2.jpg">
+            </div>
+        </div>
+    </div>
+    <div class="ui modal modal3">
+        <div class="image content">
+            <div class="ui image">
+                <img class="fluid" src="../static/images/destination_3.jpg">
+            </div>
+        </div>
+    </div>
+    <div class="ui modal modal4">
+        <div class="image content">
+            <div class="ui image">
+                <img class="fluid" src="../static/images/destination_4.jpg">
+            </div>
+        </div>
+    </div>
+</div>
+
+{#    <!--Bootstrap Button-->#}
+{#    <div class="btn btn-large btn-warning">Button</div>#}
+{##}
+{#    <!--Semantic Button-->#}
+{#    <div class="ui large red button"></div>#}
+
+
+<script>
+    $('#all_menu').click(function () {
+        $('.ui.sidebar')
+            .sidebar({transition: 'push'}) {# overlay #}
+            .sidebar('toggle');
+    });
+    $('.menu.item').tab();
+    $('.ui.dropdown').dropdown({on: 'hover'});
+    $('#upload').progress({
+        total: 3,
+        text: {
+            active: '{total}张图片,已上传{value}张',
+            success: '成功上传',
+        }
+    });
+
+    $(document).ready(function () {
+        // DIMMER
+        $('.special.cards .image').dimmer({
+            on: 'hover',
+        });
+        //SIDEBAR
+        $('.ui.sidebar').sidebar('attach events', '.toc.item');
+        //MODAL
+        $('#card1').click(function () {
+            $('.ui.modal.modal1').modal('toggle')
+
+        });
+        $('#card2').click(function () {
+            $('.ui.modal.modal2').modal('toggle')
+
+        });
+        $('#card3').click(function () {
+            $('.ui.modal.modal3').modal('toggle')
+
+        });
+        $('#card4').click(function () {
+            $('.ui.modal.modal4').modal('toggle')
+
+        });
+
+        //设置滚动效果
+        $(document).on('scroll', function () {
+            setHeader();
+        });
+
+        function setHeader() {
+            if ($(window).scrollTop() > 60) {
+                $('#header-fixed').addClass('scrolled');
+
+                {#header.addClass('scrolled');#}
+                {#headerSocial.addClass('scrolled');#}
+            } else {
+                $('#header-fixed').removeClass('scrolled');
+                {#header.removeClass('scrolled');#}
+                {#headerSocial.removeClass('scrolled');#}
+            }
+        }
+
+        //设置点击效果
+        $('#listmore').click()
+    })
+
+</script>
+<!--echarts-->
+<script type="text/javascript">
+    function mychart() {
+        myChart = echarts.init(document.getElementById('main'));
+        option = {
+            title: [
+                {
+                    text: '价格分布',
+                    textstyle: {fontfamily: 'sans-serif'}
+                }
+            ],
+            backgroundColor: '',
+            dataZoom: [
+                {
+                    type: 'slider',
+                    xAxisIndex: 0,
+                    start: 0,
+                    end: 100
+                },
+                {
+                    type: 'inside',
+                    xAxisIndex: 0,
+                    start: 0,
+                    end: 100
+                },
+            ],
+            tooltip: [{}],
+            legend: [
+                {
+                    data: '{{id}}',
+                }
+            ],
+            toolbox: [{show: true, feature: {saveAsImage: {}}}],
+            xAxis: [
+                {
+                    data: [
+                        {% for date in dates %}
+                            "{{date}}",
+                        {% endfor %}],
+                    splitLine: {show: false}
+                }
+            ],
+            yAxis: [{scale: true, splitLine: {show: false}}],
+            series: [
+                {
+                    name: '{{id}}',
+                    type: 'line',
+                    markPoint: {
+                        data: [
+                            {type: 'max', name: '最大值'},
+                            {type: 'min', name: '最小值'}]
+                    },
+                    data: [
+                        {% for price in prices %}
+                            "{{price}}",
+                        {% endfor %}],
+                    itemStyle: {
+                        normal: {
+                            color: colors[0]
+                        }
+                    },
+                }
+            ]
+        };
+        myChart.setOption(option, true);
+
+    }
+
+    function mychart2() {
+        myChart2 = echarts.init(document.getElementById('main2'));
+        option2 = {
+            title: [
+                {text: '价格间占比'}
+            ],
+            dataZoom: [
+                {
+                    type: 'slider',
+                    xAxisIndex: 0,
+                    start: 0,
+                    end: 100
+                },
+                {
+                    type: 'inside',
+                    xAxisIndex: 0,
+                    start: 0,
+                    end: 100
+                },
+            ],
+            dataset: {source: []},
+            tooltip: [{
+                trigger: 'axis',
+                showContent: true,
+            }],
+            legend: {},
+            xAxis: [
+                {
+                    type: 'category',
+                    triggerEvent: true,
+                    splitLine: {show: false}
+                }
+            ],
+            yAxis: [{scale: true, splitLine: {show: false}, gridIndex: 0}],
+            grid: {top: '55%'},
+            series: [
+                {type: 'line', smooth: true, seriesLayoutBy: 'row', symbolSize: 10},
+                {type: 'line', smooth: true, seriesLayoutBy: 'row', symbolSize: 10},
+                {
+                    type: 'pie',
+                    id: 'pie',
+                    radius: '30%',
+                    center: ['50%', '25%'],
+                    label: {
+                        formatter: '({d}%)'
+                    },
+                    color: colors
+                }
+            ]
+        };
+        myChart2.showLoading();
+        myChart2.setOption(option2, true);
+    }
+
+    function mychart3() {
+        myChart3 = echarts.init(document.getElementById('main3'));
+        option3 = {
+            title: [
+                {text: '价格间占比'}
+            ],
+            dataZoom: [
+                {
+                    type: 'slider',
+                    xAxisIndex: 0,
+                    start: 0,
+                    end: 100
+                },
+                {
+                    type: 'inside',
+                    xAxisIndex: 0,
+                    start: 0,
+                    end: 100
+                },
+            ],
+            dataset: {source: []},
+            tooltip: [{
+                trigger: 'axis',
+                showContent: true,
+            }],
+            legend: {},
+            xAxis: [
+                {
+                    type: 'category',
+                    triggerEvent: true,
+                    splitLine: {show: false},
+                    gridIndex: 0
+                },
+                {
+                    type: 'category',
+                    triggerEvent: true,
+                    splitLine: {show: false},
+                    gridIndex: 1
+                }
+            ],
+            yAxis: [{scale: true, splitLine: {show: false}, gridIndex: 0},
+                {scale: true, splitLine: {show: false}, gridIndex: 1}],
+            grid: [{x: '7%', y: '10%', width: '38%', height: '70%'},
+                {x2: '7%', y: '10%', width: '38%', height: '70%'},
+            ],
+            series: [
+                {type: 'line', smooth: true, seriesLayoutBy: 'row', symbolSize: 10},
+                {type: 'line', smooth: true, seriesLayoutBy: 'row', symbolSize: 10},
+                {
+                    type: 'bar',
+                    id: 'pie',
+                    xAxisIndex: 1,
+                    yAxisIndex: 1,
+                    label: {
+                        formatter: '({d}%)'
+                    },
+                    color: colors,
+                    encode: {x: [], y: []}
+                }
+            ]
+        };
+        myChart3.showLoading();
+        myChart3.setOption(option3, true);
+    }
+</script>
+<script type="text/javascript">
+    var server_info;
+    var colors = ['#0780cf', '#765005', '#fa6d1d', '#0e2c82', '#b6b51f', '#da1f18',
+        '#701866', '#f47a75', '#009db2', '#024b51', '#0780cf', '#765005'];
+    var colors2 = ['#63b2ee', '#76da91', '#f8cb7f', '#f89588', '#7cd6cf', '#9192ab', '#7898e1',
+        '#efa666', '#eddd86', '#9987ce', '#63b2ee', '#76da91'];
+    var colors3 = ['#95a2ff', '#fa8080', '#ffc076', '#fae768', '#87e885', '#3cb9fc', '#73abf5',
+        '#cb9bff', '#434348', '#90ed7d', '#f7a35c', '#8085e9'];
+    mychart();
+    mychart2();
+    mychart3();
+    setTimeout(function () {
+        $.ajax({
+            url: '{% url 'select_query' %}',
+            async: true,
+            type: 'GET',
+            success: function (ret) {
+                server_info_f = eval(ret);
+                $("option").remove(".selected_item");
+                for (var key in server_info_f) {
+                    if (key == '618100') {
+                        zoption = "<option value=\"" + key + "\" selected>" + server_info_f[key] + "</option>";
+                        $("select[name=DIMENSION_select]").append(zoption);
+                        $("select[name=DIMENSION_select2]").append(zoption);
+                        $("select[name=DIMENSION_select3]").append(zoption);
+                    } else if (key == '618000') {
+                        zoption = "<option value=\"" + key + "\" selected>" + server_info_f[key] + "</option>";
+                        $("select[name=DIMENSION_select2]").append(zoption);
+                        $("select[name=DIMENSION_select3]").append(zoption);
+                    } else {
+                        zoption = "<option value=\"" + key + "\">" + server_info_f[key] + "</option>";
+                        $("select[name=DIMENSION_select]").append(zoption);
+                        $("select[name=DIMENSION_select2]").append(zoption);
+                        $("select[name=DIMENSION_select3]").append(zoption);
+                    }
+                }
+
+            },
+        });
+    }, 1000);
+    $(function (view1) {
+        $("#AJAX_get").click(function () {
+            myChart.showLoading();
+            var form_data = [];
+            form_data = {
+                "DIMENSION_select": $("#DIMENSION_select").val(),
+                "START_time": $("#START_time").val(),
+                "END_time": $("#END_time").val(),
+            };
+            $.ajax({
+                url: '{% url 'market_dates' %}',
+                async: true,
+                type: 'GET',
+                data: form_data,
+                success: function (ret) {
+                    var series = [];
+                    var mid;
+                    var mid_id;
+                    server_info = eval(ret);
+                    option.xAxis[0].data = server_info['DATES'];
+                    mid = server_info['ZID'];
+                    option.legend[0].data = server_info['ZID_FUC'];
+                    console.log(server_info['ZID_FUC']);
+                    console.log(server_info['PRICES']);
+                    for (var i = 0; i < server_info['ZID'].length; i++) {
+                        mid_id = mid[i];
+                        console.log(mid_id);
+                        console.log(server_info['PRICES'][mid_id]);
+                        series.push({
+                            name: server_info['ZID_FUC'][i],
+                            type: 'line',
+                            data: server_info['PRICES'][mid_id],
+
+                            markPoint: {
+                                data: [
+                                    {type: 'max', name: '最大值'},
+                                    {type: 'min', name: '最小值'}],
+                            },
+                            itemStyle: {
+                                normal: {
+                                    color: colors[i]
+                                }
+                            }
+                        })
+                    }
+                    option.series = series;
+                    myChart.hideLoading();
+                    myChart.setOption(option, true)
+                },
+                error: function () {            //失败
+                    console.log('失败')
+                }
+            });
+
+        });
+        window.onresize = function () {
+            myChart.resize();
+        };
+    });
+    $(function (view2) {
+        $("#AJAX_get2").click(function () {
+            myChart2.showLoading();
+            var form_data = {
+                "DIMENSION_select2": $("#DIMENSION_select2").val(),
+                "START_time2": $("#START_time2").val(),
+                "END_time2": $("#END_time2").val(),
+            };
+            $.ajax({
+                url: '{% url 'market_dates2' %}',
+                async: true,
+                type: 'GET',
+                data: form_data,
+                success: function (ret) {
+                    var data_first;
+                    var series = [];
+                    server_info = eval(ret);
+                    data_first = server_info['RESULT'][0][1];
+                    option2.dataset['source'] = server_info['RESULT'];
+                    for (var i = 0; i < server_info['RESULT'].length - 1; i++) {
+                        series.push({
+                            type: 'line',
+                            smooth: true,
+                            seriesLayoutBy: 'row',
+                            symbolSize: 10,
+                            itemStyle: {
+                                normal: {
+                                    color: colors[i]
+                                }
+                            }
+                        })
+                    }
+                    series.push({
+                        type: 'pie',
+                        id: 'pie',
+                        radius: '30%',
+                        center: ['50%', '25%'],
+                        label: {
+                            formatter: '{d}%'
+                        },
+                        encode: {
+                            itemName: 'DIM_ID',
+                            value: data_first,
+                            tooltip: data_first
+                        },
+                        color: colors
+                    });
+                    option2.series = series;
+                    myChart2.hideLoading();
+                    myChart2.setOption(option2, true)
+
+                },
+                error: function () {            //失败
+                    console.log('失败')
+                }
+            });
+
+        });
+        window.onresize = function () {
+            myChart2.resize();
+        };
+    });
+    $(function (view3) {
+        $("#AJAX_get3").click(function () {
+            myChart3.showLoading();
+            var form_data = {
+                "DIMENSION_select3": $("#DIMENSION_select3").val(),
+                "START_time3": $("#START_time3").val(),
+                "END_time3": $("#END_time3").val(),
+            };
+            $.ajax({
+                url: '{% url 'market_dates3' %}',
+                async: true,
+                type: 'GET',
+                data: form_data,
+                success: function (ret) {
+                    var data_first;
+                    var series = [];
+                    server_info = eval(ret);
+                    data_first = server_info['RESULT'][0][1];
+                    option3.dataset['source'] = server_info['RESULT'];
+                    for (var i = 0; i < server_info['RESULT'].length - 1; i++) {
+                        series.push({
+                            type: 'line',
+                            smooth: true,
+                            seriesLayoutBy: 'row',
+                            symbolSize: 10,
+                            itemStyle: {
+                                normal: {
+                                    color: colors[i]
+                                }
+                            }
+                        })
+                    }
+                    series.push({
+                        type: 'bar',
+                        id: 'pie',
+                        xAxisIndex: 1,
+                        yAxisIndex: 1,
+                        label: {
+                            formatter: '{d}%'
+                        },
+                        encode: {
+                            x: 'DIM_ID',
+                            y: data_first
+                        },
+                        itemStyle: {
+                            normal: {
+                                //这里是重点
+                                color: function (params) {
+                                    //注意，如果颜色太少的话，后面颜色不会自动循环，最好多定义几个颜色
+
+                                    return colors[params.dataIndex]
+                                }
+                            }
+                        },
+                    });
+                    option3.series = series;
+                    myChart3.hideLoading();
+                    myChart3.setOption(option3, true)
+
+                },
+                error: function () {            //失败
+                    console.log('失败')
+                }
+            });
+
+        });
+        window.onresize = function () {
+            myChart3.resize();
+        };
+    });
+    setTimeout(function (view2) {
+        myChart2.on('mouseover', function (params) {
+            if (params.componentType == "xAxis") {
+                var xAxisInfo = params.value;
+                myChart2.setOption({
+                    series: {
+                        id: 'pie',
+                        label: {
+                            formatter: '{d}%'
+                        }, encode: {
+                            value: xAxisInfo,
+                            tooltip: xAxisInfo
+                        }
+                    }
+                });
+            }
+            if (params.componentType == "series" && params.seriesType == 'line') {
+                var xAxisInfo = params.value[0];
+                myChart2.setOption({
+                    series: {
+                        id: 'pie',
+                        label: {
+                            formatter: '{d}%'
+                        },
+                        encode: {
+                            value: xAxisInfo,
+                            tooltip: xAxisInfo
+                        }
+                    }
+
+                });
+            }
+            setTimeout(function () {
+                myChart.dispatchAction({
+                    type: 'highlight',
+                    seriesIndex: 4,
+                    dataIndex: params.seriesIndex
+                });
+            }, 300);
+        });
+
+        myChart2.on('mouseout', function (params) {
+            myChart2.dispatchAction({
+                type: 'downplay',
+                seriesIndex: 4,
+                dataIndex: params.seriesIndex
+            });
+        });
+    }, 100);
+    setTimeout(function (view3) {
+        myChart3.on('mouseover', function (params) {
+            if (params.componentType == "xAxis") {
+                var xAxisInfo = params.value;
+                myChart3.setOption({
+                    series: {
+                        id: 'pie',
+                        label: {
+                            formatter: '{d}%'
+                        }, encode: {
+                            y: xAxisInfo
+                        },
+                        itemStyle: {
+                            normal: {
+                                //这里是重点
+                                color: function (params) {
+                                    //注意，如果颜色太少的话，后面颜色不会自动循环，最好多定义几个颜色
+
+                                    return colors[params.dataIndex]
+                                }
+                            }
+                        },
+                    }
+                });
+            }
+            if (params.componentType == "series" && params.seriesType == 'line') {
+                var xAxisInfo = params.value[0];
+                myChart3.setOption({
+                    series: {
+                        id: 'pie',
+                        label: {
+                            formatter: '{d}%'
+                        },
+                        encode: {
+                            y: xAxisInfo
+                        },
+                        itemStyle: {
+                            normal: {
+                                //这里是重点
+                                color: function (params) {
+                                    //注意，如果颜色太少的话，后面颜色不会自动循环，最好多定义几个颜色
+
+                                    return colors[params.dataIndex]
+                                }
+                            }
+                        },
+                    }
+
+                });
+            }
+            setTimeout(function () {
+                myChart3.dispatchAction({
+                    type: 'highlight',
+                    seriesIndex: 4,
+                    dataIndex: params.seriesIndex
+                });
+            }, 300);
+        });
+
+        myChart3.on('mouseout', function (params) {
+            myChart3.dispatchAction({
+                type: 'downplay',
+                seriesIndex: 4,
+                dataIndex: params.seriesIndex
+            });
+        });
+    }, 100);
+</script>
+<script src="{% static 'js/zmonthdemo.js' %}"></script>
+
+</body>
+</html>

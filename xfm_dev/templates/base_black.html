@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+{% load static %}
+{% static "images" as baseUrl %}
+<html lang="en">
+<head>
+<title>Data</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Travello template project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap4/bootstrap.min.css' %}">
+<link href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'Semantic-UI-CSS-master/semantic.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'datatables/dataTables.semanticui.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'Semantic-UI-Calendar-master/calendar.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'Semantic-UI-Calendar-master/calendar.css' %}">
+<script src="{% static 'jquery/jquery-3.4.1.js' %}"></script>
+<script type="text/javascript" src="{% static 'Semantic-UI-CSS-master/semantic.js' %}"></script>
+<script type="text/javascript" src="{% static 'Semantic-UI-Calendar-master/calendar.js' %}"></script>
+<script type="text/javascript" src="{% static 'Semantic-UI-Calendar-master/calendar.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'datatables/dataTables.semanticui.min.js' %}"></script>
+<script src="{% static 'echarts/echarts.min.js' %}"></script>
+
+</head>
+<body>
+
+<div class="super_container">
+
+	<header class="header">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="header_content d-flex flex-row align-items-center justify-content-start">
+						<div class="header_content_inner d-flex flex-row align-items-end justify-content-start">
+							<div class="logo"><a href="../index" style="color: #0c0c0c">Data</a></div>
+							<nav class="main_nav">
+								<ul class="d-flex flex-row align-items-start justify-content-start">
+									<li class="active"><a href="../index" style="color: #0c0c0c">Home</a></li>
+									<li><a href="../contact.html" style="color: #0c0c0c">Contact</a></li>
+
+									{% if user.is_authenticated %}
+									<li>Hello,{{user.first_name}}</li>
+									<li><a href="../accounts/logout" style="color: #0c0c0c">Logout</a></li>
+                                    {% else %}
+									<li><a href="../accounts/register" style="color: #0c0c0c">Register</a></li>
+									<li><a href="../accounts/login" style="color: #0c0c0c">Login</a></li>
+									{% endif %}
+								</ul>
+							</nav>
+							<div class="header_phone ml-auto" style="color: #0c0c0c">Help: contact us</div>
+
+							<div class="hamburger ml-auto">
+								<i class="fa fa-bars" aria-hidden="true" style="color: #0c0c0c"></i>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="header_social d-flex flex-row align-items-center justify-content-start">
+			<ul class="d-flex flex-row align-items-start justify-content-start">
+				<li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+				<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+				<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+				<li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+				<li><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a></li>
+				<li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+			</ul>
+		</div>
+	</header>
+
+{% block body %}{% endblock body %}
+</div>
+
+<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'styles/bootstrap4/popper.js' %}"></script>
+<script src="{% static 'styles/bootstrap4/bootstrap.min.js' %}"></script>
+<script src="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
+<script src="{% static 'plugins/Isotope/isotope.pkgd.min.js' %}"></script>
+<script src="{% static 'plugins/scrollTo/jquery.scrollTo.min.js' %}"></script>
+<script src="{% static 'plugins/easing/easing.js' %}"></script>
+<script src="{% static 'plugins/parallax-js-master/parallax.min.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+
+</body>
+</html>

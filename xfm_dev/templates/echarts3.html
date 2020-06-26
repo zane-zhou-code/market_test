@@ -1,0 +1,702 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+    <div style="padding-top: 150px;overflow:hidden;background-color: #e6eee1">
+        <div class='market_select'
+             style="border: 1px dashed #000000;left: 20px;width: 20%;float: left;height:360px;overflow-y:auto">
+            <div class="ui container">
+                <div class="ui form">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <h3>分析维度</h3>
+                        <div class="field">
+                            <div class="fields">
+                                <div class="sixteen wide field">
+                                    <select name="DIMENSION_select" id="DIMENSION_select"
+                                            class="ui fluid search dropdown"
+                                            multiple="multiple">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="fields">
+                                <div class="ui calendar start_time" style="width: 50%;">
+                                    <div class="ui input right icon">
+                                        <i class="calendar icon"></i>
+                                        <input type="text" placeholder="{{ month }}" value="{{ month }}"
+                                               name="START_time"
+                                               id="START_time" style="margin-left:4%">
+                                    </div>
+
+                                </div>
+                                <div class="ui calendar end_time" style="width: 50%;">
+                                    <div class="ui input right icon">
+                                        <i class="calendar icon"></i>
+                                        <input type="text" placeholder="{{ month }}" value="{{ month }}" name="END_time"
+                                               id="END_time" style="margin-right: 4%">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="ui buttons" style="left:30%">
+                            <input class="ui blue button" type='button' id='AJAX_get' value="查询"/>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <div class='market_select line1' style="border: 1px dashed #000000;left: 20px;width: 80%;float: left">
+            <div id="main" style="width: 100%;height:360px;"></div>
+            <script type="text/javascript">
+                var server_info;
+                var colors = ['#0780cf', '#765005', '#fa6d1d', '#0e2c82', '#b6b51f', '#da1f18',
+                    '#701866', '#f47a75', '#009db2', '#024b51', '#0780cf', '#765005'];
+                var colors2 = ['#63b2ee', '#76da91', '#f8cb7f', '#f89588', '#7cd6cf', '#9192ab', '#7898e1',
+                    '#efa666', '#eddd86', '#9987ce', '#63b2ee', '#76da91'];
+                var colors3 = ['#95a2ff', '#fa8080', '#ffc076', '#fae768', '#87e885', '#3cb9fc', '#73abf5',
+                    '#cb9bff', '#434348', '#90ed7d', '#f7a35c', '#8085e9'];
+                var myChart = echarts.init(document.getElementById('main'));
+                var option;
+                option = {
+                    title: [
+                        {text: '价格分布'}
+                    ],
+                    backgroundColor: '',
+                    dataZoom: [
+                        {
+                            type: 'slider',
+                            xAxisIndex: 0,
+                            start: 0,
+                            end: 100
+                        },
+                        {
+                            type: 'inside',
+                            xAxisIndex: 0,
+                            start: 0,
+                            end: 100
+                        },
+                    ],
+                    tooltip: [{}],
+                    legend: [
+                        {
+                            data: '{{id}}',
+                        }
+                    ],
+                    xAxis: [
+                        {
+                            data: [
+                                {% for date in dates %}
+                                    "{{date}}",
+                                {% endfor %}],
+                            splitLine: {show: false}
+                        }
+                    ],
+                    yAxis: [{scale: true, splitLine: {show: false}}],
+                    series: [
+                        {
+                            name: '{{id}}',
+                            type: 'line',
+                            markPoint: {
+                                data: [
+                                    {type: 'max', name: '最大值'},
+                                    {type: 'min', name: '最小值'}]
+                            },
+                            data: [
+                                {% for price in prices %}
+                                    "{{price}}",
+                                {% endfor %}],
+                            itemStyle: {
+                                normal: {
+                                    color: colors[0]
+                                }
+                            },
+                        }
+
+                    ]
+                };
+                myChart.setOption(option, true);
+            </script>
+        </div>
+        <div class='market_select2'
+             style="border: 1px dashed #000000;left: 20px;width: 20%;float: left;height:360px;overflow-y:auto">
+            <div class="ui container">
+                <div class="ui form">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <h3>分析维度</h3>
+                        <div class="field">
+                            <div class="fields">
+                                <div class="sixteen wide field">
+                                    <select name="DIMENSION_select2" id="DIMENSION_select2"
+                                            class="ui fluid search dropdown"
+                                            multiple="multiple">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="fields">
+                                <div class="ui calendar start_time2" style="width: 50%;">
+                                    <div class="ui input right icon">
+                                        <i class="calendar icon"></i>
+                                        <input type="text" placeholder="{{ month }}" value="{{ month }}"
+                                               name="START_time2"
+                                               id="START_time2" style="margin-left:4%">
+                                    </div>
+
+                                </div>
+                                <div class="ui calendar end_time2" style="width: 50%;">
+                                    <div class="ui input right icon">
+                                        <i class="calendar icon"></i>
+                                        <input type="text" placeholder="{{ month }}" value="{{ month }}"
+                                               name="END_time2"
+                                               id="END_time2" style="margin-right: 4%">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="ui buttons" style="left:30%">
+                            <input class="ui blue button" type='button' id='AJAX_get2' value="查询"/>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <div class='market_select line2' style="border: 1px dashed #000000;left: 20px;width: 80%;float: left">
+            <div id="main2" style="width: 100%;height:500px;"></div>
+            <script type="text/javascript">
+                var server_info;
+                var colors = ['#0780cf', '#765005', '#fa6d1d', '#0e2c82', '#b6b51f', '#da1f18',
+                    '#701866', '#f47a75', '#009db2', '#024b51', '#0780cf', '#765005'];
+                var colors2 = ['#63b2ee', '#76da91', '#f8cb7f', '#f89588', '#7cd6cf', '#9192ab', '#7898e1',
+                    '#efa666', '#eddd86', '#9987ce', '#63b2ee', '#76da91'];
+                var colors3 = ['#95a2ff', '#fa8080', '#ffc076', '#fae768', '#87e885', '#3cb9fc', '#73abf5',
+                    '#cb9bff', '#434348', '#90ed7d', '#f7a35c', '#8085e9'];
+                var myChart2 = echarts.init(document.getElementById('main2'));
+                var option2;
+                option2 = {
+                    title: [
+                        {text: '价格间占比'}
+                    ],
+                    dataZoom: [
+                        {
+                            type: 'slider',
+                            xAxisIndex: 0,
+                            start: 0,
+                            end: 100
+                        },
+                        {
+                            type: 'inside',
+                            xAxisIndex: 0,
+                            start: 0,
+                            end: 100
+                        },
+                    ],
+                    dataset: {
+                        source: []
+                    },
+                    tooltip: [{
+                        trigger: 'axis',
+                        showContent: true,
+                    }],
+                    legend: {},
+                    xAxis: [
+                        {
+                            type: 'category',
+                            triggerEvent: true,
+                            splitLine: {show: false}
+                        }
+                    ],
+                    yAxis: [{scale: true, splitLine: {show: false}, gridIndex: 0}],
+                    grid: {top: '55%'},
+                    series: [
+                        {type: 'line', smooth: true, seriesLayoutBy: 'row', symbolSize: 10},
+                        {type: 'line', smooth: true, seriesLayoutBy: 'row', symbolSize: 10},
+                        {
+                            type: 'pie',
+                            id: 'pie',
+                            radius: '30%',
+                            center: ['50%', '25%'],
+                            label: {
+                                formatter: '({d}%)'
+                            },
+                            color: colors
+                        }
+
+                    ]
+                };
+                myChart2.showLoading();
+                myChart2.setOption(option2, true);
+            </script>
+        </div>
+        <div class='market_select3'
+             style="border: 1px dashed #000000;left: 20px;width: 20%;float: left;height:360px;overflow-y:auto">
+            <div class="ui container">
+                <div class="ui form">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <h3>分析维度</h3>
+                        <div class="field">
+                            <div class="fields">
+                                <div class="sixteen wide field">
+                                    <select name="DIMENSION_select3" id="DIMENSION_select3"
+                                            class="ui fluid search dropdown"
+                                            multiple="multiple">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="fields">
+                                <div class="ui calendar start_time3" style="width: 50%;">
+                                    <div class="ui input right icon">
+                                        <i class="calendar icon"></i>
+                                        <input type="text" placeholder="{{ month }}" value="{{ month }}"
+                                               name="START_time3"
+                                               id="START_time3" style="margin-left:4%">
+                                    </div>
+
+                                </div>
+                                <div class="ui calendar end_time3" style="width: 50%;">
+                                    <div class="ui input right icon">
+                                        <i class="calendar icon"></i>
+                                        <input type="text" placeholder="{{ month }}" value="{{ month }}"
+                                               name="END_time3"
+                                               id="END_time3" style="margin-right: 4%">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="ui buttons" style="left:30%">
+                            <input class="ui blue button" type='button' id='AJAX_get3' value="查询"/>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <div class='market_select line3' style="border: 1px dashed #000000;left: 20px;width: 80%;float: left">
+            <div id="main3" style="width: 100%;height:500px;"></div>
+            <script type="text/javascript">
+                var server_info;
+                var colors = ['#0780cf', '#765005', '#fa6d1d', '#0e2c82', '#b6b51f', '#da1f18',
+                    '#701866', '#f47a75', '#009db2', '#024b51', '#0780cf', '#765005'];
+                var colors2 = ['#63b2ee', '#76da91', '#f8cb7f', '#f89588', '#7cd6cf', '#9192ab', '#7898e1',
+                    '#efa666', '#eddd86', '#9987ce', '#63b2ee', '#76da91'];
+                var colors3 = ['#95a2ff', '#fa8080', '#ffc076', '#fae768', '#87e885', '#3cb9fc', '#73abf5',
+                    '#cb9bff', '#434348', '#90ed7d', '#f7a35c', '#8085e9'];
+                var myChart3 = echarts.init(document.getElementById('main3'));
+                var option3;
+                option3 = {
+                    title: [
+                        {text: '价格间占比'}
+                    ],
+                    dataZoom: [
+                        {
+                            type: 'slider',
+                            xAxisIndex: 0,
+                            start: 0,
+                            end: 100
+                        },
+                        {
+                            type: 'inside',
+                            xAxisIndex: 0,
+                            start: 0,
+                            end: 100
+                        },
+                    ],
+                    dataset: {
+                        source: []
+                    },
+                    tooltip: [{
+                        trigger: 'axis',
+                        showContent: true,
+                    }],
+                    legend: {},
+                    xAxis: [
+                        {
+                            type: 'category',
+                            triggerEvent: true,
+                            splitLine: {show: false},
+                            gridIndex: 0
+                        },
+                        {
+                            type: 'category',
+                            triggerEvent: true,
+                            splitLine: {show: false},
+                            gridIndex: 1
+                        }
+                    ],
+                    yAxis: [{scale: true, splitLine: {show: false}, gridIndex: 0},
+                        {scale: true, splitLine: {show: false}, gridIndex: 1}],
+                    grid: [{x: '7%', y: '7%', width: '38%', height: '80%'},
+                        {x2: '7%', y: '7%', width: '38%', height: '80%'},
+                    ],
+                    series: [
+                        {type: 'line', smooth: true, seriesLayoutBy: 'row', symbolSize: 10},
+                        {type: 'line', smooth: true, seriesLayoutBy: 'row', symbolSize: 10},
+                        {
+                            type: 'bar',
+                            id: 'pie',
+                            xAxisIndex: 1,
+                            yAxisIndex: 1,
+                            label: {
+                                formatter: '({d}%)'
+                            },
+                            color: colors,
+                            encode: {
+                                x: [],
+                                y: []
+                            }
+                        }
+
+                    ]
+                };
+                myChart3.showLoading();
+                myChart3.setOption(option3, true);
+            </script>
+        </div>
+        <script type="text/javascript">
+            setTimeout(function () {
+                $.ajax({
+                    url: '{% url 'select_query' %}',
+                    async: true,
+                    type: 'GET',
+                    success: function (ret) {
+                        server_info_f = eval(ret);
+                        $("option").remove(".selected_item");
+                        for (var key in server_info_f) {
+                            if (key == '618100') {
+                                zoption = "<option value=\"" + key + "\" selected>" + server_info_f[key] + "</option>";
+                                $("select[name=DIMENSION_select]").append(zoption);
+                                $("select[name=DIMENSION_select2]").append(zoption);
+                                $("select[name=DIMENSION_select3]").append(zoption);
+                            } else if (key == '618000') {
+                                zoption = "<option value=\"" + key + "\" selected>" + server_info_f[key] + "</option>";
+                                $("select[name=DIMENSION_select2]").append(zoption);
+                                $("select[name=DIMENSION_select3]").append(zoption);
+                            } else {
+                                zoption = "<option value=\"" + key + "\">" + server_info_f[key] + "</option>";
+                                $("select[name=DIMENSION_select]").append(zoption);
+                                $("select[name=DIMENSION_select2]").append(zoption);
+                                $("select[name=DIMENSION_select3]").append(zoption);
+                            }
+                        }
+
+                    },
+                });
+            }, 1000);
+            $(function (view1) {
+                $("#AJAX_get").click(function () {
+                    myChart.showLoading();
+                    var form_data = [];
+                    form_data = {
+                        "DIMENSION_select": $("#DIMENSION_select").val(),
+                        "START_time": $("#START_time").val(),
+                        "END_time": $("#END_time").val(),
+                    };
+                    $.ajax({
+                        url: '{% url 'market_dates' %}',
+                        async: true,
+                        type: 'GET',
+                        data: form_data,
+                        success: function (ret) {
+                            var series = [];
+                            var mid;
+                            var mid_id;
+                            server_info = eval(ret);
+                            option.xAxis[0].data = server_info['DATES'];
+                            mid = server_info['ZID'];
+                            option.legend[0].data = server_info['ZID_FUC'];
+                            console.log(server_info['ZID_FUC']);
+                            console.log(server_info['PRICES']);
+                            for (var i = 0; i < server_info['ZID'].length; i++) {
+                                mid_id = mid[i];
+                                console.log(mid_id);
+                                console.log(server_info['PRICES'][mid_id]);
+                                series.push({
+                                    name: server_info['ZID_FUC'][i],
+                                    type: 'line',
+                                    data: server_info['PRICES'][mid_id],
+
+                                    markPoint: {
+                                        data: [
+                                            {type: 'max', name: '最大值'},
+                                            {type: 'min', name: '最小值'}],
+                                    },
+                                    itemStyle: {
+                                        normal: {
+                                            color: colors[i]
+                                        }
+                                    }
+                                })
+                            }
+                            option.series = series;
+                            myChart.hideLoading();
+                            myChart.setOption(option, true)
+                        },
+                        error: function () {            //失败
+                            console.log('失败')
+                        }
+                    });
+
+                });
+                window.onresize = function () {
+                    myChart.resize();
+                };
+            });
+            $(function (view2) {
+                $("#AJAX_get2").click(function () {
+                    myChart2.showLoading();
+                    var form_data = {
+                        "DIMENSION_select2": $("#DIMENSION_select2").val(),
+                        "START_time2": $("#START_time2").val(),
+                        "END_time2": $("#END_time2").val(),
+                    };
+                    $.ajax({
+                        url: '{% url 'market_dates2' %}',
+                        async: true,
+                        type: 'GET',
+                        data: form_data,
+                        success: function (ret) {
+                            var data_first;
+                            var series = [];
+                            server_info = eval(ret);
+                            data_first = server_info['RESULT'][0][1];
+                            option2.dataset['source'] = server_info['RESULT'];
+                            for (var i = 0; i < server_info['RESULT'].length - 1; i++) {
+                                series.push({
+                                    type: 'line',
+                                    smooth: true,
+                                    seriesLayoutBy: 'row',
+                                    symbolSize: 10,
+                                    itemStyle: {
+                                        normal: {
+                                            color: colors[i]
+                                        }
+                                    }
+                                })
+                            }
+                            series.push({
+                                type: 'pie',
+                                id: 'pie',
+                                radius: '30%',
+                                center: ['50%', '25%'],
+                                label: {
+                                    formatter: '{d}%'
+                                },
+                                encode: {
+                                    itemName: 'DIM_ID',
+                                    value: data_first,
+                                    tooltip: data_first
+                                },
+                                color: colors
+                            });
+                            option2.series = series;
+                            myChart2.hideLoading();
+                            myChart2.setOption(option2, true)
+
+                        },
+                        error: function () {            //失败
+                            console.log('失败')
+                        }
+                    });
+
+                });
+                window.onresize = function () {
+                    myChart2.resize();
+                };
+            });
+            $(function (view3) {
+                $("#AJAX_get3").click(function () {
+                    myChart3.showLoading();
+                    var form_data = {
+                        "DIMENSION_select3": $("#DIMENSION_select3").val(),
+                        "START_time3": $("#START_time3").val(),
+                        "END_time3": $("#END_time3").val(),
+                    };
+                    $.ajax({
+                        url: '{% url 'market_dates3' %}',
+                        async: true,
+                        type: 'GET',
+                        data: form_data,
+                        success: function (ret) {
+                            var data_first;
+                            var series = [];
+                            server_info = eval(ret);
+                            data_first = server_info['RESULT'][0][1];
+                            option3.dataset['source'] = server_info['RESULT'];
+                            for (var i = 0; i < server_info['RESULT'].length - 1; i++) {
+                                series.push({
+                                    type: 'line',
+                                    smooth: true,
+                                    seriesLayoutBy: 'row',
+                                    symbolSize: 10,
+                                    itemStyle: {
+                                        normal: {
+                                            color: colors[i]
+                                        }
+                                    }
+                                })
+                            }
+                            series.push({
+                                type: 'bar',
+                                id: 'pie',
+                                xAxisIndex: 1,
+                                yAxisIndex: 1,
+                                label: {
+                                    formatter: '{d}%'
+                                },
+                                encode: {
+                                    x: 'DIM_ID',
+                                    y: data_first
+                                },
+                                itemStyle: {
+                                    normal: {
+                                        //这里是重点
+                                        color: function (params) {
+                                            //注意，如果颜色太少的话，后面颜色不会自动循环，最好多定义几个颜色
+
+                                            return colors[params.dataIndex]
+                                        }
+                                    }
+                                },
+                            });
+                            option3.series = series;
+                            myChart3.hideLoading();
+                            myChart3.setOption(option3, true)
+
+                        },
+                        error: function () {            //失败
+                            console.log('失败')
+                        }
+                    });
+
+                });
+                window.onresize = function () {
+                    myChart3.resize();
+                };
+            });
+            setTimeout(function (view2) {
+                myChart2.on('mouseover', function (params) {
+                    if (params.componentType == "xAxis") {
+                        var xAxisInfo = params.value;
+                        myChart2.setOption({
+                            series: {
+                                id: 'pie',
+                                label: {
+                                    formatter: '{d}%'
+                                }, encode: {
+                                    value: xAxisInfo,
+                                    tooltip: xAxisInfo
+                                }
+                            }
+                        });
+                    }
+                    if (params.componentType == "series" && params.seriesType == 'line') {
+                        var xAxisInfo = params.value[0];
+                        myChart2.setOption({
+                            series: {
+                                id: 'pie',
+                                label: {
+                                    formatter: '{d}%'
+                                },
+                                encode: {
+                                    value: xAxisInfo,
+                                    tooltip: xAxisInfo
+                                }
+                            }
+
+                        });
+                    }
+                    setTimeout(function () {
+                        myChart.dispatchAction({
+                            type: 'highlight',
+                            seriesIndex: 4,
+                            dataIndex: params.seriesIndex
+                        });
+                    }, 300);
+                });
+
+                myChart2.on('mouseout', function (params) {
+                    myChart2.dispatchAction({
+                        type: 'downplay',
+                        seriesIndex: 4,
+                        dataIndex: params.seriesIndex
+                    });
+                });
+            }, 100);
+            setTimeout(function (view3) {
+                myChart3.on('mouseover', function (params) {
+                    if (params.componentType == "xAxis") {
+                        var xAxisInfo = params.value;
+                        myChart3.setOption({
+                            series: {
+                                id: 'pie',
+                                label: {
+                                    formatter: '{d}%'
+                                }, encode: {
+                                    y: xAxisInfo
+                                },
+                                itemStyle: {
+                                    normal: {
+                                        //这里是重点
+                                        color: function (params) {
+                                            //注意，如果颜色太少的话，后面颜色不会自动循环，最好多定义几个颜色
+
+                                            return colors[params.dataIndex]
+                                        }
+                                    }
+                                },
+                            }
+                        });
+                    }
+                    if (params.componentType == "series" && params.seriesType == 'line') {
+                        var xAxisInfo = params.value[0];
+                        myChart3.setOption({
+                            series: {
+                                id: 'pie',
+                                label: {
+                                    formatter: '{d}%'
+                                },
+                                encode: {
+                                    y: xAxisInfo
+                                },
+                                itemStyle: {
+                                    normal: {
+                                        //这里是重点
+                                        color: function (params) {
+                                            //注意，如果颜色太少的话，后面颜色不会自动循环，最好多定义几个颜色
+
+                                            return colors[params.dataIndex]
+                                        }
+                                    }
+                                },
+                            }
+
+                        });
+                    }
+                    setTimeout(function () {
+                        myChart3.dispatchAction({
+                            type: 'highlight',
+                            seriesIndex: 4,
+                            dataIndex: params.seriesIndex
+                        });
+                    }, 300);
+                });
+
+                myChart3.on('mouseout', function (params) {
+                    myChart3.dispatchAction({
+                        type: 'downplay',
+                        seriesIndex: 4,
+                        dataIndex: params.seriesIndex
+                    });
+                });
+            }, 100);
+        </script>
+        <script src="{% static 'js/zmonthdemo.js' %}"></script>
+    </div>
+{% endblock body %}

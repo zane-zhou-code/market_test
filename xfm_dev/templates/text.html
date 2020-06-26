@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="{% static 'jquery/jquery-3.4.1.js' %}"></script>
+    <script src="{% static 'echarts/echarts.min.js' %}"></script>
+</head>
+<body>
+<div>
+    <div style="float: left;width: 20%">
+        <select name="DIMENSION_select" id="DIMENSION_select"
+                class="ui fluid search dropdown">
+            <option value="S5431567" selected>S5</option>
+        </select>
+    </div>
+    <div id="main0" style="width: 80%;height:400px;float: left"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart0 = echarts.init(document.getElementById('main0'));
+
+        // 指定图表的配置项和数据
+        var option0 = {
+            title: {
+                text: 'ECharts 入门示例'
+            },
+            tooltip: {},
+            legend: {
+                data: ['销量']
+            },
+            dataset: {
+                        source: [
+                            ['product', '20200601', '20200602', '20200603', '20200604', '20200605', '20200608', '20200609', '20200610', '20200611'],
+                           ['data1',['20200601', 5500.0], ['20200602', 5510.0],
+['20200603', 5525.0], ['20200604', 5645.0], ['20200605', 5645.0], ['20200608', 5780.0], ['20200609', 5800.0], ['20200610', 5800.0], ['20200611', 5800.0], ['20200612', 6080.0]]
+                        ]
+             },
+            xAxis: {
+                data:[]
+            },
+            yAxis: {},
+            series: [{
+                name: '销量',
+                type: 'bar',
+{#                data: [['20200601', 5500.0], ['20200602', 5510.0],#}
+{#['20200603', 5525.0], ['20200604', 5645.0], ['20200605', 5645.0], ['20200608', 5780.0], ['20200609', 5800.0], ['20200610', 5800.0], ['20200611', 5800.0], ['20200601', 6080.0],#}
+{#                    ['20200602', 6080.0], ['20200603', 6100.0], ['20200604', 6225.0], ['20200605', 6225.0], ['20200608', 6330.0], ['20200609', 6330.0], ['20200610', 6330.0], ['20200611', 6330.0], ['20200601', 5500.0]#}
+{#, ['20200602', 5510.0], ['20200603', 5525.0], ['20200604', 5645.0], ['20200605', 5645.0], ['20200608', 5780.0], ['20200609', 5800.0], ['20200610', 5800.0], ['20200611', 5800.0]]#}
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        {#myChart0.showLoading();#}
+        myChart0.setOption(option0);
+    </script>
+</div>
+
+<div>
+    <div style="float: left;width: 20%">
+        <select name="DIMENSION_select" id="DIMENSION_select"
+                class="ui fluid search dropdown">
+            <option value="S5431567" selected>S5</option>
+        </select>
+    </div>
+    <div id="main" style="width: 80%;height:400px;float: left"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: 'ECharts 入门示例'
+            },
+            tooltip: {},
+            legend: {
+                data: ['销量']
+            },
+            xAxis: {
+                data: []
+            },
+            yAxis: {},
+            series: [{
+                name: '销量',
+                type: 'bar',
+                data: []
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.showLoading();
+        myChart.setOption(option);
+    </script>
+</div>
+<div style="margin-top:100px;float: left;width: 20%">
+    <select name="DIMENSION_select2" id="DIMENSION_select2"
+            class="ui fluid search dropdown">
+        <option value="S5431567" selected>S5</option>
+    </select>
+</div>
+<div id="main2" style="margin-top:100px;width: 80%;height:400px;float: left;"></div>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart2 = echarts.init(document.getElementById('main2'));
+
+    // 指定图表的配置项和数据
+    var option2 = {
+        title: {
+            text: 'ECharts 入门示例'
+        },
+        tooltip: {},
+        legend: {
+            data: ['销量']
+        },
+        xAxis: {
+            data: ["a", "b", "c", "d", "e", "f"]
+        },
+        yAxis: {},
+        series: [{
+            name: '销量',
+            type: 'bar',
+            data: [["a",5], ["b",20], ["c",36], ["f",10], ["g",10]]
+        }]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart2.setOption(option2);
+</script>
+<div style="margin-top:120px;float: left;width: 20%">
+    <select name="DIMENSION_select3" id="DIMENSION_select3"
+            class="ui fluid search dropdown">
+        <option value="S5431567" selected>S5</option>
+    </select>
+</div>
+<div id="main3" style="margin-top:120px;width: 80%;height:400px;float: left;"></div>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart3 = echarts.init(document.getElementById('main3'));
+
+    // 指定图表的配置项和数据
+    var option3 = {
+        title: {
+            text: 'ECharts 入门示例'
+        },
+        tooltip: {},
+        legend: {
+            data: ['销量']
+        },
+        xAxis: {
+            data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+        },
+        yAxis: {},
+        series: [{
+            name: '销量',
+            type: 'bar',
+            data: [5, 20, 36, 10, 10, 20]
+        }]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart3.setOption(option3);
+</script>
+<div style="margin-top:150px;float: left;width: 20%">
+    <select name="DIMENSION_select4" id="DIMENSION_select4"
+            class="ui fluid search dropdown">
+        <option value="S5431567" selected>S5</option>
+    </select>
+</div>
+<div id="main4" style="margin-top:150px;width: 80%;height:400px;float: left;"></div>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart4 = echarts.init(document.getElementById('main4'));
+
+    // 指定图表的配置项和数据
+    var option4 = {
+        title: {
+            text: 'ECharts 入门示例'
+        },
+        tooltip: {},
+        legend: {
+            data: ['销量']
+        },
+        xAxis: {
+            data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+        },
+        yAxis: {},
+        series: [{
+            name: '销量',
+            type: 'bar',
+            data: [5, 20, 36, 10, 10, 20]
+        }]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart4.setOption(option4);
+</script>
+<div style="margin-top:180px;float: left;width: 20%">
+    <select name="DIMENSION_select5" id="DIMENSION_select5"
+            class="ui fluid search dropdown">
+        <option value="S5431567" selected>S5</option>
+    </select>
+</div>
+<div id="main5" style="margin-top:180px;width: 80%;height:400px;float: left;"></div>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart5 = echarts.init(document.getElementById('main5'));
+
+    // 指定图表的配置项和数据
+    var option5 = {
+        title: {
+            text: 'ECharts 入门示例'
+        },
+        tooltip: {},
+        legend: {
+            data: ['销量']
+        },
+        xAxis: {
+            data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+        },
+        yAxis: {},
+        series: [{
+            name: '销量',
+            type: 'bar',
+            data: [5, 20, 36, 10, 10, 20]
+        }]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart5.setOption(option5);
+</script>
+<div style="margin-top:200px;float: left;width: 20%">
+    <select name="DIMENSION_select6" id="DIMENSION_select6"
+            class="ui fluid search dropdown">
+        <option value="S5431567" selected>S5</option>
+    </select>
+</div>
+<div id="main6" style="margin-top:200px;width: 80%;height:400px;float: left;"></div>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart6 = echarts.init(document.getElementById('main6'));
+
+    // 指定图表的配置项和数据
+    var option6 = {
+        title: {
+            text: 'ECharts 入门示例'
+        },
+        tooltip: {},
+        legend: {
+            data: ['销量']
+        },
+        xAxis: {
+            data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+        },
+        yAxis: {},
+        series: [{
+            name: '销量',
+            type: 'bar',
+            data: [5, 20, 36, 10, 10, 20]
+        }]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart6.setOption(option6);
+</script>
+<div style="margin-top:220px;float: left;width: 20%">
+    <select name="DIMENSION_select7" id="DIMENSION_select7"
+            class="ui fluid search dropdown">
+        <option value="S5431567" selected>S5</option>
+    </select>
+</div>
+<div id="main7" style="margin-top:220px;width: 80%;height:400px;float: left;"></div>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart7 = echarts.init(document.getElementById('main7'));
+
+    // 指定图表的配置项和数据
+    var option7 = {
+        title: {
+            text: 'ECharts 入门示例'
+        },
+        tooltip: {},
+        legend: {
+            data: ['销量']
+        },
+        xAxis: {
+            data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+        },
+        yAxis: {},
+        series: [{
+            name: '销量',
+            type: 'bar',
+            data: [5, 20, 36, 10, 10, 20]
+        }]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart7.setOption(option2);
+</script>
+</body>
+{#<script>#}
+{#    $.ajax({#}
+{#        url: '{% url 'query2' %}',#}
+{#        async: true,#}
+{#        // 请求的type#}
+{#        type: 'GET',#}
+{#        success: function (ret2) {     //成功执行#}
+{#            console.log('执行ajax');#}
+{#            server_info_f = eval(ret2);#}
+{#console.log(server_info)#}
+{#            server_info_d = server_info_f.a;#}
+{#            server_info_p = server_info_f.b;#}
+{#console.log(server_info_d,server_info_p)#}
+{#            option.xAxis.data = server_info_d;#}
+{#            option.series[0].data = server_info_p;#}
+{#            myChart.setOption(option, true);#}
+{##}
+{#            option2.xAxis.data = server_info_d;#}
+{#            option2.series[0].data = server_info_p;#}
+{#            myChart2.setOption(option2, true);#}
+{##}
+{#            option3.xAxis.data = server_info_d;#}
+{#            option3.series[0].data = server_info_p;#}
+{#            myChart3.setOption(option3, true);#}
+{##}
+{#            option4.xAxis.data = server_info_d;#}
+{#            option4.series[0].data = server_info_p;#}
+{#            myChart4.setOption(option4, true);#}
+{##}
+{#            option5.xAxis.data = server_info_d;#}
+{#            option5.series[0].data = server_info_p;#}
+{#            myChart5.setOption(option5, true);#}
+{##}
+{#            option6.xAxis.data = server_info_d;#}
+{#            option6.series[0].data = server_info_p;#}
+{#            myChart6.setOption(option6, true);#}
+{##}
+{#            option7.xAxis.data = server_info_d;#}
+{#            option7.series[0].data = server_info_p;#}
+{#            myChart7.setOption(option7, true);#}
+{#        },#}
+{#        error: function () {            //失败#}
+{#            console.log('失败')#}
+{#        }#}
+{#    });#}
+{#</script>#}
+<script async="async">
+    //setTimeout(function (){
+    $.ajax({
+        url: '{% url 'query5' %}',
+        async: false,
+        // 请求的type
+        type: 'GET',
+        success: function (ret) {//成功执行
+            console.log('执行ajax');
+            server_info_f = eval(ret);
+            console.log(server_info_f);
+            for (var key in server_info_f) {
+                zoption = "<option value=\"" + key + "\">" + server_info_f[key] + "</option>";
+                console.log(zoption);
+                $("select[name=DIMENSION_select]").append(zoption);
+                $("select[name=DIMENSION_select2]").append(zoption);
+                $("select[name=DIMENSION_select3]").append(zoption);
+                $("select[name=DIMENSION_select4]").append(zoption);
+                $("select[name=DIMENSION_select5]").append(zoption);
+                $("select[name=DIMENSION_select6]").append(zoption);
+                $("select[name=DIMENSION_select7]").append(zoption);
+            }
+        },
+    });
+    $.ajax({
+        url: '{% url 'query2' %}',
+        async: true,
+        // 请求的type
+        type: 'GET',
+        success: function (ret2) {     //成功执行
+            console.log('执行ajax');
+            server_info_f = eval(ret2);
+            {#console.log(server_info)#}
+            server_info_d = server_info_f.a;
+            server_info_p = server_info_f.b;
+            {#console.log(server_info_d,server_info_p)#}
+            option.xAxis.data = server_info_d;
+            option.series[0].data = server_info_p;
+            myChart.hideLoading();
+            myChart.setOption(option, true);
+        },
+        error: function () {            //失败
+            console.log('失败')
+        }
+    });
+    {#$.ajax({#}
+    {#    url: '{% url 'query5' %}',#}
+    {#    async: false,#}
+    {#    // 请求的type#}
+    {#    type: 'GET',#}
+    {#    success: function (ret) {//成功执行#}
+    {#        console.log('执行ajax');#}
+    {#        server_info_f = eval(ret);#}
+    {#        console.log(server_info_f);#}
+    {#        for (var key in server_info_f) {#}
+    {#            zoption = "<option value=\"" + key + "\">" + server_info_f[key] + "</option>";#}
+    {#            console.log(zoption);#}
+    {#            $("select[name=DIMENSION_select2]").append(zoption);#}
+    {#        }#}
+    {#    },#}
+    //{#});#}
+    {#$.ajax({#}
+    {#    url: '{% url 'query5' %}',#}
+    {#    async: false,#}
+    {#    // 请求的type#}
+    {#    type: 'GET',#}
+    {#    success: function (ret) {//成功执行#}
+    {#        console.log('执行ajax');#}
+    {#        server_info_f = eval(ret);#}
+    {#        console.log(server_info_f);#}
+    {#        for (var key in server_info_f) {#}
+    {#            zoption = "<option value=\"" + key + "\">" + server_info_f[key] + "</option>";#}
+    {#            console.log(zoption);#}
+    {#            $("select[name=DIMENSION_select3]").append(zoption);#}
+    {#        }#}
+    {#    },#}
+    //{#});#}
+    {#$.ajax({#}
+    {#    url: '{% url 'query5' %}',#}
+    {#    async: false,#}
+    {#    // 请求的type#}
+    {#    type: 'GET',#}
+    {#    success: function (ret) {//成功执行#}
+    {#        console.log('执行ajax');#}
+    {#        server_info_f = eval(ret);#}
+    {#        console.log(server_info_f);#}
+    {#        for (var key in server_info_f) {#}
+    {#            zoption = "<option value=\"" + key + "\">" + server_info_f[key] + "</option>";#}
+    {#            console.log(zoption);#}
+    {#            $("select[name=DIMENSION_select4]").append(zoption);#}
+    {#        }#}
+    {#    },#}
+    //{#});#}
+    {#$.ajax({#}
+    {#    url: '{% url 'query5' %}',#}
+    {#    async: false,#}
+    {#    // 请求的type#}
+    {#    type: 'GET',#}
+    {#    success: function (ret) {//成功执行#}
+    {#        console.log('执行ajax');#}
+    {#        server_info_f = eval(ret);#}
+    {#        console.log(server_info_f);#}
+    {#        for (var key in server_info_f) {#}
+    {#            zoption = "<option value=\"" + key + "\">" + server_info_f[key] + "</option>";#}
+    {#            console.log(zoption);#}
+    {#            $("select[name=DIMENSION_select5]").append(zoption);#}
+    {#        }#}
+    {#    },#}
+    //});
+    {#$.ajax({#}
+    {#    url: '{% url 'query5' %}',#}
+    {#    async: false,#}
+    {#    // 请求的type#}
+    {#    type: 'GET',#}
+    {#    success: function (ret) {//成功执行#}
+    {#        console.log('执行ajax');#}
+    {#        server_info_f = eval(ret);#}
+    {#        console.log(server_info_f);#}
+    {#        for (var key in server_info_f) {#}
+    {#            zoption = "<option value=\"" + key + "\">" + server_info_f[key] + "</option>";#}
+    {#            console.log(zoption);#}
+    {#            $("select[name=DIMENSION_select6]").append(zoption);#}
+    {#        }#}
+    {#    },#}
+    //});
+    {#$.ajax({#}
+    {#    url: '{% url 'query5' %}',#}
+    {#    async: false,#}
+    {#    // 请求的type#}
+    {#    type: 'GET',#}
+    {#    success: function (ret) {//成功执行#}
+    {#        console.log('执行ajax');#}
+    {#        server_info_f = eval(ret);#}
+    {#        console.log(server_info_f);#}
+    {#        for (var key in server_info_f) {#}
+    {#            zoption = "<option value=\"" + key + "\">" + server_info_f[key] + "</option>";#}
+    {#            console.log(zoption);#}
+    {#            $("select[name=DIMENSION_select7]").append(zoption);#}
+    {#        }#}
+    {#    },#}
+    //});
+
+
+    $.ajax({
+        url: '{% url 'query3' %}',
+        async: true,
+        // 请求的type
+        type: 'GET',
+        success: function (ret2) {     //成功执行
+            console.log('执行ajax');
+            server_info_f = eval(ret2);
+            console.log(server_info)
+            server_info_d = server_info_f.a;
+            server_info_p = server_info_f.b;
+            console.log(server_info_d,server_info_p)
+            option2.xAxis.data = server_info_d;
+            option2.series[0].data = server_info_p;
+            myChart2.setOption(option2, true);
+        },
+        error: function () {            //失败
+            console.log('失败')
+        }
+    });
+    $.ajax({
+        url: '{% url 'query4' %}',
+        async: true,
+        // 请求的type
+        type: 'GET',
+        success: function (ret2) {     //成功执行
+            console.log('执行ajax');
+            server_info_f = eval(ret2);
+            {#console.log(server_info)#}
+            server_info_d = server_info_f.a;
+            server_info_p = server_info_f.b;
+            {#console.log(server_info_d,server_info_p)#}
+            option3.xAxis.data = server_info_d;
+            option3.series[0].data = server_info_p;
+            myChart3.setOption(option3, true);
+
+
+        },
+        error: function () {            //失败
+            console.log('失败')
+        }
+    });
+    $.ajax({
+        url: '{% url 'query2' %}',
+        async: true,
+        // 请求的type
+        type: 'GET',
+        success: function (ret2) {     //成功执行
+            console.log('执行ajax');
+            server_info_f = eval(ret2);
+            {#console.log(server_info)#}
+            server_info_d = server_info_f.a;
+            server_info_p = server_info_f.b;
+            {#console.log(server_info_d,server_info_p)#}
+            option4.xAxis.data = server_info_d;
+            option4.series[0].data = server_info_p;
+            myChart4.setOption(option4, true);
+
+
+        },
+        error: function () {            //失败
+            console.log('失败')
+        }
+    });
+    $.ajax({
+        url: '{% url 'query2' %}',
+        async: true,
+        // 请求的type
+        type: 'GET',
+        success: function (ret2) {     //成功执行
+            console.log('执行ajax');
+            server_info_f = eval(ret2);
+            {#console.log(server_info)#}
+            server_info_d = server_info_f.a;
+            server_info_p = server_info_f.b;
+            {#console.log(server_info_d,server_info_p)#}
+            option5.xAxis.data = server_info_d;
+            option5.series[0].data = server_info_p;
+            myChart5.setOption(option5, true);
+
+
+        },
+        error: function () {            //失败
+            console.log('失败')
+        }
+    });
+    $.ajax({
+        url: '{% url 'query2' %}',
+        async: true,
+        // 请求的type
+        type: 'GET',
+        success: function (ret2) {     //成功执行
+            console.log('执行ajax');
+            server_info_f = eval(ret2);
+            {#console.log(server_info)#}
+            server_info_d = server_info_f.a;
+            server_info_p = server_info_f.b;
+            {#console.log(server_info_d,server_info_p)#}
+            option6.xAxis.data = server_info_d;
+            option6.series[0].data = server_info_p;
+            myChart6.setOption(option6, true);
+
+
+        },
+        error: function () {            //失败
+            console.log('失败')
+        }
+    });
+    $.ajax({
+        url: '{% url 'query2' %}',
+        async: true,
+        // 请求的type
+        type: 'GET',
+        success: function (ret2) {     //成功执行
+            console.log('执行ajax');
+            server_info_f = eval(ret2);
+            {#console.log(server_info)#}
+            server_info_d = server_info_f.a;
+            server_info_p = server_info_f.b;
+            {#console.log(server_info_d,server_info_p)#}
+            option7.xAxis.data = server_info_d;
+            option7.series[0].data = server_info_p;
+            myChart7.setOption(option7, true);
+        },
+        error: function () {            //失败
+            console.log('失败')
+        }
+    });
+//},1000)
+    //});
+
+</script>
+</html>

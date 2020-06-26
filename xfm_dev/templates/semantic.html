@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'Semantic-UI-CSS-master/semantic.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'datatables/dataTables.semanticui.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'Semantic-UI-Calendar-master/calendar.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'Semantic-UI-Calendar-master/calendar.css' %}">
+    <script src="{% static 'jquery/jquery-3.4.1.js' %}"></script>
+    <script type="text/javascript" src="{% static 'Semantic-UI-CSS-master/semantic.js' %}"></script>
+    <script type="text/javascript" src="{% static 'Semantic-UI-Calendar-master/calendar.js' %}"></script>
+    <script type="text/javascript" src="{% static 'Semantic-UI-Calendar-master/calendar.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'datatables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'datatables/dataTables.semanticui.min.js' %}"></script>
+    <title>Semantic UI Project</title>
+    <style>
+        .sc-main {
+        {#position: absolute;#} background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.1)),
+        url(../static/images/background2.jpg) no-repeat 50% 50% !important;
+            background-size: cover !important;
+            background-position: center !important;
+        {#background-repeat: no-repeat;#}
+        }
+
+        .sc-main.segment {
+            min-height: 100vh;
+
+        }
+
+        .sc-header_content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 80%;
+        }
+
+        .sc-logo {
+            display: block;
+            width: 70px;
+            height: 70px;
+            color: #fff;
+            font-size: 26px;
+            line-height: 70px !important;
+            text-align: center;
+            border: 1px solid #fff;
+            border-radius: 100%;
+        }
+
+        .fixed {
+            background-color: rgba(24, 24, 24, 0.6) !important;
+            padding-right: 8% !important;
+            padding-left: 8% !important;
+        }
+
+        .secondary.pointing.menu .toc.item {
+            display: none;
+        }
+
+        h1.ui.header::first-letter {
+            color: #e74c3c !important;
+        }
+
+        .primary {
+            background-color: #e74c3c !important;
+        }
+
+        .primary:hover {
+            background-color: #c0392b !important;
+        }
+
+        .sc-button {
+            font-weight: 300 !important;
+            margin-top: 25px !important;
+        }
+
+        .sc-section {
+            padding-top: 100px !important;
+            padding-bottom: 100px !important;
+
+        }
+
+        h2.sc-h2 {
+            font-size: 2.2em !important;
+        }
+
+        #portfolio {
+            background-color: #f5f5f5;
+        }
+
+        #about {
+            position: relative;
+        }
+
+        .sc-vertical:after {
+            content: '';
+            position: absolute;
+            z-index: -1;
+            top: 275px;
+            bottom: 200px;
+            left: 50%;
+            border-left: 2px solid #c0392b;
+            transform: translate(-50%);
+        }
+
+        #item {
+            background-color: #f5f5f5;
+        }
+
+        /*contact section*/
+        #contact {
+        {#position: absolute;#} background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.1)),
+        url(../static/images/background2.jpg) no-repeat 50% 50% !important;
+            background-size: cover !important;
+            background-position: center !important;
+        {#background-repeat: no-repeat;#}
+        }
+
+        #contact p,
+        #contact .description,
+        #contact i.icon {
+            color: #fff;
+
+        }
+
+        @media only screen and (max-width: 767px){
+            .sc-logo{
+                width: 50px;
+                height: 50px;
+                font-size: 18px;
+                line-height: 50px !important;
+            }
+            .secondary.pointing.menu .item,
+            .secondary.pointing.menu .menu{
+                display: none;
+            }
+            .secondary.pointing.menu .toc.item{
+                display: block;
+            }
+            .sc-main.segment{
+                min-height: 350px;
+            }
+            .sc-main h1.ui.header{
+                font-size: 3em;
+                margin-top: 1.5em;
+            }
+            .sc-main h2{
+                margin-top: 0.5em;
+                font-size: 1.5em;
+            }
+            .ui.stackable.grid > .row > .column{
+                width: 80% !important;
+
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="ui vertical inverted sidebar menu">
+    <a class="item" href="#main">Home</a>
+    <a class="item" href="#services">Services</a>
+    <a class="item" href="#portfolio">Portfolio</a>
+    <a class="item" href="#about">About</a>
+    <a class="item" href="#team">Team</a>
+    <a class="item" href="#contact">Contact</a>
+
+</div>
+
+
+<div class="pusher">
+    <div class="ui vertical sc-main center aligned segment" style="border-color: rgba(248,248,255,0.7);">
+        <div class="ui container"><!--创建ui容器-->
+            <div class="ui large secondary inverted pointing fixed menu"><!--创建一个抬头标签-->
+                <a class="toc item">
+                    <i class="sidebar icon"></i>
+                </a>
+                <div class="sc-logo">SC</div>
+                <div class="right item">
+                    <a class="item" href="#main">Home</a>
+                    <a class="item" href="#services">Services</a>
+                    <a class="item" href="#portfolio">Portfolio</a>
+                    <a class="item" href="#about">About</a>
+                    <a class="item" href="#team">Team</a>
+                    <a class="item" href="#contact">Contact</a>
+                </div>
+            </div>
+        </div>
+        <div class="ui text sc-header_content container">
+            <h1 class="ui inverted header">BE SEMANTIC</h1>
+            <p class="ui inverted header">aaaaaaaaaa</p>
+            <a class="ui huge primary right labeled icon button sc-button">GET STRATED<i class="arrow down icon"></i>
+            </a>
+
+        </div>
+
+    </div>
+    <section id="services" class="sc-section">
+        <div class="ui center aligned stackable three column grid container">
+            <div class="row">
+                <div class="sixteen wide mobile twelve wide tablet eight wide computer column">
+                    <h2 class="ui header sc-h2">SERVICES</h2>
+                    <p>这是服务名称</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <h3 class="ui icon header">
+                        <i class="circular inverted laptop icon"></i>
+                        <div class="content">WEB DESIGN</div>
+
+                    </h3>
+                    <p>这是网页名称</p>
+                </div>
+                <div class="column">
+                    <h3 class="ui icon header">
+                        <i class="circular inverted mobile alternate icon"></i>
+                        <div class="content">MOBILE DESIGN</div>
+
+                    </h3>
+                    <p>这是网页名称</p>
+                </div>
+                <div class="column">
+                    <h3 class="ui icon header">
+                        <i class="circular inverted eye icon"></i>
+                        <div class="content">BRANDING</div>
+
+                    </h3>
+                    <p>这是网页名称</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <section id="portfolio" class="sc-section">
+        <div class="ui center aligned stackable three column grid container">
+            <div class="row">
+                <div class="sixteen wide mobile twelve wide tablet eight wide computer column">
+                    <h2 class="ui header sc-h2">PORTFOLIO</h2>
+                    <p>这是服务名称</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <div class="ui special cards">
+                        <div id="card1" class="ui link center fluid card">
+                            <div class="blurring dimmable image">
+                                <div class="ui dimmer">
+                                    <div class="center">
+                                        <i class="huge plus circle icon"></i>
+                                    </div>
+                                </div>
+                                <img class="ui image" src="../static/images/destination_1.jpg">
+                            </div>
+                            <div class="content">
+                                <div class="header">Project Name</div>
+                                <div class="meta">Project Category</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="ui special cards">
+                        <div id="card2" class="ui link center fluid card">
+                            <div class="blurring dimmable image">
+                                <div class="ui dimmer">
+                                    <div class="center">
+                                        <i class="huge plus circle icon"></i>
+                                    </div>
+                                </div>
+                                <img class="ui image" src="../static/images/destination_2.jpg">
+                            </div>
+                            <div class="content">
+                                <div class="header">Project Name</div>
+                                <div class="meta">Project Category</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="ui special cards">
+                        <div id="card3" class="ui link center fluid card">
+                            <div class="blurring dimmable image">
+                                <div class="ui dimmer">
+                                    <div class="center">
+                                        <i class="huge plus circle icon"></i>
+                                    </div>
+                                </div>
+                                <img class="ui image" src="../static/images/destination_3.jpg">
+                            </div>
+                            <div class="content">
+                                <div class="header">Project Name</div>
+                                <div class="meta">Project Category</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="ui special cards">
+                        <div id="card4" class="ui link center fluid card">
+                            <div class="blurring dimmable image">
+                                <div class="ui dimmer">
+                                    <div class="center">
+                                        <i class="huge plus circle icon"></i>
+                                    </div>
+                                </div>
+                                <img class="ui image" src="../static/images/destination_4.jpg">
+                            </div>
+                            <div class="content">
+                                <div class="header">Project Name</div>
+                                <div class="meta">Project Category</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="about" class="sc-section sc-vertical">
+        <div class="ui grid middle aligned container">
+            <div class="centered row">
+                <div class="center aligned sixteen wide mobile twelve wide table eight wide computer column">
+                    <h2 class="ui header sc-h2">ABOUT US</h2>
+                    <p>这个是介绍</p>
+                </div>
+            </div>
+            <div class="two column row">
+                <div class="right aligned six wide column">
+                    <div class="item">
+                        <div class="content">
+                            <h3 class="header">2009</h3>
+                            <p>这是2009年</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="four wide column">
+                    <div class="ui circular medium image">
+                        <div class="ui hidden divider"></div>
+                        <div class="ui hidden divider"></div>
+                        <img src="../static/images/about.jpg">
+                        <div class="ui hidden divider"></div>
+                        <div class="ui hidden divider"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="two column row">
+                <div class="right floated aligned four wide column">
+                    <div class="ui circular medium image">
+                        <div class="ui hidden divider"></div>
+                        <div class="ui hidden divider"></div>
+                        <img src="../static/images/about.jpg">
+                        <div class="ui hidden divider"></div>
+                        <div class="ui hidden divider"></div>
+                    </div>
+                </div>
+                <div class="left aligned six wide column">
+                    <div class="item">
+                        <div class="content">
+                            <h3 class="header">2019</h3>
+                            <p>这是2019年</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="two column row">
+                <div class="right aligned six wide column">
+                    <div class="item">
+                        <div class="content">
+                            <h3 class="header">2018</h3>
+                            <p>这是2018年</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="four wide column">
+                    <div class="ui circular medium image">
+                        <div class="ui hidden divider"></div>
+                        <div class="ui hidden divider"></div>
+                        <img src="../static/images/about.jpg">
+                        <div class="ui hidden divider"></div>
+                        <div class="ui hidden divider"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="two column row">
+                <div class="right floated aligned four wide column">
+                    <div class="ui circular medium image">
+                        <div class="ui hidden divider"></div>
+                        <div class="ui hidden divider"></div>
+                        <img src="../static/images/about.jpg">
+                        <div class="ui hidden divider"></div>
+                        <div class="ui hidden divider"></div>
+                    </div>
+                </div>
+                <div class="left aligned six wide column">
+                    <div class="item">
+                        <div class="content">
+                            <h3 class="header">2020</h3>
+                            <p>这是2020年</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="centered one column row">
+                <div class="centered aligned four wide column">
+                    <div class="ui circular medium image">
+                        <div class="ui hidden divider"></div>
+                        <div class="ui hidden divider"></div>
+                        <img src="../static/images/about_1.jpg">
+                        <h3 class="header">WE ARE HERE</h3>
+                        <div class="ui hidden divider"></div>
+                        <div class="ui hidden divider"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="item" class="sc-section">
+        <div class="ui center aligned stackable three column grid container">
+            <div class="row">
+                <div class="sixteen wide mobile twelve wide tablet eight wide computer column">
+                    <h2 class="ui header sc-h2">TEAM</h2>
+                    <p>这是团队名称</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <div class="ui two column middle aligned grid">
+                        <div class="sixteen wide tablet eight wide computer column">
+                            <img class="ui fluid image" src="../static/images/travello.jpg">
+                        </div>
+                        <div class="sixteen wide tablet eight wide computer column">
+                            <h3 class="header">AA</h3>
+                            <div class="meta">CEO</div>
+                            <div class="ui hidden divider"></div>
+                            <i class="circular inverted twitter link icon"></i>
+                            <i class="circular inverted facebook link icon"></i>
+                            <i class="circular inverted linkedin link icon"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="ui two column middle aligned grid">
+                        <div class="sixteen wide tablet eight wide computer column">
+                            <img class="ui fluid image" src="../static/images/travello.jpg">
+                        </div>
+                        <div class="sixteen wide tablet eight wide computer column">
+                            <h3 class="header">AA</h3>
+                            <div class="meta">CEO</div>
+                            <div class="ui hidden divider"></div>
+                            <i class="circular inverted twitter link icon"></i>
+                            <i class="circular inverted facebook link icon"></i>
+                            <i class="circular inverted linkedin link icon"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="ui two column middle aligned grid">
+                        <div class="sixteen wide tablet eight wide computer column">
+                            <img class="ui fluid image" src="../static/images/travello.jpg">
+                        </div>
+                        <div class="sixteen wide tablet eight wide computer column">
+                            <h3 class="header">AA</h3>
+                            <div class="meta">CEO</div>
+                            <div class="ui hidden divider"></div>
+                            <i class="circular inverted twitter link icon"></i>
+                            <i class="circular inverted facebook link icon"></i>
+                            <i class="circular inverted linkedin link icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="contact" class="sc-section">
+        <div class="ui center aligned two column stackable grid container">
+            <div class="row">
+                <div class="center aligned eight wide column">
+                    <h2 class="ui header sc-h2">CONTACT US</h2>
+                    <p>这是联系方式</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <form class="ui form">
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <input type="text" placeholder="Name">
+                                <i class="user icon"></i>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <input type="email" placeholder="email">
+                                <i class="envelope icon"></i>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <textarea rows="5" placeholder="Message"></textarea>
+                        </div>
+                        <div class="ui primary button sc-button">SEND</div>
+                    </form>
+                </div>
+                <div class="left aligned column">
+                    <div class="ui list">
+                        <div class="item">
+                            <i class="large home middle aligned icon"></i>
+                            <div class="content">
+                                <h3 class="header">Office ADddress</h3>
+                                <div class="description">aaaaaaaaaaa</div>
+                            </div>
+                        </div>
+                        <div class="ui hidder divider"></div>
+
+                        <div class="item">
+                            <i class="large home middle aligned icon"></i>
+                            <div class="content">
+                                <h3 class="header">Office ADddress</h3>
+                                <div class="description">aaaaaaaaaaa</div>
+                            </div>
+                        </div>
+                        <div class="ui hidder divider"></div>
+
+                        <div class="item">
+                            <i class="large home middle aligned icon"></i>
+                            <div class="content">
+                                <h3 class="header">Office ADddress</h3>
+                                <div class="description">aaaaaaaaaaa</div>
+                            </div>
+                        </div>
+                        <div class="ui hidder divider"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!--MODELS-->
+    <div class="ui modal modal1">
+        <div class="image content">
+            <div class="ui image">
+                <img class="fluid" src="../static/images/destination_1.jpg">
+            </div>
+        </div>
+    </div>
+    <div class="ui modal modal2">
+        <div class="image content">
+            <div class="ui image">
+                <img class="fluid" src="../static/images/destination_2.jpg">
+            </div>
+        </div>
+    </div>
+    <div class="ui modal modal3">
+        <div class="image content">
+            <div class="ui image">
+                <img class="fluid" src="../static/images/destination_3.jpg">
+            </div>
+        </div>
+    </div>
+    <div class="ui modal modal4">
+        <div class="image content">
+            <div class="ui image">
+                <img class="fluid" src="../static/images/destination_4.jpg">
+            </div>
+        </div>
+    </div>
+</div>
+
+{#    <!--Bootstrap Button-->#}
+{#    <div class="btn btn-large btn-warning">Button</div>#}
+{##}
+{#    <!--Semantic Button-->#}
+{#    <div class="ui large red button"></div>#}
+
+
+<script>
+    $('#all_menu').click(function () {
+        $('.ui.sidebar')
+            .sidebar({transition: 'push'}) {# overlay #}
+            .sidebar('toggle');
+    });
+    $('.menu.item').tab();
+    $('.ui.dropdown').dropdown({on: 'hover'});
+    $('#upload').progress({
+        total: 3,
+        text: {
+            active: '{total}张图片,已上传{value}张',
+            success: '成功上传',
+        }
+    });
+
+    $(document).ready(function () {
+        // DIMMER
+        $('.special.cards .image').dimmer({
+            on: 'hover',
+        });
+        //SIDEBAR
+        $('.ui.sidebar').sidebar('attach events', '.toc.item');
+        //MODAL
+        $('#card1').click(function () {
+            $('.ui.modal.modal1').modal('toggle')
+
+        });
+        $('#card2').click(function () {
+            $('.ui.modal.modal2').modal('toggle')
+
+        });
+        $('#card3').click(function () {
+            $('.ui.modal.modal3').modal('toggle')
+
+        });
+        $('#card4').click(function () {
+            $('.ui.modal.modal4').modal('toggle')
+
+        })
+
+    })
+</script>
+</body>
+</html>

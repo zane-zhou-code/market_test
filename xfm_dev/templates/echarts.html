@@ -1,0 +1,184 @@
+{% extends 'multiple_demo1.html' %}
+{% load static %}
+{% block  form1 %}
+    {% csrf_token %}
+    <h3>分析维度</h3>
+    <div class="field">
+        <div class="fields">
+            <div class="sixteen wide field">
+                <select name="DIMENSION_select" id="DIMENSION_select" class="ui fluid search dropdown"
+                        multiple="multiple">
+                    <option value="S5431567" selected>{{ id }}</option>
+                    {% for key, value in mselect_dict.items %}
+                        <option value="{{ value.select }}">{{ key }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="fields">
+            <div class="ui calendar start_time" style="width: 50%">
+                <div class="ui input right icon">
+                    <i class="calendar icon"></i>
+                    <input type="text" placeholder="开始时间" value="" name="START_time" id="START_time">
+                </div>
+
+            </div>
+            <div class="ui calendar end_time" style="width: 50%">
+                <div class="ui input right icon">
+                    <i class="calendar icon"></i>
+                    <input type="text" placeholder="结束时间" value="" name="END_time" id="END_time">
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="ui buttons" style="left:30%">
+        <input class="ui blue button" type='button' id='AJAX_get' value="查询"/>
+
+    </div>
+{% endblock form1 %}
+
+{% block fun1 %}
+    <script type="text/javascript">
+        $(function () {
+            var myChart = echarts.init(document.getElementById('main'));
+            var option;
+            option = {
+                title: [
+                    {text: '价格分布'}
+                ],
+                backgroundColor: '',
+                dataZoom: [
+                    {   // 这个dataZoom组件，默认控制x轴。
+                        type: 'slider', // 这个 dataZoom 组件是 slider 型 dataZoom 组件
+                        xAxisIndex: 0,
+                        start: 50,      // 左边在 10% 的位置。
+                        end: 100         // 右边在 60% 的位置。
+                    },
+                    {   // 这个dataZoom组件，也控制x轴。
+                        type: 'inside', // 这个 dataZoom 组件是 inside 型 dataZoom 组件
+                        xAxisIndex: 0,
+                        start: 0,      // 左边在 10% 的位置。
+                        end: 100         // 右边在 60% 的位置。
+                    },
+                ],
+                tooltip: [{}],
+                legend: [
+                    {
+                        data: '{{id}}',
+                    }
+                ],
+                xAxis: [
+                    {
+                        data: [
+                            {% for date in dates %}
+                                "{{date}}",
+                            {% endfor %}],
+                        splitLine: {show: false}
+                    }
+                ],
+                yAxis: [{scale: true, splitLine: {show: false}}],
+                series: [
+                    {
+                        name: '{{id}}',
+                        type: 'line',//pip 饼 line 折线 bar 柱状图
+                        markPoint: {
+                            data: [
+                                {type: 'max', name: '最大值'},
+                                {type: 'min', name: '最小值'}]
+                        },
+                        data: [
+                            {% for price in prices %}
+                                "{{price}}",
+                            {% endfor %}],
+                        itemStyle: {
+                            normal: {
+                                color: colors[0]
+                                {#                         color: function(params) {#}
+                                {#                            // build a color map as your need.#}
+                                {#                            var colorList = [#}
+                                {#                              '#C1232B','#B5C334','#FCCE10','#E87C25','#27727B',#}
+                                {#                               '#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD',#}
+                                {#                               '#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0'#}
+                                {#                            ];#}
+                                {#                            return colorList[params.dataIndex]#}
+                                {#                        },#}
+                                {#                         label: {#}
+                                {#                            show: true,#}
+                                {#                            position: 'top',#}
+                                {#//                             formatter: '{c}'#}
+                                {#                            formatter: '{b}\n{c}'#}
+                                {#                            }#}
+                            }
+                        },
+                    }
+
+                ]
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option, true);
+            {# myChart.showLoading();#}
+            $("#AJAX_get").click(function () {
+                // 获取单选下拉框的值
+                var form_data = {
+                    "DIMENSION_select": $("#DIMENSION_select").val(),
+                    "START_time": $("#START_time").val(),
+                    "END_time": $("#END_time").val(),
+                };
+
+                $.ajax({
+                    // 请求的url
+                    url: '{% url 'query' %}',
+                    async: true,
+                    // 请求的type
+                    type: 'GET',
+                    // 发送的数据
+                    data: form_data,
+                    // 回调函数，其中ret是返回的JSON，可以以字典的方式调用
+                    success: function (ret) {     //成功执行
+                        var series = [];
+                        server_info = eval(ret);
+                        // console.log(server_info)
+                        option.xAxis[0].data = server_info.a;
+                        option.legend[0].data = server_info.id;
+                        {#option.title[0].text = server_info.id#}
+                        for (var i = 0; i < server_info['id'].length; i++) {
+                            series.push({
+                                name: server_info['id'][i],
+                                type: 'line',
+                                data: server_info['b'][i],
+                                markPoint: {
+                                    data: [
+                                        {type: 'max', name: '最大值'},
+                                        {type: 'min', name: '最小值'}],
+                                    {#symbolSize: 15,#}
+                                },
+
+                                itemStyle: {
+                                    normal: {
+                                        color: colors[i]
+                                    }
+                                }
+                            })
+                        }
+                        option.series = series;
+                        {#option.title[0].text = server_info.id+'  价格分布';#}
+                        myChart.hideLoading();
+                        myChart.setOption(option, true)
+                    },
+                    error: function () {            //失败
+                        console.log('失败')
+                    }
+                });
+
+            });
+            window.onresize = function () {
+                myChart.resize();
+            };
+
+
+        });
+    </script>
+    <script src="{% static 'js/zmonthdemo.js' %}"></script>
+{% endblock fun1 %}
+

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+{% load static %}
+{% static "images" as baseUrl %}
+<html lang="en">
+<head>
+    <title>Data</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Travello template project">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {#<link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap4/bootstrap.min.css' %}">#}
+    {#<link href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">#}
+    {#<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">#}
+    {#<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">#}
+    {#<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">#}
+    {#<link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">#}
+    {#<link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">#}
+    <link rel="stylesheet" type="text/css" href="{% static 'Semantic-UI-CSS-master/semantic.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'datatables/dataTables.semanticui.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'Semantic-UI-Calendar-master/calendar.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'Semantic-UI-Calendar-master/calendar.css' %}">
+    <script src="{% static 'jquery/jquery-3.4.1.js' %}"></script>
+    <script type="text/javascript" src="{% static 'Semantic-UI-CSS-master/semantic.js' %}"></script>
+    <script type="text/javascript" src="{% static 'Semantic-UI-Calendar-master/calendar.js' %}"></script>
+    <script type="text/javascript" src="{% static 'Semantic-UI-Calendar-master/calendar.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'datatables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'datatables/dataTables.semanticui.min.js' %}"></script>
+    {#<script src="{% static 'echarts/echarts.min.js' %}"></script>#}
+    <style>
+        #about {
+            position: relative;
+        }
+
+        .sc-section {
+            padding-top: 100px !important;
+            padding-bottom: 100px !important;
+
+        }
+
+        .sc-vertical li:after {
+            display: block;
+            position: absolute;
+            left: 50%;
+        {#-webkit-transform: translateX(-50%);#} {#-moz-transform: translateX(-50%);#} {#-ms-transform: translateX(-50%);#} {#-o-transform: translateX(-50%);#} transform: translateX(-50%);
+            top: -104px;
+            width: 2px;
+            height: 0px;
+            background: #0c0c0c;
+            content: '';
+        {#visibility: hidden;#} {#opacity: 0;#} {#-webkit-transition: all 200ms ease;#} {#-moz-transition: all 200ms ease;#} {#-ms-transition: all 200ms ease;#} {#-o-transition: all 200ms ease;#} transition: all 200ms ease;
+        }
+
+        .sc-vertical ul li.active::after,
+        .sc-vertical ul li:hover::after {
+            height: 100px;
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+<div class="ui sidebar inverted vertical menu">{# thin top #}
+    <div class="item">
+        <h4 class="ui blue header">ninghao.net</h4>
+    </div>
+    <div class="item">
+        <div class="ui inverted transparent icon input">
+            <i class="search icon"></i>
+            <input type="text" placeholder="搜索...">
+        </div>
+    </div>
+    <div class="item">
+        <div class="header">课程</div>
+        <div class="menu">
+            <a class="item">HTML</a>
+            <a class="item">CSS</a>
+            <a class="item">JavaScript</a>
+        </div>
+    </div>
+    <div class="item">博客</div>
+    <div class="item">社区</div>
+
+</div>
+<div class="pusher">
+    <div class="ui container" style="padding: 50px">
+        <h2>Siderbar</h2>
+        <div class="ui section divider"></div>
+        <div class="ui label icon button" id="all_menu">
+            <i class="sidebar icon"></i>
+            菜单
+        </div>
+        {#  #}
+        <div class="ui top attached tabular menu">
+            <a href="" class="item active" data-tab="html">HTML</a>
+            <a href="" class="item" data-tab="css">CSS</a>
+            <a href="" class="item" data-tab="javascript">JavaScript</a>
+        </div>
+        <div class="ui bottom attached tab segment active" data-tab="html">111</div>
+        <div class="ui bottom attached tab segment" data-tab="css">222</div>
+        <div class="ui bottom attached tab segment" data-tab="javascript">333</div>
+        {# 下拉框 #}
+        <div class="ui left pointing dropdown labeled icon button">
+            <i class="angle down icon"></i>
+            <span class="text">选择课程</span>
+            <div class="menu">
+                <div class="ui icon search input">
+                    <i class="search icon"></i>
+                    <input type="text" placeholder="搜索">
+                </div>
+                <div class="item" data-value="html">HTML</div>
+                <div class="item" data-value="css">CSS</div>
+                <div class="item" data-value="javascript">JavaScript</div>
+            </div>
+        </div>
+        {# 进程 #}
+        <div class="ui progress" id="upload">
+            <div class="bar">
+                <div class="progress"></div>
+            </div>
+            <div class="label">上传文件</div>
+        </div>
+        {# 3D图形 #}
+        <div class="ui shape">
+            <div class="sides">
+                <div class="side active">
+                    <div class="ui card"></div>
+                </div>
+                <div class="side">
+                    <div class="ui card"></div>
+                </div>
+            </div>
+        </div>
+        {# 抬头 #}
+        <div class="ui large secondary inverted pointed fixed menu">
+            <i class="sidebar icon"></i>
+            <div class="left item">
+                <a class="item" style="background-color: #0c0c0c">aaa</a>
+            </div>
+        </div>
+        <div id="about" class="sc-section sc-vertical" style="display: flex;z-index: -2">
+            {#            <img src="../static/images/about.jpg">#}
+            {#            <img src="../static/images/about.jpg">#}
+            {#            <div>aaaaaa</div>#}
+            {#            <div>bbbbb</div>#}
+            <ul>
+                <li class="active"><a href="index">Home</a></li>
+                <li><a href="contact.html">Contact</a></li>
+
+
+                <li>Hello,AA</li>
+                <li><a href="accounts/logout">Logout</a></li>
+                <li><a href="accounts/register">Register</a></li>
+                <li><a href="accounts/login">Login</a></li>
+            </ul>
+        </div>
+        <form>
+        <div class="two fields">
+            <div class="field">
+                <div class="ui calendar start_time">
+                    <div class="ui input right icon">
+                        <i class="calendar icon"></i>
+                        <input type="text" placeholder="{{ month }}" value="{{ month }}"
+                               name="START_time"
+                               id="START_time" style="margin-left:4%">
+                    </div>
+
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui calendar end_time field">
+                    <div class="ui input right icon">
+                        <i class="calendar icon"></i>
+                        <input type="text" placeholder="{{ month }}" value="{{ month }}" name="END_time"
+                               id="END_time" style="margin-right: 4%">
+                    </div>
+                </div>
+            </div>
+        </div> </form>
+    </div>
+
+</div>
+
+
+{#<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>#}
+{#<script src="{% static 'styles/bootstrap4/popper.js' %}"></script>#}
+{#<script src="{% static 'styles/bootstrap4/bootstrap.min.js' %}"></script>#}
+{#<script src="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>#}
+{#<script src="{% static 'plugins/Isotope/isotope.pkgd.min.js' %}"></script>#}
+{#<script src="{% static 'plugins/scrollTo/jquery.scrollTo.min.js' %}"></script>#}
+{#<script src="{% static 'plugins/easing/easing.js' %}"></script>#}
+{#<script src="{% static 'plugins/parallax-js-master/parallax.min.js' %}"></script>#}
+{#<script src="{% static 'js/custom.js' %}"></script>#}
+<script src="{% static 'js/zmonthdemo.js' %}"></script>
+<script>
+    $('#all_menu').click(function () {
+        $('.ui.sidebar')
+            .sidebar({transition: 'push'}) {# overlay #}
+            .sidebar('toggle');
+    });
+    $('.menu.item').tab();
+    $('.ui.dropdown').dropdown({on: 'hover'});
+    $('#upload').progress({
+        total: 3,
+        text: {
+            active: '{total}张图片,已上传{value}张',
+            success: '成功上传',
+        }
+    })
+</script>
+</body>
+
+</html>
+
+
+
+
