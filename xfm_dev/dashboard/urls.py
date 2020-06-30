@@ -3,7 +3,10 @@ from django.conf.urls import url
 from django.http import HttpResponse
 from django.views.generic.base import TemplateView
 from . import views
+from rest_framework.routers import DefaultRouter
 
+# router.register('books', views.BookViewSet)
+# router = DefaultRouter()
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -32,6 +35,7 @@ urlpatterns = [
     path('semantic', views.semantic, name='semantic-ui'),
     path('test/', views.test, name='test'),
     path('zzzzzz', views.zzzzzz, name='zzzzzz'),
+    # path('book', include(router.urls))
     # path('api/666', view=lambda request: HttpResponse('戏说不是胡说')),
     # url(regex='^$', view=lambda request:
     #     TemplateView.as_view(template_name='vue.html')),

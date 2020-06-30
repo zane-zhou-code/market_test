@@ -6,6 +6,8 @@ import pyhdb,cx_Oracle
 import pandas as pd
 from django.utils import six
 import json,datetime
+from rest_framework import viewsets
+# from dashboard.serializer import BookSerializer
 
 # Create your views here.
 def index(request):
@@ -410,3 +412,7 @@ def query6(request):
 
 def test(request):
     return JsonResponse({'status':0, 'message':'This is test file'})
+
+# class BookViewSet(viewsets.ModelViewSet):
+#     queryset = ''# Book.objects.all()
+#     serializer_class = BookSerializer
