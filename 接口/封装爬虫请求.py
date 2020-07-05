@@ -51,41 +51,54 @@ class get_market_values(object):
         ccfei_cookie = requests.utils.dict_from_cookiejar(cookie_jar)
         return ccfei_cookie
     def icis_cookie(self):
-        #  登陆初始网页，获取visid_incap
-        data1 = {
-            'client_id': 'genesis.web',
-            'redirect_uri': 'https://subscriber.icis.com/loggedIn',
-            'response_type': 'id_token token',
-            'scope': 'openid profile',
-            'state': '3907c92ac4f548e0855ed4845e18bc61',
-            'nonce': '59fc93c52acf40edab1bc7f1434f9faf',
-        }
-        url = 'https://id.icis.com/connect/authorize?'
-        response1 = requests.get(url, data=data1)
-        a = response1.history[0].headers['Set-Cookie']
-        visid_incap = re.findall('visid_incap_1770784=(.*?);', a)[0]
-        #  进入登陆页面跳转获取desktop_auth
-        headers2 = {
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Cookie': 'visid_incap_1770784=%s;.AspNetCore.Antiforgery.Mq6lYlS5ObU=%s' % (visid_incap,
-                'CfDJ8MaAtEszY1ZGne6pG9ldcXOPOGAcswHK2h0QjiH998AT0m79tivXf2Dyxdv0Wu6sgFlgxXzf1OkmmyIR7s5H0btHIWGkjjefNKR3ykMTscA1MwRuGZ62zY5SAB2bYK3xMD6TOqfbmYejKpQDJ0VC6_A')
-        }
-        data2 = {
-            'ReturnUrl': '/connect/authorize/callback?client_id=genesis.web&redirect_uri=https%3A%2F%2Fsubscriber.icis.com%2FloggedIn&response_type=id_token%20token&scope=openid%20profile&state=441c5978ffd540a698b90449b36763a5&nonce=bfa4dd54d3e94ef5a31e895e33971d31',
-            'Username': 'henglilh@hengli.com',
-            'Password': 'HLlh2018',
-            'button': 'login',
-            '__RequestVerificationToken': 'CfDJ8MaAtEszY1ZGne6pG9ldcXMmZdg3Bej0SQBIKG7y9fcvwEkmvoaVdT_NzDwel5B17H8pQmjWk8BZOVm8_WJlhwywozR5UT4mHpwH4kTwD5UiQZCTwdBuqkpbriVpo3O1cdnqGJEJqr8KwU6dQjvp1q0',
-            'RememberLogin': 'false',
-        }
-        url2 = 'https://id.icis.com/Account/Login?'
-        response1 = requests.post(url=url2, headers=headers2, data=data2)
-        #  跳转第二个定向页面获取desktop_auth
-        COOKIES2 = response1.history[1].headers['Set-Cookie']
-        desktop_auth = re.findall('icis_desktop_auth=(.*?);', COOKIES2)[0]
-        return 'icis_desktop_auth=' + desktop_auth +';visid_incap_1770784=' + visid_incap + \
-              ';__RequestVerificationToken_L0Rhc2hib2FyZA2=AKmlscXi2nAd0lDanMErsbboFUuYpq8ImpIaJdpZUOhTmjYG8ccd3VBw0vUxSUCNirTrbkwO-Sr6aLhknNikMkg8zSzink3ubvDDxPwJ2q01;'
+        counter = 1
+        while counter <= 2:
+            try:
+                headers_o = {
+                    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+                    "User-Agent": "Opera/9.80 (Windows NT 6.0) Presto/2.12.388 Version/12.14",
+                }
+                # 利用最终url跳转url2-logon,跳转url3-connect_authorize,跳转url4-login(取网页参数asp、rvfc和cookies)
+                url = 'https://www.icis.com/Dashboard/PurchasedPriceHistory/DisplayChartDualYAxis'
+                response = requests.post(url, headers=headers_o, timeout=120, allow_redirects=False)
+                url2 = 'https://www.icis.com' + response.headers['location']
+
+                response_lgo = requests.get(url2, headers=headers_o, timeout=120, allow_redirects=False)
+                url3 = response_lgo.headers['location']
+
+                response_coa = requests.get(url3, headers=headers_o, timeout=120, allow_redirects=False)
+                url4 = response_coa.headers['location']
+                cookie_coa = requests.utils.dict_from_cookiejar(response_coa.cookies)
+
+                response_lgi = requests.get(url4, headers=headers_o, timeout=120, cookies=cookie_coa, allow_redirects=False)
+                html = etree.HTML(response_lgi.text)
+                set_para = '//*[@id="login-form"]/input/@value'
+                asp = html.xpath(set_para)[0]
+                rvfc = html.xpath(set_para)[1]
+                cookie_lgi = requests.utils.dict_from_cookiejar(response_lgi.cookies)
+
+                data_o = {
+                    'ReturnUrl': asp,
+                    'Username': 'henglilh@hengli.com',
+                    'Password': 'HLlh2018',
+                    'button': 'login',
+                    '__RequestVerificationToken': rvfc,
+                    'RememberLogin': 'false',
+                }
+                response_lgi_y = requests.post(url4, headers=headers_o, data=data_o, cookies=cookie_lgi, timeout=120,
+                                               allow_redirects=False)
+                cookies_lgi_y = requests.utils.dict_from_cookiejar(response_lgi_y.cookies)
+
+                url5 = 'https://www.icis.com/Dashboard/'
+                response_das = requests.get(url5, headers=headers_o, cookies=cookies_lgi_y, timeout=120)
+                cookies_das = requests.utils.dict_from_cookiejar(response_das.cookies)
+                html2 = etree.HTML(response_das.text)
+                set_para2 = '//*[@class="    primaryBG"]/input/@value'
+                rvfc2 = html2.xpath(set_para2)[0]
+                return (cookies_das, rvfc2)
+            except:
+                pass
+            counter = counter + 1
     # 定义response的get post json 函数，获取网页文本
     def get_one_page(self, url, headers, data, cookies):
         try:
@@ -426,7 +439,7 @@ class stock_load_values(get_market_values):
                     print('\033[1;37;41m----------------------未取到库存指数数据-----------------------\033[0m')
                     wechat_auto().send_mesg(0, 'person', 10)
             counter = counter + 1
-# 获取PTA流通环节库存-+
+# 获取PTA流通环节库存
 class pta_stock_values(get_market_values):
     _sqllist = []
     def parse_one_page(self, *params):
@@ -573,12 +586,12 @@ class cj_metal(get_market_values):
                                 try:
                                     name_str = '//div[@id="fontzoom"]/table/tbody/tr[%s]/td[1]/p/text() | //*[@id="fontzoom"]/div/div/table/tbody/tr[%s]/td[1]/p/text() |' \
                                                '//div[@id="fontzoom"]/table/tbody/tr[%s]/td[1]/p/span[2]/text() | //div[@id="fontzoom"]/table/tbody/tr[%s]/td[1]/text() |' \
-                                               '//div[@id="fontzoom"]/div/table/tbody/tr[%s]/td[1]/p/text()' % (
-                                               j, j, j, j, j)
+                                               '//div[@id="fontzoom"]/div/table/tbody/tr[%s]/td[1]/p/text() | //*[@id="fontzoom"]/table/tbody/tr[%s]/td[1]/p/strong/span/text()' % (
+                                               j, j, j, j, j, j)
                                     sl_str = '//div[@id="fontzoom"]/table/tbody/tr[%s]/td[5]/p/text() | //*[@id="fontzoom"]/div/div/table/tbody/tr[%s]/td[5]/p/text() |' \
                                              '//div[@id="fontzoom"]/table/tbody/tr[%s]/td[5]/p/span/text() | //div[@id="fontzoom"]/table/tbody/tr[%s]/td[5]/text() |' \
-                                             '//div[@id="fontzoom"]/div/table/tbody/tr[%s]/td[5]/p/text()' % (
-                                             j, j, j, j, j)
+                                             '//div[@id="fontzoom"]/div/table/tbody/tr[%s]/td[5]/p/text() | //*[@id="fontzoom"]/table/tbody/tr[%s]/td[5]/p/strong/span/text()' % (
+                                             j, j, j, j, j, j)
                                     name = html.xpath(name_str)[0]
                                     sl = str(html.xpath(sl_str)[0]).replace(',', '')
                                     yield {
@@ -667,7 +680,7 @@ class icis_price(get_market_values):
     _sqllist = []
     def parse_one_page(self, *params):
         data = {
-            '__RequestVerificationToken':'B7ExT4b769SlMaExFnNKSgKB2LcBC1S00MYQ6BqDKkQdjuuVT-pNYDz3b6uy4NmsqOJAvlkP45_Tf46Y772frEJOB4e1BjxD2DL-AFL2zZf6vM5_9lhXxMqb2U0Cjohb0',
+            '__RequestVerificationToken':params[0][5][1],
             'StartDate': str(params[0][0]).replace('-', '/'),
             'EndDate': str(params[0][1]).replace('-', '/'),
             "FrequencyCode": "Daily",
@@ -685,19 +698,14 @@ class icis_price(get_market_values):
         headers = {
             "Accept": "application/json, text/javascript, */*; q=0.01",
             "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-            "Host": "www.icis.com",
             "User-Agent": "Opera/9.80 (Windows NT 6.0) Presto/2.12.388 Version/12.14",
-            "Sec-Fetch-Dest": "empty",
-            "Sec-Fetch-Mode": "cors",
-            "Sec-Fetch-Site": "same-origi",
             "X-Requested-With": "XMLHttpRequest",
-            "Cookie": params[0][5],
         }
         counter = 1
         while counter <= 2:
             try:
                 url = 'https://www.icis.com/Dashboard/PurchasedPriceHistory/DisplayChartDualYAxis'
-                response3 = requests.post(url, data=data, headers=headers, timeout=120)
+                response3 = requests.post(url, data=data, headers=headers, cookies=params[0][5][0], timeout=120)
                 a = response3.json()
                 c = a['chartLines'][0]['pointList']
                 for i in range(0, len(c)):
@@ -724,7 +732,7 @@ def main():
         # 设定传递参数，依次为昨日，今日和年月
         ccf_cookie = str(get_market_values().ccf_cookie())
         ccfei_cookie = str(get_market_values().ccfei_cookie())
-        icis_cookie = str(get_market_values().icis_cookie())
+        icis_cookie = get_market_values().icis_cookie()
 
         param = [yeday, today, ny, ccf_cookie, ccfei_cookie, icis_cookie]
         sqltuple = get_market_values().parse_concurrent(param)

@@ -8,6 +8,55 @@ body{
   background-color: #ffffff;
   height: 100%;
 }
+
+/***************设置下载样式***************/
+/*设置columnstyle下面的下载图片样式*/
+.compact.downimg{
+	position: absolute !important;
+	top:1% !important;
+	right: 1% !important;
+    z-index: 999 !important; 
+}
+/*设置columnstyle下面fi的下载图片样式*/
+.compact.downimgfi{
+	position: absolute !important;
+	top:1% !important;
+	right: 1% !important;
+    z-index: 999 !important; 
+}
+/*设置按钮背景颜色*/
+.downimg_buttom{
+	background: transparent !important; 
+}
+/*设置无页边距*/
+.ui.downimg_buttom.animated.button .visible.content{
+	margin-right:0em !important;
+}
+/***************设置下载样式结束***************/
+
+/*setting*/
+.settings.active{
+	display:block
+}
+.settings{
+	display:none
+}
+/*回到顶部图标设置*/
+.go-top{
+	position:fixed;
+	right:2%;
+	bottom:2%;
+	background-color:#f1f4f5 !important;
+	z-index:999;
+}
+/*设置总览button样式*/
+.dashboard_buttom{
+	padding: 0em 0em 0em !important;
+	color: rgba(0,0,0,.87) !important;
+	font-size: 1em !important;
+	background: none #fff !important;
+}
+
 .sc-main {
     /*background: url('src/style/images/background2.jpg') no-repeat 50% 50% !important;*/
     background-size: cover !important;
