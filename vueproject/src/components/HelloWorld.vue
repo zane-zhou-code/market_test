@@ -105,7 +105,8 @@
         </sui-grid-column>
         <sui-grid-column>
           <!--fi01图-->
-          <sui-segment id="1" class="columnstyle" v-on:mouseenter="seen_enter($event)" v-on:mouseleave="seen_leave($event)">
+          <sui-segment id="1" class="columnstyle" v-on:mouseenter="seen_enter($event)"
+                       v-on:mouseleave="seen_leave($event)">
             <a class="compact downimgfi" v-show="seen[1].seen_val"
                @click="saveimage('fi01', '同类公司财务分析')">
               <sui-button class="downimg_buttom" animated="" tab-index="0">
@@ -115,7 +116,7 @@
                 <sui-button-content class="downimg_buttom" hidden>下载</sui-button-content>
               </sui-button>
             </a>
-            <div ref="fi01" style="width: 100%;height: 130%;"></div>
+            <div ref="fi01" style="width: 100%;height: 150px;"></div>
           </sui-segment>
         </sui-grid-column>
       </sui-grid>
@@ -126,271 +127,275 @@
         <sui-grid-row id="allcol">
           <!--总览 销售-->
           <sui-grid-column id="sdcol">
-            <sui-segment id='2' class="columnstyle" v-on:mouseenter="seen_enter($event)" v-on:mouseleave="seen_leave($event)">
+            <sui-segment id='2' class="columnstyle" v-on:mouseenter="seen_enter($event)"
+                         v-on:mouseleave="seen_leave($event)">
               <a class="compact downimg" v-show="seen[2].seen_val"
-               @click="saveimage('dbsd01', '销售情况')">
-              <sui-button class="downimg_buttom" animated="" tab-index="0">
-                <sui-button-content class="downimg_buttom" visible>
-                  <i class="caret square large down icon grey"></i>
-                </sui-button-content>
-                <sui-button-content class="downimg_buttom" hidden>下载</sui-button-content>
-              </sui-button>
-            </a>
+                 @click="saveimage('dbsd01', '销售情况')">
+                <sui-button class="downimg_buttom" animated="" tab-index="0">
+                  <sui-button-content class="downimg_buttom" visible>
+                    <i class="caret square large down icon grey"></i>
+                  </sui-button-content>
+                  <sui-button-content class="downimg_buttom" hidden>下载</sui-button-content>
+                </sui-button>
+              </a>
               <div ref='dbsd01'>
-              <sui-grid :columns="2" centered>
-                <sui-grid-row>
-                  <sui-grid-column vertical-align="middle">
-                    <h3 is="sui-header">销售情况</h3>
-                  </sui-grid-column>
-                </sui-grid-row>
-                <!--销售 销量/同比-->
-                <sui-grid-row>
-                  <sui-grid-column vertical-align="middle">
-                    <a>
-                      <div slot="label">
-                        <sui-label circular color="red" size="tiny" floating style="left:50%">吨</sui-label>
-                        <sui-list-item>
-                          <sui-label color="grey" horizontal>销量</sui-label>
-                          <sui-button class="dashboard_buttom">2,048</sui-button>
-                        </sui-list-item>
-                      </div>
-                    </a>
-                  </sui-grid-column>
-                  <sui-grid-column vertical-align="middle">
-                    <a>
-                      <div slot="label">
-                        <sui-label circular color="teal" size="tiny" floating style="left:50%">
-                          <i class="arrow down icon" style="margin: 0.25em 0 0"></i>
-                        </sui-label>
-                        <sui-list-item>
-                          <sui-label color="grey" horizontal>同比</sui-label>
-                          <sui-button class="dashboard_buttom">2.85%</sui-button>
-                        </sui-list-item>
-                      </div>
-                    </a>
-                  </sui-grid-column>
-                </sui-grid-row>
-                <!--销售 金额/同比-->
-                <sui-grid-row>
-                  <sui-grid-column vertical-align="middle">
-                    <a>
-                      <div slot="label">
-                        <sui-label circular color="red" size="tiny" floating style="left:50%">万</sui-label>
-                        <sui-list-item>
-                          <sui-label color="grey" horizontal>金额</sui-label>
-                          <sui-button class="dashboard_buttom">3,052</sui-button>
-                        </sui-list-item>
-                      </div>
-                    </a>
-                  </sui-grid-column>
-                  <sui-grid-column vertical-align="middle">
-                    <a>
-                      <div slot="label">
-                        <sui-label circular color="red" size="tiny" floating style="left:50%">
-                          <i class="arrow up icon" style="margin: 0.25em 0 0"></i>
-                        </sui-label>
-                        <sui-list-item>
-                          <sui-label color="grey" horizontal>同比</sui-label>
-                          <sui-button class="dashboard_buttom">3.85%</sui-button>
-                        </sui-list-item>
-                      </div>
-                    </a>
-                  </sui-grid-column>
-                </sui-grid-row>
-                <!--销售 均价/同比-->
-                <sui-grid-row>
-                  <sui-grid-column vertical-align="middle">
-                    <a>
-                      <div slot="label">
-                        <sui-label circular color="red" size="tiny" floating style="left:50%">¥/T</sui-label>
-                        <sui-list-item>
-                          <sui-label color="grey" horizontal>均价</sui-label>
-                          <sui-button class="dashboard_buttom">580</sui-button>
-                        </sui-list-item>
-                      </div>
-                    </a>
-                  </sui-grid-column>
-                  <sui-grid-column vertical-align="middle">
-                    <a>
-                      <div slot="label">
-                        <sui-label circular color="red" size="tiny" floating style="left:50%">
-                          <i class="arrow up icon" style="margin: 0.25em 0 0"></i>
-                        </sui-label>
-                        <sui-list-item>
-                          <sui-label color="grey" horizontal>同比</sui-label>
-                          <sui-button class="dashboard_buttom">3.85%</sui-button>
-                        </sui-list-item>
-                      </div>
-                    </a>
-                  </sui-grid-column>
-                </sui-grid-row>
-              </sui-grid>
+                <sui-grid :columns="2" centered>
+                  <sui-grid-row>
+                    <sui-grid-column vertical-align="middle">
+                      <h3 is="sui-header">销售情况</h3>
+                    </sui-grid-column>
+                  </sui-grid-row>
+                  <!--销售 销量/同比-->
+                  <sui-grid-row>
+                    <sui-grid-column vertical-align="middle">
+                      <a>
+                        <div slot="label">
+                          <sui-label circular color="red" size="tiny" floating style="left:50%">吨</sui-label>
+                          <sui-list-item>
+                            <sui-label color="grey" horizontal>销量</sui-label>
+                            <sui-button class="dashboard_buttom">{{ data1['dbsd01_sales'] }}</sui-button>
+                          </sui-list-item>
+                        </div>
+                      </a>
+                    </sui-grid-column>
+                    <sui-grid-column vertical-align="middle">
+                      <a>
+                        <div slot="label">
+                          <sui-label circular color="teal" size="tiny" floating style="left:50%">
+                            <i class="arrow down icon" style="margin: 0.25em 0 0"></i>
+                          </sui-label>
+                          <sui-list-item>
+                            <sui-label color="grey" horizontal>同比</sui-label>
+                            <sui-button class="dashboard_buttom">{{ data1['dbsd01_salesyoy'] }}</sui-button>
+                          </sui-list-item>
+                        </div>
+                      </a>
+                    </sui-grid-column>
+                  </sui-grid-row>
+                  <!--销售 金额/同比-->
+                  <sui-grid-row>
+                    <sui-grid-column vertical-align="middle">
+                      <a>
+                        <div slot="label">
+                          <sui-label circular color="red" size="tiny" floating style="left:50%">万</sui-label>
+                          <sui-list-item>
+                            <sui-label color="grey" horizontal>金额</sui-label>
+                            <sui-button class="dashboard_buttom">{{ data1['dbsd01_money'] }}</sui-button>
+                          </sui-list-item>
+                        </div>
+                      </a>
+                    </sui-grid-column>
+                    <sui-grid-column vertical-align="middle">
+                      <a>
+                        <div slot="label">
+                          <sui-label circular color="red" size="tiny" floating style="left:50%">
+                            <i class="arrow up icon" style="margin: 0.25em 0 0"></i>
+                          </sui-label>
+                          <sui-list-item>
+                            <sui-label color="grey" horizontal>同比</sui-label>
+                            <sui-button class="dashboard_buttom">{{ data1['dbsd01_moneyyoy'] }}</sui-button>
+                          </sui-list-item>
+                        </div>
+                      </a>
+                    </sui-grid-column>
+                  </sui-grid-row>
+                  <!--销售 均价/同比-->
+                  <sui-grid-row>
+                    <sui-grid-column vertical-align="middle">
+                      <a>
+                        <div slot="label">
+                          <sui-label circular color="red" size="tiny" floating style="left:50%">¥/T</sui-label>
+                          <sui-list-item>
+                            <sui-label color="grey" horizontal>均价</sui-label>
+                            <sui-button class="dashboard_buttom">{{ data1['dbsd01_price'] }}</sui-button>
+                          </sui-list-item>
+                        </div>
+                      </a>
+                    </sui-grid-column>
+                    <sui-grid-column vertical-align="middle">
+                      <a>
+                        <div slot="label">
+                          <sui-label circular color="red" size="tiny" floating style="left:50%">
+                            <i class="arrow up icon" style="margin: 0.25em 0 0"></i>
+                          </sui-label>
+                          <sui-list-item>
+                            <sui-label color="grey" horizontal>同比</sui-label>
+                            <sui-button class="dashboard_buttom">{{ data1['dbsd01_priceyoy'] }}</sui-button>
+                          </sui-list-item>
+                        </div>
+                      </a>
+                    </sui-grid-column>
+                  </sui-grid-row>
+                </sui-grid>
               </div>
             </sui-segment>
           </sui-grid-column>
           <!--总览 人力-->
           <sui-grid-column id="hrcol">
-            <sui-segment id='3' class="columnstyle" v-on:mouseenter="seen_enter($event)" v-on:mouseleave="seen_leave($event)">
+            <sui-segment id='3' class="columnstyle" v-on:mouseenter="seen_enter($event)"
+                         v-on:mouseleave="seen_leave($event)">
               <a class="compact downimg" v-show="seen[3].seen_val"
-               @click="saveimage('dbhr01', '人力概览')">
-              <sui-button class="downimg_buttom" animated="" tab-index="0">
-                <sui-button-content class="downimg_buttom" visible>
-                  <i class="caret square large down icon grey"></i>
-                </sui-button-content>
-                <sui-button-content class="downimg_buttom" hidden>下载</sui-button-content>
-              </sui-button>
-            </a>
+                 @click="saveimage('dbhr01', '人力概览')">
+                <sui-button class="downimg_buttom" animated="" tab-index="0">
+                  <sui-button-content class="downimg_buttom" visible>
+                    <i class="caret square large down icon grey"></i>
+                  </sui-button-content>
+                  <sui-button-content class="downimg_buttom" hidden>下载</sui-button-content>
+                </sui-button>
+              </a>
               <div ref='dbhr01'>
-              <sui-grid :columns="2" centered>
-                <sui-grid-row>
-                  <sui-grid-column vertical-align="middle">
-                    <h3 is="sui-header">人员概览</h3>
-                  </sui-grid-column>
-                </sui-grid-row>
-                <!--人力 总人数/公司占比-->
-                <sui-grid-row>
-                  <sui-grid-column vertical-align="middle">
-                    <a>
-                      <div slot="label">
-                        <sui-list-item>
-                          <sui-label color="grey" horizontal>总数</sui-label>
-                          <sui-button class="dashboard_buttom">12,048</sui-button>
-                        </sui-list-item>
-                      </div>
-                    </a>
-                  </sui-grid-column>
-                </sui-grid-row>
-                <!--hr01图-->
-                <sui-grid-row>
-                  <div ref="hr01" style="width: 100%;height: 150px;"></div>
-                </sui-grid-row>
-              </sui-grid>
+                <sui-grid :columns="2" centered>
+                  <sui-grid-row>
+                    <sui-grid-column vertical-align="middle">
+                      <h3 is="sui-header">人员概览</h3>
+                    </sui-grid-column>
+                  </sui-grid-row>
+                  <!--人力 总人数/公司占比-->
+                  <sui-grid-row>
+                    <sui-grid-column vertical-align="middle">
+                      <a>
+                        <div slot="label">
+                          <sui-list-item>
+                            <sui-label color="grey" horizontal>总数</sui-label>
+                            <sui-button class="dashboard_buttom">{{ data2['dbhr01_amount'] }}</sui-button>
+                          </sui-list-item>
+                        </div>
+                      </a>
+                    </sui-grid-column>
+                  </sui-grid-row>
+                  <!--hr01图-->
+                  <sui-grid-row>
+                    <div ref="hr01" style="width: 100%;height: 150px;"></div>
+                  </sui-grid-row>
+                </sui-grid>
               </div>
             </sui-segment>
           </sui-grid-column>
           <!--总览 生产-->
           <sui-grid-column id="sccol">
-            <sui-segment id='4' class="columnstyle" v-on:mouseenter="seen_enter($event)" v-on:mouseleave="seen_leave($event)">
+            <sui-segment id='4' class="columnstyle" v-on:mouseenter="seen_enter($event)"
+                         v-on:mouseleave="seen_leave($event)">
               <a class="compact downimg" v-show="seen[4].seen_val"
-               @click="saveimage('dbsc01', '生产规模')">
-              <sui-button class="downimg_buttom" animated="" tab-index="0">
-                <sui-button-content class="downimg_buttom" visible>
-                  <i class="caret square large down icon grey"></i>
-                </sui-button-content>
-                <sui-button-content class="downimg_buttom" hidden>下载</sui-button-content>
-              </sui-button>
-            </a>
+                 @click="saveimage('dbsc01', '生产规模')">
+                <sui-button class="downimg_buttom" animated="" tab-index="0">
+                  <sui-button-content class="downimg_buttom" visible>
+                    <i class="caret square large down icon grey"></i>
+                  </sui-button-content>
+                  <sui-button-content class="downimg_buttom" hidden>下载</sui-button-content>
+                </sui-button>
+              </a>
               <div ref="dbsc01">
-              <sui-grid :columns="2" centered>
-                <sui-grid-row>
-                  <sui-grid-column>
-                    <h3 is="sui-header">生产规模</h3>
-                  </sui-grid-column>
-                </sui-grid-row>
-                <!--生产 产量/装置分布-->
-                <sui-grid-row>
-                  <sui-grid-column vertical-align="middle">
-                    <a>
-                      <div slot="label">
-                        <sui-list-item>
-                          <sui-label color="grey" horizontal>产量</sui-label>
-                          <sui-button class="dashboard_buttom">150,048</sui-button>
-                        </sui-list-item>
-                      </div>
-                    </a>
-                  </sui-grid-column>
-                </sui-grid-row>
-                <!--sc01图-->
-                <sui-grid-row>
-                  <div ref="sc01" style="width: 100%;height: 100%;"></div>
-                </sui-grid-row>
-              </sui-grid>
-                </div>
+                <sui-grid :columns="2" centered>
+                  <sui-grid-row>
+                    <sui-grid-column>
+                      <h3 is="sui-header">生产规模</h3>
+                    </sui-grid-column>
+                  </sui-grid-row>
+                  <!--生产 产量/装置分布-->
+                  <sui-grid-row>
+                    <sui-grid-column vertical-align="middle">
+                      <a>
+                        <div slot="label">
+                          <sui-list-item>
+                            <sui-label color="grey" horizontal>产量</sui-label>
+                            <sui-button class="dashboard_buttom">{{ data3['dbsc01_product'] }}</sui-button>
+                          </sui-list-item>
+                        </div>
+                      </a>
+                    </sui-grid-column>
+                  </sui-grid-row>
+                  <!--sc01图-->
+                  <sui-grid-row>
+                    <div ref="sc01" style="width: 100%;height: 150px;"></div>
+                  </sui-grid-row>
+                </sui-grid>
+              </div>
             </sui-segment>
           </sui-grid-column>
           <!--总览 库存-->
           <sui-grid-column id="mmcol">
-            <sui-segment id='5' class="columnstyle" v-on:mouseenter="seen_enter($event)" v-on:mouseleave="seen_leave($event)">
+            <sui-segment id='5' class="columnstyle" v-on:mouseenter="seen_enter($event)"
+                         v-on:mouseleave="seen_leave($event)">
               <a class="compact downimg" v-show="seen[5].seen_val"
-               @click="saveimage('dbmm01', '库存分布')">
-              <sui-button class="downimg_buttom" animated="" tab-index="0">
-                <sui-button-content class="downimg_buttom" visible>
-                  <i class="caret square large down icon grey"></i>
-                </sui-button-content>
-                <sui-button-content class="downimg_buttom" hidden>下载</sui-button-content>
-              </sui-button>
-            </a>
+                 @click="saveimage('dbmm01', '库存分布')">
+                <sui-button class="downimg_buttom" animated="" tab-index="0">
+                  <sui-button-content class="downimg_buttom" visible>
+                    <i class="caret square large down icon grey"></i>
+                  </sui-button-content>
+                  <sui-button-content class="downimg_buttom" hidden>下载</sui-button-content>
+                </sui-button>
+              </a>
               <div ref="dbmm01">
-              <sui-grid :columns="2" centered>
-                <sui-grid-row>
-                  <sui-grid-column vertical-align="middle">
-                    <h3 is="sui-header">库存分布</h3>
-                  </sui-grid-column>
-                </sui-grid-row>
-                <!--库存 内外贸库存-->
-                <sui-grid-row>
-                  <sui-grid-column vertical-align="middle">
-                    <a>
-                      <div slot="label">
-                        <sui-label circular color="red" size="tiny" floating style="left:50%">吨</sui-label>
-                        <sui-list-item>
-                          <sui-label color="grey" horizontal>内贸成品</sui-label>
-                          <sui-button class="dashboard_buttom">18,048</sui-button>
-                        </sui-list-item>
-                      </div>
-                    </a>
-                  </sui-grid-column>
-                  <sui-grid-column vertical-align="middle">
-                    <a>
-                      <div slot="label">
-                        <sui-label circular color="red" size="tiny" floating style="left:50%">吨</sui-label>
-                        <sui-list-item>
-                          <sui-label color="grey" horizontal>外贸成品</sui-label>
-                          <sui-button class="dashboard_buttom">15,048</sui-button>
-                        </sui-list-item>
-                      </div>
-                    </a>
-                  </sui-grid-column>
-                </sui-grid-row>
-                <!--库存 库存天数-->
-                <sui-grid-row>
-                  <sui-grid-column vertical-align="middle">
-                    <a>
-                      <div slot="label">
-                        <sui-label circular color="red" size="tiny" floating style="left:50%">天</sui-label>
-                        <sui-list-item>
-                          <sui-label color="grey" horizontal>库存天数</sui-label>
-                          <sui-button class="dashboard_buttom">17.52</sui-button>
-                        </sui-list-item>
-                      </div>
-                    </a>
-                  </sui-grid-column>
-                </sui-grid-row>
-                <sui-grid-row>
-                  <sui-grid-column vertical-align="middle">
-                    <a>
-                      <div slot="label">
-                        <sui-label circular color="red" size="tiny" floating style="left:50%">吨</sui-label>
-                        <sui-list-item>
-                          <sui-label color="grey" horizontal>PTA</sui-label>
-                          <sui-button class="dashboard_buttom">98,580</sui-button>
-                        </sui-list-item>
-                      </div>
-                    </a>
-                  </sui-grid-column>
-                  <sui-grid-column vertical-align="middle">
-                    <a>
-                      <div slot="label">
-                        <sui-label circular color="red" size="tiny" floating style="left:50%">吨</sui-label>
-                        <sui-list-item>
-                          <sui-label color="grey" horizontal>MEG</sui-label>
-                          <sui-button class="dashboard_buttom">8,580</sui-button>
-                        </sui-list-item>
-                      </div>
-                    </a>
-                  </sui-grid-column>
-                </sui-grid-row>
-              </sui-grid>
+                <sui-grid :columns="2" centered>
+                  <sui-grid-row>
+                    <sui-grid-column vertical-align="middle">
+                      <h3 is="sui-header">库存分布</h3>
+                    </sui-grid-column>
+                  </sui-grid-row>
+                  <!--库存 内外贸库存-->
+                  <sui-grid-row>
+                    <sui-grid-column vertical-align="middle">
+                      <a>
+                        <div slot="label">
+                          <sui-label circular color="red" size="tiny" floating style="left:50%">吨</sui-label>
+                          <sui-list-item>
+                            <sui-label color="grey" horizontal>内贸成品</sui-label>
+                            <sui-button class="dashboard_buttom">18,048</sui-button>
+                          </sui-list-item>
+                        </div>
+                      </a>
+                    </sui-grid-column>
+                    <sui-grid-column vertical-align="middle">
+                      <a>
+                        <div slot="label">
+                          <sui-label circular color="red" size="tiny" floating style="left:50%">吨</sui-label>
+                          <sui-list-item>
+                            <sui-label color="grey" horizontal>外贸成品</sui-label>
+                            <sui-button class="dashboard_buttom">15,048</sui-button>
+                          </sui-list-item>
+                        </div>
+                      </a>
+                    </sui-grid-column>
+                  </sui-grid-row>
+                  <!--库存 库存天数-->
+                  <sui-grid-row>
+                    <sui-grid-column vertical-align="middle">
+                      <a>
+                        <div slot="label">
+                          <sui-label circular color="red" size="tiny" floating style="left:50%">天</sui-label>
+                          <sui-list-item>
+                            <sui-label color="grey" horizontal>库存天数</sui-label>
+                            <sui-button class="dashboard_buttom">17.52</sui-button>
+                          </sui-list-item>
+                        </div>
+                      </a>
+                    </sui-grid-column>
+                  </sui-grid-row>
+                  <sui-grid-row>
+                    <sui-grid-column vertical-align="middle">
+                      <a>
+                        <div slot="label">
+                          <sui-label circular color="red" size="tiny" floating style="left:50%">吨</sui-label>
+                          <sui-list-item>
+                            <sui-label color="grey" horizontal>PTA</sui-label>
+                            <sui-button class="dashboard_buttom">98,580</sui-button>
+                          </sui-list-item>
+                        </div>
+                      </a>
+                    </sui-grid-column>
+                    <sui-grid-column vertical-align="middle">
+                      <a>
+                        <div slot="label">
+                          <sui-label circular color="red" size="tiny" floating style="left:50%">吨</sui-label>
+                          <sui-list-item>
+                            <sui-label color="grey" horizontal>MEG</sui-label>
+                            <sui-button class="dashboard_buttom">8,580</sui-button>
+                          </sui-list-item>
+                        </div>
+                      </a>
+                    </sui-grid-column>
+                  </sui-grid-row>
+                </sui-grid>
               </div>
             </sui-segment>
           </sui-grid-column>
@@ -399,346 +404,350 @@
         <sui-grid-row>
           <!--总览 安全-->
           <sui-grid-column id="aqcol">
-            <sui-segment id='6' class="columnstyle" v-on:mouseenter="seen_enter($event)" v-on:mouseleave="seen_leave($event)">
+            <sui-segment id='6' class="columnstyle" v-on:mouseenter="seen_enter($event)"
+                         v-on:mouseleave="seen_leave($event)">
               <a class="compact downimg" v-show="seen[6].seen_val"
-               @click="saveimage('dbaq01', '安全状况')">
-              <sui-button class="downimg_buttom" animated="" tab-index="0">
-                <sui-button-content class="downimg_buttom" visible>
-                  <i class="caret square large down icon grey"></i>
-                </sui-button-content>
-                <sui-button-content class="downimg_buttom" hidden>下载</sui-button-content>
-              </sui-button>
-            </a>
+                 @click="saveimage('dbaq01', '安全状况')">
+                <sui-button class="downimg_buttom" animated="" tab-index="0">
+                  <sui-button-content class="downimg_buttom" visible>
+                    <i class="caret square large down icon grey"></i>
+                  </sui-button-content>
+                  <sui-button-content class="downimg_buttom" hidden>下载</sui-button-content>
+                </sui-button>
+              </a>
               <div ref="dbaq01">
-              <sui-grid :columns="2" centered>
-                <sui-grid-row>
-                  <sui-grid-column vertical-align="middle">
-                    <h3 is="sui-header">安全状况</h3>
-                  </sui-grid-column>
-                </sui-grid-row>
-                <!--销售 销量/同比-->
-                <sui-grid-row>
-                  <sui-grid-column vertical-align="middle">
-                    <a>
-                      <div slot="label">
-                        <sui-label circular color="red" size="tiny" floating style="left:50%">吨</sui-label>
-                        <sui-list-item>
-                          <sui-label color="grey" horizontal>销量</sui-label>
-                          <sui-button class="dashboard_buttom">2,048</sui-button>
-                        </sui-list-item>
-                      </div>
-                    </a>
-                  </sui-grid-column>
-                  <sui-grid-column vertical-align="middle">
-                    <a>
-                      <div slot="label">
-                        <sui-label circular color="teal" size="tiny" floating style="left:50%">
-                          <i class="arrow down icon" style="margin: 0.25em 0 0"></i>
-                        </sui-label>
-                        <sui-list-item>
-                          <sui-label color="grey" horizontal>同比</sui-label>
-                          <sui-button class="dashboard_buttom">2.85%</sui-button>
-                        </sui-list-item>
-                      </div>
-                    </a>
-                  </sui-grid-column>
-                </sui-grid-row>
-                <!--销售 金额/同比-->
-                <sui-grid-row>
-                  <sui-grid-column vertical-align="middle">
-                    <a>
-                      <div slot="label">
-                        <sui-label circular color="red" size="tiny" floating style="left:50%">万</sui-label>
-                        <sui-list-item>
-                          <sui-label color="grey" horizontal>金额</sui-label>
-                          <sui-button class="dashboard_buttom">3,052</sui-button>
-                        </sui-list-item>
-                      </div>
-                    </a>
-                  </sui-grid-column>
-                  <sui-grid-column vertical-align="middle">
-                    <a>
-                      <div slot="label">
-                        <sui-label circular color="red" size="tiny" floating style="left:50%">
-                          <i class="arrow up icon" style="margin: 0.25em 0 0"></i>
-                        </sui-label>
-                        <sui-list-item>
-                          <sui-label color="grey" horizontal>同比</sui-label>
-                          <sui-button class="dashboard_buttom">3.85%</sui-button>
-                        </sui-list-item>
-                      </div>
-                    </a>
-                  </sui-grid-column>
-                </sui-grid-row>
-                <!--销售 均价/同比-->
-                <sui-grid-row>
-                  <sui-grid-column vertical-align="middle">
-                    <a>
-                      <div slot="label">
-                        <sui-label circular color="red" size="tiny" floating style="left:50%">¥/T</sui-label>
-                        <sui-list-item>
-                          <sui-label color="grey" horizontal>均价</sui-label>
-                          <sui-button class="dashboard_buttom">580</sui-button>
-                        </sui-list-item>
-                      </div>
-                    </a>
-                  </sui-grid-column>
-                  <sui-grid-column vertical-align="middle">
-                    <a>
-                      <div slot="label">
-                        <sui-label circular color="red" size="tiny" floating style="left:50%">
-                          <i class="arrow up icon" style="margin: 0.25em 0 0"></i>
-                        </sui-label>
-                        <sui-list-item>
-                          <sui-label color="grey" horizontal>同比</sui-label>
-                          <sui-button class="dashboard_buttom">3.85%</sui-button>
-                        </sui-list-item>
-                      </div>
-                    </a>
-                  </sui-grid-column>
-                </sui-grid-row>
-              </sui-grid>
-                </div>
+                <sui-grid :columns="2" centered>
+                  <sui-grid-row>
+                    <sui-grid-column vertical-align="middle">
+                      <h3 is="sui-header">安全状况</h3>
+                    </sui-grid-column>
+                  </sui-grid-row>
+                  <!--销售 销量/同比-->
+                  <sui-grid-row>
+                    <sui-grid-column vertical-align="middle">
+                      <a>
+                        <div slot="label">
+                          <sui-label circular color="red" size="tiny" floating style="left:50%">吨</sui-label>
+                          <sui-list-item>
+                            <sui-label color="grey" horizontal>销量</sui-label>
+                            <sui-button class="dashboard_buttom">2,048</sui-button>
+                          </sui-list-item>
+                        </div>
+                      </a>
+                    </sui-grid-column>
+                    <sui-grid-column vertical-align="middle">
+                      <a>
+                        <div slot="label">
+                          <sui-label circular color="teal" size="tiny" floating style="left:50%">
+                            <i class="arrow down icon" style="margin: 0.25em 0 0"></i>
+                          </sui-label>
+                          <sui-list-item>
+                            <sui-label color="grey" horizontal>同比</sui-label>
+                            <sui-button class="dashboard_buttom">2.85%</sui-button>
+                          </sui-list-item>
+                        </div>
+                      </a>
+                    </sui-grid-column>
+                  </sui-grid-row>
+                  <!--销售 金额/同比-->
+                  <sui-grid-row>
+                    <sui-grid-column vertical-align="middle">
+                      <a>
+                        <div slot="label">
+                          <sui-label circular color="red" size="tiny" floating style="left:50%">万</sui-label>
+                          <sui-list-item>
+                            <sui-label color="grey" horizontal>金额</sui-label>
+                            <sui-button class="dashboard_buttom">3,052</sui-button>
+                          </sui-list-item>
+                        </div>
+                      </a>
+                    </sui-grid-column>
+                    <sui-grid-column vertical-align="middle">
+                      <a>
+                        <div slot="label">
+                          <sui-label circular color="red" size="tiny" floating style="left:50%">
+                            <i class="arrow up icon" style="margin: 0.25em 0 0"></i>
+                          </sui-label>
+                          <sui-list-item>
+                            <sui-label color="grey" horizontal>同比</sui-label>
+                            <sui-button class="dashboard_buttom">3.85%</sui-button>
+                          </sui-list-item>
+                        </div>
+                      </a>
+                    </sui-grid-column>
+                  </sui-grid-row>
+                  <!--销售 均价/同比-->
+                  <sui-grid-row>
+                    <sui-grid-column vertical-align="middle">
+                      <a>
+                        <div slot="label">
+                          <sui-label circular color="red" size="tiny" floating style="left:50%">¥/T</sui-label>
+                          <sui-list-item>
+                            <sui-label color="grey" horizontal>均价</sui-label>
+                            <sui-button class="dashboard_buttom">580</sui-button>
+                          </sui-list-item>
+                        </div>
+                      </a>
+                    </sui-grid-column>
+                    <sui-grid-column vertical-align="middle">
+                      <a>
+                        <div slot="label">
+                          <sui-label circular color="red" size="tiny" floating style="left:50%">
+                            <i class="arrow up icon" style="margin: 0.25em 0 0"></i>
+                          </sui-label>
+                          <sui-list-item>
+                            <sui-label color="grey" horizontal>同比</sui-label>
+                            <sui-button class="dashboard_buttom">3.85%</sui-button>
+                          </sui-list-item>
+                        </div>
+                      </a>
+                    </sui-grid-column>
+                  </sui-grid-row>
+                </sui-grid>
+              </div>
             </sui-segment>
           </sui-grid-column>
           <!--总览 物资-->
           <sui-grid-column id="wzcol">
-            <sui-segment id='7' class="columnstyle" v-on:mouseenter="seen_enter($event)" v-on:mouseleave="seen_leave($event)">
+            <sui-segment id='7' class="columnstyle" v-on:mouseenter="seen_enter($event)"
+                         v-on:mouseleave="seen_leave($event)">
               <a class="compact downimg" v-show="seen[7].seen_val"
-               @click="saveimage('dbwz01', '物资采购')">
-              <sui-button class="downimg_buttom" animated="" tab-index="0">
-                <sui-button-content class="downimg_buttom" visible>
-                  <i class="caret square large down icon grey"></i>
-                </sui-button-content>
-                <sui-button-content class="downimg_buttom" hidden>下载</sui-button-content>
-              </sui-button>
-            </a>
+                 @click="saveimage('dbwz01', '物资采购')">
+                <sui-button class="downimg_buttom" animated="" tab-index="0">
+                  <sui-button-content class="downimg_buttom" visible>
+                    <i class="caret square large down icon grey"></i>
+                  </sui-button-content>
+                  <sui-button-content class="downimg_buttom" hidden>下载</sui-button-content>
+                </sui-button>
+              </a>
               <div ref="dbwz01">
-              <sui-grid :columns="2" centered>
-                <sui-grid-row>
-                  <sui-grid-column vertical-align="middle">
-                    <h3 is="sui-header">物资采购</h3>
-                  </sui-grid-column>
-                </sui-grid-row>
-                <!--物资 采购总量-->
-                <sui-grid-row>
-                  <sui-grid-column vertical-align="middle">
-                    <a>
-                      <div slot="label">
-                        <sui-label circular color="red" size="tiny" floating style="left:50%">吨</sui-label>
-                        <sui-list-item>
-                          <sui-label color="grey" horizontal>总量</sui-label>
-                          <sui-button class="dashboard_buttom">12,048</sui-button>
-                        </sui-list-item>
-                      </div>
-                    </a>
-                  </sui-grid-column>
-                </sui-grid-row>
-                <!--物资 供应商分布-->
-                <sui-divider></sui-divider>
-                <sui-grid-row>
+                <sui-grid :columns="2" centered>
+                  <sui-grid-row>
+                    <sui-grid-column vertical-align="middle">
+                      <h3 is="sui-header">物资采购</h3>
+                    </sui-grid-column>
+                  </sui-grid-row>
+                  <!--物资 采购总量-->
+                  <sui-grid-row>
+                    <sui-grid-column vertical-align="middle">
+                      <a>
+                        <div slot="label">
+                          <sui-label circular color="red" size="tiny" floating style="left:50%">吨</sui-label>
+                          <sui-list-item>
+                            <sui-label color="grey" horizontal>总量</sui-label>
+                            <sui-button class="dashboard_buttom">12,048</sui-button>
+                          </sui-list-item>
+                        </div>
+                      </a>
+                    </sui-grid-column>
+                  </sui-grid-row>
+                  <!--物资 供应商分布-->
+                  <sui-divider></sui-divider>
+                  <sui-grid-row>
 
-                  <sui-segments>
-                    <sui-table aligned="left" class="segment" celled striped collapsing>
-                      <!--表头-->
-                      <sui-table-header>
-                        <sui-table-row>
-                          <sui-table-header-cell>供应商</sui-table-header-cell>
-                          <sui-table-header-cell>采购金额</sui-table-header-cell>
-                          <sui-table-header-cell>采购数量</sui-table-header-cell>
-                          <sui-table-header-cell>采购单价</sui-table-header-cell>
-                        </sui-table-row>
-                      </sui-table-header>
-                      <!--表体-->
-                      <!--第一行-->
-                      <sui-table-body>
-                        <sui-table-row>
-                          <sui-table-cell>
-                            <h4 is="sui-header" style="text-align: center">新凤鸣</h4>
-                          </sui-table-cell>
-                          <sui-table-cell>10000</sui-table-cell>
-                          <sui-table-cell>500</sui-table-cell>
-                          <sui-table-cell>10.1</sui-table-cell>
-                        </sui-table-row>
-                      </sui-table-body>
-                      <!--第二行-->
-                      <sui-table-body>
-                        <sui-table-row>
-                          <sui-table-cell>
-                            <h4 is="sui-header" style="text-align: center">桐昆</h4>
-                          </sui-table-cell>
-                          <sui-table-cell>52000</sui-table-cell>
-                          <sui-table-cell>3300</sui-table-cell>
-                          <sui-table-cell>8.91</sui-table-cell>
-                        </sui-table-row>
-                      </sui-table-body>
-                      <!--第三行-->
-                      <sui-table-body>
-                        <sui-table-row>
-                          <sui-table-cell>
-                            <h4 is="sui-header" style="text-align: center">恒力</h4>
-                          </sui-table-cell>
-                          <sui-table-cell>9800</sui-table-cell>
-                          <sui-table-cell>780</sui-table-cell>
-                          <sui-table-cell>1.5</sui-table-cell>
-                        </sui-table-row>
-                      </sui-table-body>
-                    </sui-table>
-                    <!--                        </sui-segment sui-ta>-->
-                  </sui-segments>
+                    <sui-segments>
+                      <sui-table aligned="left" class="segment" celled striped collapsing>
+                        <!--表头-->
+                        <sui-table-header>
+                          <sui-table-row>
+                            <sui-table-header-cell>供应商</sui-table-header-cell>
+                            <sui-table-header-cell>采购金额</sui-table-header-cell>
+                            <sui-table-header-cell>采购数量</sui-table-header-cell>
+                            <sui-table-header-cell>采购单价</sui-table-header-cell>
+                          </sui-table-row>
+                        </sui-table-header>
+                        <!--表体-->
+                        <!--第一行-->
+                        <sui-table-body>
+                          <sui-table-row>
+                            <sui-table-cell>
+                              <h4 is="sui-header" style="text-align: center">新凤鸣</h4>
+                            </sui-table-cell>
+                            <sui-table-cell>10000</sui-table-cell>
+                            <sui-table-cell>500</sui-table-cell>
+                            <sui-table-cell>10.1</sui-table-cell>
+                          </sui-table-row>
+                        </sui-table-body>
+                        <!--第二行-->
+                        <sui-table-body>
+                          <sui-table-row>
+                            <sui-table-cell>
+                              <h4 is="sui-header" style="text-align: center">桐昆</h4>
+                            </sui-table-cell>
+                            <sui-table-cell>52000</sui-table-cell>
+                            <sui-table-cell>3300</sui-table-cell>
+                            <sui-table-cell>8.91</sui-table-cell>
+                          </sui-table-row>
+                        </sui-table-body>
+                        <!--第三行-->
+                        <sui-table-body>
+                          <sui-table-row>
+                            <sui-table-cell>
+                              <h4 is="sui-header" style="text-align: center">恒力</h4>
+                            </sui-table-cell>
+                            <sui-table-cell>9800</sui-table-cell>
+                            <sui-table-cell>780</sui-table-cell>
+                            <sui-table-cell>1.5</sui-table-cell>
+                          </sui-table-row>
+                        </sui-table-body>
+                      </sui-table>
+                      <!--                        </sui-segment sui-ta>-->
+                    </sui-segments>
 
-                </sui-grid-row>
-                <!--wz01图-->
-                <sui-grid-row>
-                  <div ref="wz01" style="width: 100%;height: 150px;"></div>
-                </sui-grid-row>
-              </sui-grid>
-                </div>
+                  </sui-grid-row>
+                  <!--wz01图-->
+                  <sui-grid-row>
+                    <div ref="wz01" style="width: 100%;height: 150px;"></div>
+                  </sui-grid-row>
+                </sui-grid>
+              </div>
             </sui-segment>
           </sui-grid-column>
           <!--总览 质量-->
           <sui-grid-column id="qmcol">
-            <sui-segment id='8' class="columnstyle" v-on:mouseenter="seen_enter($event)" v-on:mouseleave="seen_leave($event)">
+            <sui-segment id='8' class="columnstyle" v-on:mouseenter="seen_enter($event)"
+                         v-on:mouseleave="seen_leave($event)">
               <a class="compact downimg" v-show="seen[8].seen_val"
-               @click="saveimage('dbqm01', '质量中心')">
-              <sui-button class="downimg_buttom" animated="" tab-index="0">
-                <sui-button-content class="downimg_buttom" visible>
-                  <i class="caret square large down icon grey"></i>
-                </sui-button-content>
-                <sui-button-content class="downimg_buttom" hidden>下载</sui-button-content>
-              </sui-button>
-            </a>
+                 @click="saveimage('dbqm01', '质量中心')">
+                <sui-button class="downimg_buttom" animated="" tab-index="0">
+                  <sui-button-content class="downimg_buttom" visible>
+                    <i class="caret square large down icon grey"></i>
+                  </sui-button-content>
+                  <sui-button-content class="downimg_buttom" hidden>下载</sui-button-content>
+                </sui-button>
+              </a>
               <div ref="dbqm01">
-              <sui-grid :columns="2" centered>
-                <sui-grid-row>
-                  <sui-grid-column vertical-align="middle">
-                    <h3 is="sui-header">质量中心</h3>
-                  </sui-grid-column>
-                </sui-grid-row>
-                <!--销售 销量/同比-->
-                <sui-grid-row>
-                  <sui-grid-column vertical-align="middle">
-                    <a>
-                      <div slot="label">
-                        <sui-label circular color="red" size="tiny" floating style="left:50%">吨</sui-label>
-                        <sui-list-item>
-                          <sui-label color="grey" horizontal>销量</sui-label>
-                          <sui-button class="dashboard_buttom">2,048</sui-button>
-                        </sui-list-item>
-                      </div>
-                    </a>
-                  </sui-grid-column>
-                  <sui-grid-column vertical-align="middle">
-                    <a>
-                      <div slot="label">
-                        <sui-label circular color="teal" size="tiny" floating style="left:50%">
-                          <i class="arrow down icon" style="margin: 0.25em 0 0"></i>
-                        </sui-label>
-                        <sui-list-item>
-                          <sui-label color="grey" horizontal>同比</sui-label>
-                          <sui-button class="dashboard_buttom">2.85%</sui-button>
-                        </sui-list-item>
-                      </div>
-                    </a>
-                  </sui-grid-column>
-                </sui-grid-row>
-                <!--销售 金额/同比-->
-                <sui-grid-row>
-                  <sui-grid-column vertical-align="middle">
-                    <a>
-                      <div slot="label">
-                        <sui-label circular color="red" size="tiny" floating style="left:50%">万</sui-label>
-                        <sui-list-item>
-                          <sui-label color="grey" horizontal>金额</sui-label>
-                          <sui-button class="dashboard_buttom">3,052</sui-button>
-                        </sui-list-item>
-                      </div>
-                    </a>
-                  </sui-grid-column>
-                  <sui-grid-column vertical-align="middle">
-                    <a>
-                      <div slot="label">
-                        <sui-label circular color="red" size="tiny" floating style="left:50%">
-                          <i class="arrow up icon" style="margin: 0.25em 0 0"></i>
-                        </sui-label>
-                        <sui-list-item>
-                          <sui-label color="grey" horizontal>同比</sui-label>
-                          <sui-button class="dashboard_buttom">3.85%</sui-button>
-                        </sui-list-item>
-                      </div>
-                    </a>
-                  </sui-grid-column>
-                </sui-grid-row>
-                <!--销售 均价/同比-->
-                <sui-grid-row>
-                  <sui-grid-column vertical-align="middle">
-                    <a>
-                      <div slot="label">
-                        <sui-label circular color="red" size="tiny" floating style="left:50%">¥/T</sui-label>
-                        <sui-list-item>
-                          <sui-label color="grey" horizontal>均价</sui-label>
-                          <sui-button class="dashboard_buttom">580</sui-button>
-                        </sui-list-item>
-                      </div>
-                    </a>
-                  </sui-grid-column>
-                  <sui-grid-column vertical-align="middle">
-                    <a>
-                      <div slot="label">
-                        <sui-label circular color="red" size="tiny" floating style="left:50%">
-                          <i class="arrow up icon" style="margin: 0.25em 0 0"></i>
-                        </sui-label>
-                        <sui-list-item>
-                          <sui-label color="grey" horizontal>同比</sui-label>
-                          <sui-button class="dashboard_buttom">3.85%</sui-button>
-                        </sui-list-item>
-                      </div>
-                    </a>
-                  </sui-grid-column>
-                </sui-grid-row>
-              </sui-grid>
+                <sui-grid :columns="2" centered>
+                  <sui-grid-row>
+                    <sui-grid-column vertical-align="middle">
+                      <h3 is="sui-header">质量中心</h3>
+                    </sui-grid-column>
+                  </sui-grid-row>
+                  <!--销售 销量/同比-->
+                  <sui-grid-row>
+                    <sui-grid-column vertical-align="middle">
+                      <a>
+                        <div slot="label">
+                          <sui-label circular color="red" size="tiny" floating style="left:50%">吨</sui-label>
+                          <sui-list-item>
+                            <sui-label color="grey" horizontal>销量</sui-label>
+                            <sui-button class="dashboard_buttom">2,048</sui-button>
+                          </sui-list-item>
+                        </div>
+                      </a>
+                    </sui-grid-column>
+                    <sui-grid-column vertical-align="middle">
+                      <a>
+                        <div slot="label">
+                          <sui-label circular color="teal" size="tiny" floating style="left:50%">
+                            <i class="arrow down icon" style="margin: 0.25em 0 0"></i>
+                          </sui-label>
+                          <sui-list-item>
+                            <sui-label color="grey" horizontal>同比</sui-label>
+                            <sui-button class="dashboard_buttom">2.85%</sui-button>
+                          </sui-list-item>
+                        </div>
+                      </a>
+                    </sui-grid-column>
+                  </sui-grid-row>
+                  <!--销售 金额/同比-->
+                  <sui-grid-row>
+                    <sui-grid-column vertical-align="middle">
+                      <a>
+                        <div slot="label">
+                          <sui-label circular color="red" size="tiny" floating style="left:50%">万</sui-label>
+                          <sui-list-item>
+                            <sui-label color="grey" horizontal>金额</sui-label>
+                            <sui-button class="dashboard_buttom">3,052</sui-button>
+                          </sui-list-item>
+                        </div>
+                      </a>
+                    </sui-grid-column>
+                    <sui-grid-column vertical-align="middle">
+                      <a>
+                        <div slot="label">
+                          <sui-label circular color="red" size="tiny" floating style="left:50%">
+                            <i class="arrow up icon" style="margin: 0.25em 0 0"></i>
+                          </sui-label>
+                          <sui-list-item>
+                            <sui-label color="grey" horizontal>同比</sui-label>
+                            <sui-button class="dashboard_buttom">3.85%</sui-button>
+                          </sui-list-item>
+                        </div>
+                      </a>
+                    </sui-grid-column>
+                  </sui-grid-row>
+                  <!--销售 均价/同比-->
+                  <sui-grid-row>
+                    <sui-grid-column vertical-align="middle">
+                      <a>
+                        <div slot="label">
+                          <sui-label circular color="red" size="tiny" floating style="left:50%">¥/T</sui-label>
+                          <sui-list-item>
+                            <sui-label color="grey" horizontal>均价</sui-label>
+                            <sui-button class="dashboard_buttom">580</sui-button>
+                          </sui-list-item>
+                        </div>
+                      </a>
+                    </sui-grid-column>
+                    <sui-grid-column vertical-align="middle">
+                      <a>
+                        <div slot="label">
+                          <sui-label circular color="red" size="tiny" floating style="left:50%">
+                            <i class="arrow up icon" style="margin: 0.25em 0 0"></i>
+                          </sui-label>
+                          <sui-list-item>
+                            <sui-label color="grey" horizontal>同比</sui-label>
+                            <sui-button class="dashboard_buttom">3.85%</sui-button>
+                          </sui-list-item>
+                        </div>
+                      </a>
+                    </sui-grid-column>
+                  </sui-grid-row>
+                </sui-grid>
               </div>
             </sui-segment>
           </sui-grid-column>
           <!--总览 信息-->
           <sui-grid-column id="ifcol">
-            <sui-segment id='9' class="columnstyle" v-on:mouseenter="seen_enter($event)" v-on:mouseleave="seen_leave($event)">
+            <sui-segment id='9' class="columnstyle" v-on:mouseenter="seen_enter($event)"
+                         v-on:mouseleave="seen_leave($event)">
               <a class="compact downimg" v-show="seen[9].seen_val"
-               @click="saveimage('dbif01', '信息管理')">
-              <sui-button class="downimg_buttom" animated="" tab-index="0">
-                <sui-button-content class="downimg_buttom" visible>
-                  <i class="caret square large down icon grey"></i>
-                </sui-button-content>
-                <sui-button-content class="downimg_buttom" hidden>下载</sui-button-content>
-              </sui-button>
-            </a>
+                 @click="saveimage('dbif01', '信息管理')">
+                <sui-button class="downimg_buttom" animated="" tab-index="0">
+                  <sui-button-content class="downimg_buttom" visible>
+                    <i class="caret square large down icon grey"></i>
+                  </sui-button-content>
+                  <sui-button-content class="downimg_buttom" hidden>下载</sui-button-content>
+                </sui-button>
+              </a>
               <div ref="dbif01">
-              <sui-grid :columns="2" centered>
-                <sui-grid-row>
-                  <sui-grid-column vertical-align="middle">
-                    <h3 is="sui-header">信息管理</h3>
-                  </sui-grid-column>
-                </sui-grid-row>
-                <!--人力 总人数/公司占比-->
-                <sui-grid-row>
-                  <sui-grid-column vertical-align="middle">
-                    <a>
-                      <div slot="label">
-                        <sui-label circular color="red" size="tiny" floating style="left:50%">吨</sui-label>
-                        <sui-list-item>
-                          <sui-label color="grey" horizontal>总数</sui-label>
-                          <sui-button class="dashboard_buttom">12,048</sui-button>
-                        </sui-list-item>
-                      </div>
-                    </a>
-                  </sui-grid-column>
-                </sui-grid-row>
-                <!--if01图-->
-                <sui-grid-row>
-                  <div ref="if01" style="width: 100%;height: 150px;"></div>
-                </sui-grid-row>
-              </sui-grid>
-                </div>
+                <sui-grid :columns="2" centered>
+                  <sui-grid-row>
+                    <sui-grid-column vertical-align="middle">
+                      <h3 is="sui-header">信息管理</h3>
+                    </sui-grid-column>
+                  </sui-grid-row>
+                  <!--人力 总人数/公司占比-->
+                  <sui-grid-row>
+                    <sui-grid-column vertical-align="middle">
+                      <a>
+                        <div slot="label">
+                          <sui-label circular color="red" size="tiny" floating style="left:50%">吨</sui-label>
+                          <sui-list-item>
+                            <sui-label color="grey" horizontal>总数</sui-label>
+                            <sui-button class="dashboard_buttom">12,048</sui-button>
+                          </sui-list-item>
+                        </div>
+                      </a>
+                    </sui-grid-column>
+                  </sui-grid-row>
+                  <!--if01图-->
+                  <sui-grid-row>
+                    <div ref="if01" style="width: 100%;height: 150px;"></div>
+                  </sui-grid-row>
+                </sui-grid>
+              </div>
             </sui-segment>
           </sui-grid-column>
         </sui-grid-row>
@@ -762,19 +771,27 @@
       return {
         //定义十个seen参数
         seen: [{seen_val: false}, {seen_val: false}, {seen_val: false}, {seen_val: false}, {seen_val: false},
-          {seen_val: false}, {seen_val: false}, {seen_val: false}, {seen_val: false}, {seen_val: false}]
+          {seen_val: false}, {seen_val: false}, {seen_val: false}, {seen_val: false}, {seen_val: false}],
+        data1: [{}],
+        data2: [{}],
+        data3: [{}]
       }
+    },
+    created() {
+      this.$axios.get('/dashboard/overallviewsd').then(
+        response => {
+          this.data1 = response.data
+        });
     },
     methods: {
       //定义移入移出函数
-      seen_enter(e){
-            let id = e.currentTarget.id;
-            this.seen[id].seen_val = true;
-
+      seen_enter(e) {
+        let id = e.currentTarget.id;
+        this.seen[id].seen_val = true;
       },
-      seen_leave(e){
-            let id = e.currentTarget.id;
-            this.seen[id].seen_val = false;
+      seen_leave(e) {
+        let id = e.currentTarget.id;
+        this.seen[id].seen_val = false;
       },
       //定义保存图片函数
       saveimage: function (divText, imgText) {
@@ -782,7 +799,6 @@
       },
       initCharts() {
         let myChartfi01 = this.$echarts.init(this.$refs.fi01);
-        // console.log(this.$refs.fi01);
         // 绘制图表
         myChartfi01.setOption({
           title: {text: '同类公司财务分析', textstyle: {fontSize: 15,}},
@@ -820,7 +836,7 @@
             axisTick: {show: false},
             axisLine: {show: false},
           },
-          grid: [{x: '7%', y: '40%', width: '86%', height: '45%'}],
+          grid: [{x: '7%', y: '40%', width: '86%', height: '48%'}],
           yAxis: [{
             type: 'value',
             name: '利润(柱状)',
@@ -869,7 +885,7 @@
       initCharts2() {
         let myCharthr01 = this.$echarts.init(this.$refs.hr01);
         // 绘制图表
-        myCharthr01.setOption({
+        const optionhr = {
           title: {text: '人员公司分布', textstyle: {fontSize: 15,}},
           tooltip: [{
             trigger: 'item',
@@ -878,12 +894,9 @@
               return str
             },
           }],
-          dataset: {
-            source: [['公司名称', "中辰", "中盈", "中维", "中辰", "中石"],
-              ['人数', 335, 310, 234, 135, 1548,]],
-          },
+          dataset: {source: []},
           series: [{
-            type: 'pie', smooth: true, seriesLayoutBy: 'row',
+            type: 'pie', smooth: true, seriesLayoutBy: 'row', center:['50%', '60%'],
             itemStyle: {
               normal: {
                 color: function (params) {
@@ -892,14 +905,29 @@
               },
             },
           }]
+        };
+        myCharthr01.showLoading({
+          text: 'loading',
+          color: '#f2711c',
+          textColor: '#000',
+          maskColor: 'rgba(255, 255, 255, 0.7)',
         });
+        myCharthr01.setOption(optionhr);
+        this.$axios.get('/dashboard/overallviewhr').then(
+          response => {
+            this.data2 = response.data;
+            optionhr.dataset.source = [this.data2['dbhr01_bukrs']
+              , this.data2['dbhr01_bukrs_amonut']];
+            myCharthr01.hideLoading();
+            myCharthr01.setOption(optionhr, true)
+          })
       },
       initCharts3() {
         let myChartsc01 = this.$echarts.init(this.$refs.sc01);
         // 绘制图表
-        myChartsc01.setOption({
+        var optionsc = {
           title: {text: '产量装置分布', textstyle: {fontSize: 15,}},
-          grid: [{x: '10%', y: '25%', width: '90%', height: '70%'},],
+          grid: [{x: '5%', y: '25%', width: '90%', height: '70%'},],
           tooltip: [{
             trigger: 'axis',
             formatter(value) {
@@ -910,14 +938,9 @@
               return str
             },
           }],
-          dataset: {
-            source: [['装置名称', "ZCP01", "ZCP02", "ZCP03", "ZCP04", "ZCP05", "ZCP06", 'ZCP07', 'ZCP08', 'HCP01',
-              'HCP02', 'HCP03', 'HCP04', 'HCP05', 'HCP06'],
-              ['产量', 40, 20, 35, 60, 55, 10, 11, 21, 5, 19, 28, 4, 9, 111]],
-          },
+          dataset: {source: [],},
           xAxis: {
-            data: ["ZCP01", "ZCP02", "ZCP03", "ZCP04", "ZCP05", "ZCP06", 'ZCP07', 'ZCP08', 'HCP01',
-              'HCP02', 'HCP03', 'HCP04', 'HCP05', 'HCP06'],
+            data: [],
             show: true,
             axisTick: {show: false},
             axisLine: {show: false},
@@ -927,7 +950,23 @@
             name: '产量', type: 'line', smooth: true, seriesLayoutBy: 'row',
             itemStyle: {normal: {label: {show: true}, color: colors[0]}},
           }]
+        };
+        myChartsc01.showLoading({
+          text: 'loading',
+          color: '#f2711c',
+          textColor: '#000',
+          maskColor: 'rgba(255, 255, 255, 0.7)',
         });
+        myChartsc01.setOption(optionsc);
+        this.$axios.get('/dashboard/overallviewsc').then(
+          response => {
+            this.data3 = response.data;
+            optionsc.dataset.source = [this.data3['dbsc01_zzh']
+              , this.data3['dbsc01_zzh_product']];
+            optionsc.xAxis.data = this.data3['dbsc01_zzho'];
+            myChartsc01.hideLoading();
+            myChartsc01.setOption(optionsc, true)
+          })
       }
     },
     mounted() {

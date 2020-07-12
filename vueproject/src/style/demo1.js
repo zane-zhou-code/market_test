@@ -34,7 +34,6 @@ function
     document.body.removeChild(a);
   });
 }
-
 export {
   dataURLToBlob, saveImage
 }

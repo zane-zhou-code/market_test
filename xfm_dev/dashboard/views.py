@@ -413,6 +413,61 @@ def query6(request):
 def test(request):
     return JsonResponse({'status':0, 'message':'This is test file'})
 
-# class BookViewSet(viewsets.ModelViewSet):
-#     queryset = ''# Book.objects.all()
-#     serializer_class = BookSerializer
+# 总览--销售
+def overallviewsd(request):
+    list = {
+        'dbsd01_sales':3048,
+        'dbsd01_salesyoy':'3.85%',
+        'dbsd01_money': 4052,
+        'dbsd01_moneyyoy': '4.85%',
+        'dbsd01_price': 682,
+        'dbsd01_priceyoy': '5.85%',
+    }
+    return HttpResponse(json.dumps(list, ensure_ascii=False),
+                        content_type="application/json charset=utf-8")
+# 总览--人资
+def overallviewhr(request):
+    list = {
+        'dbhr01_amount':120491,
+        'dbhr01_bukrs':['公司名称', "中辰", "中盈", "中维", "中辰", "中石"],
+        'dbhr01_bukrs_amonut': ['人数', 435, 310, 234, 135, 1548,],
+    }
+    return HttpResponse(json.dumps(list, ensure_ascii=False),
+                        content_type="application/json charset=utf-8")
+# 总览--生产
+def overallviewsc(request):
+    list = {
+        'dbsc01_product':250049,
+        'dbsc01_zzh':['装置名称', "ZCP01", "ZCP02", "ZCP03", "ZCP04", "ZCP05", "ZCP06", 'ZCP07', 'ZCP08', 'HCP01',
+              'HCP02', 'HCP03', 'HCP04', 'HCP05', 'HCP06'],
+        'dbsc01_zzho': ["ZCP01", "ZCP02", "ZCP03", "ZCP04", "ZCP05", "ZCP06", 'ZCP07', 'ZCP08', 'HCP01',
+                       'HCP02', 'HCP03', 'HCP04', 'HCP05', 'HCP06'],
+        'dbsc01_zzh_product': ['产量', 40, 20, 35, 60, 55, 10, 11, 21, 5, 19, 28, 4, 9, 111],
+
+    }
+    return HttpResponse(json.dumps(list, ensure_ascii=False),
+                        content_type="application/json charset=utf-8")
+# 总览--库存
+def overallviewmm(request):
+    list = {
+        'dbsd01_sales':3048,
+        'dbsd01_salesyoy':'3.85%',
+        'dbsd01_money': 4052,
+        'dbsd01_moneyyoy': '4.85%',
+        'dbsd01_price': 682,
+        'dbsd01_priceyoy': '5.85%',
+    }
+    return HttpResponse(json.dumps(list, ensure_ascii=False),
+                        content_type="application/json charset=utf-8")
+# 总览--安全
+def overallviewaq(request):
+    list = {
+        'dbsd01_sales':3048,
+        'dbsd01_salesyoy':'3.85%',
+        'dbsd01_money': 4052,
+        'dbsd01_moneyyoy': '4.85%',
+        'dbsd01_price': 682,
+        'dbsd01_priceyoy': '5.85%',
+    }
+    return HttpResponse(json.dumps(list, ensure_ascii=False),
+                        content_type="application/json charset=utf-8")

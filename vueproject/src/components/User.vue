@@ -3,6 +3,9 @@
       {{ page_info }}
       <br>
       {{ django_message }}
+      <br>
+      {{ django_message.zlsd01xl}}
+      {{ django_message.zlsd01xltb}}
       <table border="1">
         <tr>
           <th>user</th>
@@ -11,9 +14,9 @@
           <td>{{ user }}</td>
         </tr>
       </table>
-      <iframe src="http://www.baidu.com" style="width: 2000px;height: 500px">
-    IE：你们都看我干吗，我现在也是支持的
-</iframe>
+<!--      <iframe src="http://www.baidu.com" style="width: 2000px;height: 500px">-->
+<!--    IE：你们都看我干吗，我现在也是支持的-->
+<!--</iframe>-->
 
     </div>
 </template>
@@ -29,9 +32,9 @@
           }
       },
       created() {
-            this.$axios.get('/test/')
+            this.$axios.get('/dashboard/overallview')
         .then(response =>{
-          this.django_message = response.data.message
+          this.django_message = response.data
         })
       },
     }

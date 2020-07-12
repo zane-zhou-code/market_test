@@ -33,10 +33,13 @@ urlpatterns = [
     path('text3', views.text3, name='text3'),
     path('text4', views.text4, name='text4'),
     path('semantic', views.semantic, name='semantic-ui'),
-    path('test/', views.test, name='test'),
+    path('test', views.test, name='test'),
     path('zzzzzz', views.zzzzzz, name='zzzzzz'),
-    # path('book', include(router.urls))
-    # path('api/666', view=lambda request: HttpResponse('戏说不是胡说')),
-    # url(regex='^$', view=lambda request:
-    #     TemplateView.as_view(template_name='vue.html')),
+    # 下面为vue使用的数据
+    path('overallviewsd', views.overallviewsd, name='overallviewsd'),
+    path('overallviewhr', views.overallviewhr, name='overallviewhr'),
+    path('overallviewsc', views.overallviewsc, name='overallviewsc'),
+    path('overallviewmm', views.overallviewmm, name='overallviewmm'),
+    path('overallviewaq', views.overallviewaq, name='overallviewaq'),
+
 ]
